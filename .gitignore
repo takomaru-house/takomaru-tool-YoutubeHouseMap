@@ -1,0 +1,24 @@
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Build / test outputs
+coverage/
+test-results/
+playwright-report/
+
+# Logs
+logs/
+*.log
+
+# Claude Code local data
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
