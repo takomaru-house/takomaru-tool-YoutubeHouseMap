@@ -16,8 +16,10 @@ const loadPublished = () => JSON.parse(fs.readFileSync(PUBLISHED_PATH, 'utf-8'))
 const collectAllVideos = (data) => {
   const videos = [];
   for (const c of data.categories || []) {
-    for (const g of c.genres || []) {
-      for (const v of g.videos || []) videos.push(v);
+    for (const grp of c.groups || []) {
+      for (const g of grp.genres || []) {
+        for (const v of g.videos || []) videos.push(v);
+      }
     }
   }
   return videos;
@@ -66,8 +68,8 @@ describe('SCHEMA: 公開用 docs/data/videos.json スキーマ準拠', () => {
     }
   });
 
-  test('SCHEMA-07: schema_version が "1.1"', () => {
+  test('SCHEMA-07: schema_version が "1.2"', () => {
     const data = loadPublished();
-    expect(data.meta.schema_version).toBe('1.1');
+    expect(data.meta.schema_version).toBe('1.2');
   });
 });

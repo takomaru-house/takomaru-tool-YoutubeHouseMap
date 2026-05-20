@@ -24,13 +24,21 @@ const SCHEMA_INIT_CATEGORIES = {
       id: 'CAT-01',
       name: '施主目線',
       order: 1,
-      genres: [
+      side: 'right',
+      groups: [
         {
-          id: 'GNR-01',
-          name: '間取り',
+          id: 'GRP-A',
+          name: '計画・間取り',
           order: 1,
-          searchQuery: 'q1',
-          searchQueryAlt: 'q1alt',
+          genres: [
+            {
+              id: 'GNR-01',
+              name: '間取り',
+              order: 1,
+              searchQuery: 'q1',
+              searchQueryAlt: 'q1alt',
+            },
+          ],
         },
       ],
     },
@@ -38,39 +46,45 @@ const SCHEMA_INIT_CATEGORIES = {
 };
 
 const makeInitialVideos = () => ({
-  meta: { last_updated: '2026-05-20', schema_version: '1.1' },
+  meta: { last_updated: '2026-05-20', schema_version: '1.2' },
   categories: [
     {
       id: 'CAT-01',
       name: '施主目線',
-      genres: [
+      groups: [
         {
-          id: 'GNR-01',
-          name: '間取り',
-          videos: [
+          id: 'GRP-A',
+          name: '計画・間取り',
+          genres: [
             {
-              videoId: 'existing001',
-              title: 'existing 1',
-              channelName: 'ch',
-              thumbnailUrl: 'https://img.youtube.com/vi/existing001/hqdefault.jpg',
-              publishedAt: '2025-01-01',
-              duration: 'PT8M',
-              tags: [],
-              source: 'auto',
-              status: 'active',
-              order: 1,
-            },
-            {
-              videoId: 'existing002',
-              title: 'existing 2',
-              channelName: 'ch',
-              thumbnailUrl: 'https://img.youtube.com/vi/existing002/hqdefault.jpg',
-              publishedAt: '2025-01-02',
-              duration: 'PT9M',
-              tags: [],
-              source: 'auto',
-              status: 'active',
-              order: 2,
+              id: 'GNR-01',
+              name: '間取り',
+              videos: [
+                {
+                  videoId: 'existing001',
+                  title: 'existing 1',
+                  channelName: 'ch',
+                  thumbnailUrl: 'https://img.youtube.com/vi/existing001/hqdefault.jpg',
+                  publishedAt: '2025-01-01',
+                  duration: 'PT8M',
+                  tags: [],
+                  source: 'auto',
+                  status: 'active',
+                  order: 1,
+                },
+                {
+                  videoId: 'existing002',
+                  title: 'existing 2',
+                  channelName: 'ch',
+                  thumbnailUrl: 'https://img.youtube.com/vi/existing002/hqdefault.jpg',
+                  publishedAt: '2025-01-02',
+                  duration: 'PT9M',
+                  tags: [],
+                  source: 'auto',
+                  status: 'active',
+                  order: 2,
+                },
+              ],
             },
           ],
         },
@@ -125,11 +139,10 @@ describe('IT-04: 管理 API エンドポイント', () => {
     const res = await request(app).get('/api/videos');
     expect(res.status).toBe(200);
     expect(res.body.categories[0].id).toBe('CAT-01');
-    expect(res.body.categories[0].genres[0].videos.length).toBe(2);
+    expect(res.body.categories[0].groups[0].genres[0].videos.length).toBe(2);
   });
 
   test('IT-04-02: POST /api/videos/add で manual 動画が追加される（201）', async () => {
-    // YouTube API で動画詳細を取得（nock モック）
     const videoId = 'newManual01';
     nock(YOUTUBE_API_BASE)
       .get(`${YOUTUBE_API_PATH}/videos`)
@@ -138,11 +151,11 @@ describe('IT-04: 管理 API エンドポイント', () => {
 
     const res = await request(app)
       .post('/api/videos/add')
-      .send({ videoId, categoryId: 'CAT-01', genreId: 'GNR-01' });
+      .send({ videoId, categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' });
 
     expect(res.status).toBe(201);
     const stored = await readVideosJson();
-    const added = stored.categories[0].genres[0].videos.find((v) => v.videoId === videoId);
+    const added = stored.categories[0].groups[0].genres[0].videos.find((v) => v.videoId === videoId);
     expect(added).toBeDefined();
     expect(added.source).toBe('manual');
     expect(added.tags).toContain('manual');
@@ -151,24 +164,23 @@ describe('IT-04: 管理 API エンドポイント', () => {
   test('IT-04-03: DELETE /api/videos/:id で動画が削除される（200）', async () => {
     const res = await request(app)
       .delete('/api/videos/existing001')
-      .query({ categoryId: 'CAT-01', genreId: 'GNR-01' });
+      .query({ categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' });
     expect(res.status).toBe(200);
 
     const stored = await readVideosJson();
-    const remaining = stored.categories[0].genres[0].videos.map((v) => v.videoId);
+    const remaining = stored.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
     expect(remaining).not.toContain('existing001');
   });
 
   test('IT-04-04: PUT /api/videos/:id/order で順序が変更される（200）', async () => {
-    // existing001 (order:1) を down へ
     const res = await request(app)
       .put('/api/videos/existing001/order')
-      .query({ categoryId: 'CAT-01', genreId: 'GNR-01' })
+      .query({ categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' })
       .send({ direction: 'down' });
     expect(res.status).toBe(200);
 
     const stored = await readVideosJson();
-    const videos = stored.categories[0].genres[0].videos;
+    const videos = stored.categories[0].groups[0].genres[0].videos;
     expect(videos[0].videoId).toBe('existing002');
     expect(videos[1].videoId).toBe('existing001');
   });
@@ -176,7 +188,7 @@ describe('IT-04: 管理 API エンドポイント', () => {
   test('IT-04-05: 不正な videoId の追加は 400 を返す', async () => {
     const res = await request(app)
       .post('/api/videos/add')
-      .send({ videoId: 'short', categoryId: 'CAT-01', genreId: 'GNR-01' });
+      .send({ videoId: 'short', categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' });
     expect(res.status).toBe(400);
   });
 
@@ -214,27 +226,33 @@ describe('IT-04: 管理 API エンドポイント', () => {
 
   test('IT-04-07: POST /api/batch/approve で draft がマージされ draft が削除される', async () => {
     const draft = {
-      meta: { last_updated: '2026-05-21', schema_version: '1.1' },
+      meta: { last_updated: '2026-05-21', schema_version: '1.2' },
       categories: [
         {
           id: 'CAT-01',
           name: '施主目線',
-          genres: [
+          groups: [
             {
-              id: 'GNR-01',
-              name: '間取り',
-              videos: [
+              id: 'GRP-A',
+              name: '計画・間取り',
+              genres: [
                 {
-                  videoId: 'fromDraft01',
-                  title: 'from draft',
-                  channelName: 'ch',
-                  thumbnailUrl: 'https://img.youtube.com/vi/fromDraft01/hqdefault.jpg',
-                  publishedAt: '2025-04-01',
-                  duration: 'PT12M',
-                  tags: [],
-                  source: 'auto',
-                  status: 'active',
-                  order: 1,
+                  id: 'GNR-01',
+                  name: '間取り',
+                  videos: [
+                    {
+                      videoId: 'fromDraft01',
+                      title: 'from draft',
+                      channelName: 'ch',
+                      thumbnailUrl: 'https://img.youtube.com/vi/fromDraft01/hqdefault.jpg',
+                      publishedAt: '2025-04-01',
+                      duration: 'PT12M',
+                      tags: [],
+                      source: 'auto',
+                      status: 'active',
+                      order: 1,
+                    },
+                  ],
                 },
               ],
             },
@@ -252,7 +270,7 @@ describe('IT-04: 管理 API エンドポイント', () => {
     expect(res.status).toBe(200);
 
     const stored = await readVideosJson();
-    const ids = stored.categories[0].genres[0].videos.map((v) => v.videoId);
+    const ids = stored.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
     expect(ids).toContain('fromDraft01');
 
     // draft 削除確認
@@ -311,21 +329,21 @@ describe('IT-04 拡張: 負シナリオとバリデーション', () => {
   test('IT-04-12: 存在しない videoId の DELETE は 404', async () => {
     const res = await request(app)
       .delete('/api/videos/notExistAAA')
-      .query({ categoryId: 'CAT-01', genreId: 'GNR-01' });
+      .query({ categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' });
     expect(res.status).toBe(404);
   });
 
-  test('IT-04-13: 存在しない category/genre の DELETE は 404', async () => {
+  test('IT-04-13: 存在しない category/group/genre の DELETE は 404', async () => {
     const res = await request(app)
       .delete('/api/videos/existing001')
-      .query({ categoryId: 'CAT-99', genreId: 'GNR-99' });
+      .query({ categoryId: 'CAT-99', groupId: 'GRP-99', genreId: 'GNR-99' });
     expect(res.status).toBe(404);
   });
 
   test('IT-04-14: PUT order で direction 欠落は 400', async () => {
     const res = await request(app)
       .put('/api/videos/existing001/order')
-      .query({ categoryId: 'CAT-01', genreId: 'GNR-01' })
+      .query({ categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' })
       .send({});
     expect(res.status).toBe(400);
   });
@@ -333,7 +351,7 @@ describe('IT-04 拡張: 負シナリオとバリデーション', () => {
   test('IT-04-15: PUT order で先頭動画を up すると unchanged', async () => {
     const res = await request(app)
       .put('/api/videos/existing001/order')
-      .query({ categoryId: 'CAT-01', genreId: 'GNR-01' })
+      .query({ categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' })
       .send({ direction: 'up' });
     expect(res.status).toBe(200);
     expect(res.body.status).toBe('unchanged');
@@ -342,19 +360,19 @@ describe('IT-04 拡張: 負シナリオとバリデーション', () => {
   test('IT-04-16: PUT order で存在しない videoId は 404', async () => {
     const res = await request(app)
       .put('/api/videos/notExistAAA/order')
-      .query({ categoryId: 'CAT-01', genreId: 'GNR-01' })
+      .query({ categoryId: 'CAT-01', groupId: 'GRP-A', genreId: 'GNR-01' })
       .send({ direction: 'up' });
     expect(res.status).toBe(404);
   });
 
-  test('IT-04-17: POST add で存在しない category/genre は 404', async () => {
+  test('IT-04-17: POST add で存在しない category/group/genre は 404', async () => {
     nock(YOUTUBE_API_BASE)
       .get(`${YOUTUBE_API_PATH}/videos`)
       .query(true)
       .reply(200, makeVideosResponse(['validVid001']));
     const res = await request(app)
       .post('/api/videos/add')
-      .send({ videoId: 'validVid001', categoryId: 'CAT-99', genreId: 'GNR-99' });
+      .send({ videoId: 'validVid001', categoryId: 'CAT-99', groupId: 'GRP-99', genreId: 'GNR-99' });
     expect(res.status).toBe(404);
   });
 

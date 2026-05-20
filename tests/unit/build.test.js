@@ -19,31 +19,37 @@ const makeVideo = (overrides = {}) => ({
 });
 
 const makeData = (videos) => ({
-  meta: { last_updated: '2025-01-01', schema_version: '1.1' },
+  meta: { last_updated: '2025-01-01', schema_version: '1.2' },
   categories: [
     {
       id: 'CAT-01',
       name: 'A',
-      genres: [{ id: 'GNR-01', name: 'g1', videos }],
+      groups: [
+        {
+          id: 'GRP-A',
+          name: 'g1',
+          genres: [{ id: 'GNR-01', name: 'gn1', videos }],
+        },
+      ],
     },
   ],
 });
 
-describe('filterDeadVideos()', () => {
+describe('filterDeadVideos() (3階層)', () => {
   test('UT-06-01: status:"dead" の動画が除外される', () => {
     const data = makeData([
       makeVideo({ videoId: 'aliveXXXXXX', status: 'active' }),
       makeVideo({ videoId: 'deadXXXXXXX', status: 'dead' }),
     ]);
     const result = filterDeadVideos(data);
-    const ids = result.categories[0].genres[0].videos.map((v) => v.videoId);
+    const ids = result.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
     expect(ids).toEqual(['aliveXXXXXX']);
   });
 
   test('UT-06-02: status:"active" の動画は保持される', () => {
     const data = makeData([makeVideo({ videoId: 'aliveXXXXXX', status: 'active' })]);
     const result = filterDeadVideos(data);
-    expect(result.categories[0].genres[0].videos).toHaveLength(1);
+    expect(result.categories[0].groups[0].genres[0].videos).toHaveLength(1);
   });
 
   test('UT-06-03: 全動画が dead の場合は空配列のジャンルになる', () => {
@@ -52,21 +58,21 @@ describe('filterDeadVideos()', () => {
       makeVideo({ videoId: 'deadBBBBBBB', status: 'dead' }),
     ]);
     const result = filterDeadVideos(data);
-    expect(result.categories[0].genres[0].videos).toEqual([]);
+    expect(result.categories[0].groups[0].genres[0].videos).toEqual([]);
   });
 });
 
 describe('updateLastUpdated()', () => {
   test('UT-06-04: meta.last_updated が指定日付（YYYY-MM-DD）に更新される', () => {
     const data = makeData([]);
-    const fixed = new Date(Date.UTC(2026, 4, 20)); // 2026-05-20
+    const fixed = new Date(Date.UTC(2026, 4, 20));
     const result = updateLastUpdated(data, fixed);
     expect(result.meta.last_updated).toBe('2026-05-20');
-    expect(result.meta.schema_version).toBe('1.1');
+    expect(result.meta.schema_version).toBe('1.2');
   });
 });
 
-describe('checkCategoryIntegrity()', () => {
+describe('checkCategoryIntegrity() (3階層)', () => {
   test('UT-06-05: categories.json にないジャンルIDがあれば警告ログを出力', () => {
     const videos = makeData([]);
     const categories = {
@@ -74,7 +80,13 @@ describe('checkCategoryIntegrity()', () => {
         {
           id: 'CAT-01',
           name: 'A',
-          genres: [{ id: 'OTHER', name: 'other' }], // GNR-01 が定義されていない
+          groups: [
+            {
+              id: 'GRP-A',
+              name: 'g1',
+              genres: [{ id: 'OTHER', name: 'other' }],
+            },
+          ],
         },
       ],
     };
@@ -91,7 +103,13 @@ describe('checkCategoryIntegrity()', () => {
         {
           id: 'CAT-01',
           name: 'A',
-          genres: [{ id: 'GNR-01', name: 'g1' }],
+          groups: [
+            {
+              id: 'GRP-A',
+              name: 'g1',
+              genres: [{ id: 'GNR-01', name: 'gn1' }],
+            },
+          ],
         },
       ],
     };

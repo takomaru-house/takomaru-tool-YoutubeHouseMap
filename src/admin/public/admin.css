@@ -56,7 +56,10 @@ main { max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
 .videos-list { display: flex; flex-direction: column; gap: 0.75rem; }
 .cat-block { border: 1px solid #e5e7eb; border-radius: 6px; }
 .cat-title { padding: 0.5rem 0.75rem; background: #f9fafb; font-weight: 600; border-bottom: 1px solid #e5e7eb; }
-.gnr-block { padding: 0.5rem 0.75rem; border-top: 1px dashed #e5e7eb; }
+.grp-block { padding: 0 0 0 0.5rem; border-top: 1px solid #e5e7eb; }
+.grp-block:first-of-type { border-top: none; }
+.grp-title { padding: 0.4rem 0.75rem; background: #fbf7ed; font-weight: 600; font-size: 0.9rem; color: #6b5b1c; }
+.gnr-block { padding: 0.4rem 0.75rem 0.4rem 1.5rem; border-top: 1px dashed #e5e7eb; }
 .gnr-block:first-of-type { border-top: none; }
 .gnr-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem; }
 .gnr-name { font-weight: 600; }
@@ -112,7 +115,7 @@ main { max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
   grid-template-columns: 1fr;
 }
 @media (min-width: 700px) {
-  .add-form { grid-template-columns: 2fr 1fr 1fr auto; align-items: end; }
+  .add-form { grid-template-columns: 2fr 1fr 1fr 1fr auto; align-items: end; }
   .block-form { grid-template-columns: 1fr 2fr auto; align-items: end; }
 }
 .add-form label, .block-form label {

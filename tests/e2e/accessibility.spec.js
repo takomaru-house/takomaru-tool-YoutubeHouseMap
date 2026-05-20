@@ -9,6 +9,7 @@ test.describe('E2E-04: アクセシビリティ', () => {
     await expect(page.locator('#mobile-view')).toBeVisible();
     // アコーディオン展開で動画カード描画
     await page.locator('.acc-cat-header').first().click();
+    await page.locator('.acc-grp-header').first().click();
     await page.locator('.acc-genre-header').first().click();
     const imgs = page.locator('.video-card img');
     const count = await imgs.count();
@@ -24,6 +25,7 @@ test.describe('E2E-04: アクセシビリティ', () => {
     await page.setViewportSize({ width: 400, height: 800 });
     await page.goto('');
     await page.locator('.acc-cat-header').first().click();
+    await page.locator('.acc-grp-header').first().click();
     await page.locator('.acc-genre-header').first().click();
     const firstCard = page.locator('.video-card').first();
     await firstCard.focus();

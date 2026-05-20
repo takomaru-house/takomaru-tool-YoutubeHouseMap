@@ -26,18 +26,25 @@ const makeManual = (videoId) =>
     title: `manual ${videoId}`,
   });
 
+// 3階層コンテナ：CAT-01 / GRP-A / GNR-01
 const makeContainer = (videos) => ({
-  meta: { last_updated: '2026-05-20', schema_version: '1.1' },
+  meta: { last_updated: '2026-05-20', schema_version: '1.2' },
   categories: [
     {
       id: 'CAT-01',
       name: '施主目線',
-      genres: [{ id: 'GNR-01', name: '間取り', videos }],
+      groups: [
+        {
+          id: 'GRP-A',
+          name: '計画・間取り',
+          genres: [{ id: 'GNR-01', name: '間取り', videos }],
+        },
+      ],
     },
   ],
 });
 
-describe('IT-02: draft → 本番マージフロー', () => {
+describe('IT-02: draft → 本番マージフロー (v1.2 3階層)', () => {
   test('IT-02-01: 承認後に draft の auto 内容が videos.json に反映される', () => {
     const prev = makeContainer([]);
     const draft = makeContainer([
@@ -47,7 +54,7 @@ describe('IT-02: draft → 本番マージフロー', () => {
 
     const merged = mergeDraft(prev, draft);
 
-    const ids = merged.categories[0].genres[0].videos.map((v) => v.videoId);
+    const ids = merged.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
     expect(ids).toEqual(['draftA00001', 'draftB00002']);
   });
 
@@ -59,7 +66,7 @@ describe('IT-02: draft → 本番マージフロー', () => {
     ]);
 
     const merged = mergeDraft(prev, draft);
-    const videos = merged.categories[0].genres[0].videos;
+    const videos = merged.categories[0].groups[0].genres[0].videos;
     const sources = videos.map((v) => v.source);
     const ids = videos.map((v) => v.videoId);
 
@@ -77,7 +84,9 @@ describe('IT-02: draft → 本番マージフロー', () => {
     ]);
 
     const merged = mergeDraft(prev, draft);
-    const target = merged.categories[0].genres[0].videos.find((v) => v.videoId === 'autoOld0001');
+    const target = merged.categories[0].groups[0].genres[0].videos.find(
+      (v) => v.videoId === 'autoOld0001'
+    );
     expect(target.title).toBe('new title from draft');
   });
 
@@ -90,9 +99,11 @@ describe('IT-02: draft → 本番マージフロー', () => {
     ]);
 
     const merged = mergeDraft(prev, draft);
-    const target = merged.categories[0].genres[0].videos.find((v) => v.videoId === 'deadVideo01');
+    const target = merged.categories[0].groups[0].genres[0].videos.find(
+      (v) => v.videoId === 'deadVideo01'
+    );
     expect(target.status).toBe('dead');
-    expect(target.title).toBe('draft refresh'); // タイトル更新は反映される
+    expect(target.title).toBe('draft refresh');
   });
 
   test('IT-02-05: マージ結果がアトミック書き込みで永続化できる（writeJsonAtomic 経由）', async () => {
@@ -106,10 +117,9 @@ describe('IT-02: draft → 本番マージフロー', () => {
       await writeJsonAtomic(targetPath, merged);
 
       const written = JSON.parse(await fs.readFile(targetPath, 'utf-8'));
-      const ids = written.categories[0].genres[0].videos.map((v) => v.videoId);
+      const ids = written.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
       expect(ids).toContain('keepManual1');
       expect(ids).toContain('draftA00001');
-      // .tmp ファイルが残っていない
       await expect(fs.access(targetPath + '.tmp')).rejects.toThrow();
     } finally {
       await fs.rm(tmpDir, { recursive: true, force: true });

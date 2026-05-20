@@ -1,9 +1,9 @@
-// バッチエントリポイント
+// バッチエントリポイント（schema v1.2 3階層対応）
 // フロー:
 //   1. categories.json + 前回 videos.json 読み込み
-//   2. 各カテゴリ × ジャンルで fetchForGenre → trending タグ付与
+//   2. 各カテゴリ × グループ × ジャンルで fetchForGenre → trending タグ付与
 //   3. 件数不足時は前回 auto 動画から補完（manual は draft に混入させない）
-//   4. 全体で重複排除（カテゴリ order → ジャンル order の前を優先）
+//   4. 全体で重複排除（カテゴリ order → グループ order → ジャンル order の前を優先）
 //   5. _tempApiData を strip し、order を再付与
 //   6. data/videos.draft.json をアトミック書き込み
 
@@ -15,14 +15,13 @@ const { isTrending } = require('./score');
 const { deduplicateVideos } = require('./dedup');
 
 const MAX_VIDEOS_PER_GENRE = 8;
-const SCHEMA_VERSION = '1.1';
+const SCHEMA_VERSION = '1.2';
 
 const readJSON = async (filePath) => {
   const content = await fs.readFile(filePath, 'utf-8');
   return JSON.parse(content);
 };
 
-// 前回データはオプショナル：読めない（存在しない/壊れている）場合は空構造で続行
 const readJSONOrDefault = async (filePath, defaultValue) => {
   try {
     return await readJSON(filePath);
@@ -34,10 +33,12 @@ const readJSONOrDefault = async (filePath, defaultValue) => {
 const collectManualVideos = (videosData) => {
   const result = [];
   for (const cat of (videosData && videosData.categories) || []) {
-    for (const gnr of cat.genres || []) {
-      for (const v of gnr.videos || []) {
-        if (v.source === 'manual') {
-          result.push({ categoryId: cat.id, genreId: gnr.id, video: v });
+    for (const grp of cat.groups || []) {
+      for (const gnr of grp.genres || []) {
+        for (const v of gnr.videos || []) {
+          if (v.source === 'manual') {
+            result.push({ categoryId: cat.id, groupId: grp.id, genreId: gnr.id, video: v });
+          }
         }
       }
     }
@@ -45,10 +46,12 @@ const collectManualVideos = (videosData) => {
   return result;
 };
 
-const findPrevAutoVideos = (prev, catId, gnrId) => {
+const findPrevAutoVideos = (prev, catId, groupId, gnrId) => {
   const cat = ((prev && prev.categories) || []).find((c) => c.id === catId);
   if (!cat) return [];
-  const gnr = (cat.genres || []).find((g) => g.id === gnrId);
+  const grp = (cat.groups || []).find((g) => g.id === groupId);
+  if (!grp) return [];
+  const gnr = (grp.genres || []).find((g) => g.id === gnrId);
   if (!gnr) return [];
   return (gnr.videos || []).filter((v) => v.source === 'auto');
 };
@@ -89,54 +92,53 @@ const runBatch = async (options) => {
   const insufficientGenres = [];
 
   for (const cat of config.categories) {
-    const newGenres = [];
-    for (const gnr of cat.genres) {
-      let videos = [];
-      try {
-        videos = await fetchForGenre(cat, gnr, {
-          apiKey,
-          blockedChannelIds: (config.globalSettings && config.globalSettings.blockedChannelIds) || [],
-          blockedVideoIds: (config.globalSettings && config.globalSettings.blockedVideoIds) || [],
-          sleep,
-        });
-      } catch (err) {
-        logger.error(`fetchForGenre failed ${cat.id}/${gnr.id}: ${err.message}`);
-        videos = [];
-      }
-
-      // trending タグ付与 + 必須フィールド設定
-      videos = videos.map((v) => ({
-        ...v,
-        tags: isTrending(v) ? ['trending'] : [],
-        source: 'auto',
-        status: 'active',
-      }));
-
-      // 件数不足時は前回 auto 動画から補完
-      if (videos.length < MAX_VIDEOS_PER_GENRE) {
-        const prevAuto = findPrevAutoVideos(prev, cat.id, gnr.id);
-        const existingIds = new Set(videos.map((v) => v.videoId));
-        for (const pv of prevAuto) {
-          if (existingIds.has(pv.videoId)) continue;
-          videos.push({ ...pv });
-          existingIds.add(pv.videoId);
-          if (videos.length >= MAX_VIDEOS_PER_GENRE) break;
+    const newGroups = [];
+    for (const grp of cat.groups) {
+      const newGenres = [];
+      for (const gnr of grp.genres) {
+        let videos = [];
+        try {
+          videos = await fetchForGenre(cat, gnr, {
+            apiKey,
+            blockedChannelIds: (config.globalSettings && config.globalSettings.blockedChannelIds) || [],
+            blockedVideoIds: (config.globalSettings && config.globalSettings.blockedVideoIds) || [],
+            sleep,
+          });
+        } catch (err) {
+          logger.error(`fetchForGenre failed ${cat.id}/${grp.id}/${gnr.id}: ${err.message}`);
+          videos = [];
         }
+
+        videos = videos.map((v) => ({
+          ...v,
+          tags: isTrending(v) ? ['trending'] : [],
+          source: 'auto',
+          status: 'active',
+        }));
+
+        if (videos.length < MAX_VIDEOS_PER_GENRE) {
+          const prevAuto = findPrevAutoVideos(prev, cat.id, grp.id, gnr.id);
+          const existingIds = new Set(videos.map((v) => v.videoId));
+          for (const pv of prevAuto) {
+            if (existingIds.has(pv.videoId)) continue;
+            videos.push({ ...pv });
+            existingIds.add(pv.videoId);
+            if (videos.length >= MAX_VIDEOS_PER_GENRE) break;
+          }
+        }
+
+        if (videos.length < MAX_VIDEOS_PER_GENRE) {
+          insufficientGenres.push(`${cat.id}/${grp.id}/${gnr.id}: ${videos.length}件`);
+        }
+
+        videos = videos.slice(0, MAX_VIDEOS_PER_GENRE);
+        videos = videos.map((v, i) => stripTempApiData(v, i + 1));
+
+        newGenres.push({ id: gnr.id, name: gnr.name, order: gnr.order, videos });
       }
-
-      if (videos.length < MAX_VIDEOS_PER_GENRE) {
-        insufficientGenres.push(`${cat.id}/${gnr.id}: ${videos.length}件`);
-      }
-
-      // 上限 8 件に丸める
-      videos = videos.slice(0, MAX_VIDEOS_PER_GENRE);
-
-      // _tempApiData strip + order 再付与
-      videos = videos.map((v, i) => stripTempApiData(v, i + 1));
-
-      newGenres.push({ id: gnr.id, name: gnr.name, videos });
+      newGroups.push({ id: grp.id, name: grp.name, order: grp.order, genres: newGenres });
     }
-    draftCategories.push({ id: cat.id, name: cat.name, genres: newGenres });
+    draftCategories.push({ id: cat.id, name: cat.name, order: cat.order, groups: newGroups });
   }
 
   let draftData = {
@@ -144,33 +146,26 @@ const runBatch = async (options) => {
       last_updated: formatDateYYYYMMDD(now),
       schema_version: SCHEMA_VERSION,
     },
-    categories: draftCategories.map((c) => ({
-      ...c,
-      order: (config.categories.find((cc) => cc.id === c.id) || {}).order,
-      genres: c.genres.map((g) => ({
-        ...g,
-        order: ((config.categories.find((cc) => cc.id === c.id) || {}).genres || []).find(
-          (gg) => gg.id === g.id
-        ) ?
-          ((config.categories.find((cc) => cc.id === c.id) || {}).genres || []).find(
-            (gg) => gg.id === g.id
-          ).order :
-          undefined,
-      })),
-    })),
+    categories: draftCategories,
   };
   draftData = deduplicateVideos(draftData);
 
-  // dedup の副産物として残った category.order / genre.order は本番 videos.json には含めないため除去
+  // dedup後にorderフィールドを除去（公開データには不要、categories.jsonが正本）
   draftData = {
     ...draftData,
     categories: draftData.categories.map((c) => {
       const { order: _co, ...rest } = c;
       return {
         ...rest,
-        genres: c.genres.map((g) => {
+        groups: (c.groups || []).map((g) => {
           const { order: _go, ...gRest } = g;
-          return gRest;
+          return {
+            ...gRest,
+            genres: (g.genres || []).map((gn) => {
+              const { order: _gno, ...gnRest } = gn;
+              return gnRest;
+            }),
+          };
         }),
       };
     }),
@@ -189,8 +184,7 @@ const runBatch = async (options) => {
   };
 };
 
-// CLI 実行（npm run batch）— カバレッジ対象外（実行確認は手動 + IT で代替）
-/* istanbul ignore next */
+/* istanbul ignore next : CLI 起動 */
 const main = async () => {
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) {

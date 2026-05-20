@@ -19,11 +19,11 @@ const api = {
   async approve() { return postJSON('/api/batch/approve'); },
   async reject() { return postJSON('/api/batch/reject'); },
   async addVideo(body) { return postJSON('/api/videos/add', body); },
-  async deleteVideo(videoId, categoryId, genreId) {
-    return fetchJSON(`/api/videos/${encodeURIComponent(videoId)}?categoryId=${encodeURIComponent(categoryId)}&genreId=${encodeURIComponent(genreId)}`, { method: 'DELETE' });
+  async deleteVideo(videoId, categoryId, groupId, genreId) {
+    return fetchJSON(`/api/videos/${encodeURIComponent(videoId)}?categoryId=${encodeURIComponent(categoryId)}&groupId=${encodeURIComponent(groupId)}&genreId=${encodeURIComponent(genreId)}`, { method: 'DELETE' });
   },
-  async reorderVideo(videoId, categoryId, genreId, direction) {
-    return fetchJSON(`/api/videos/${encodeURIComponent(videoId)}/order?categoryId=${encodeURIComponent(categoryId)}&genreId=${encodeURIComponent(genreId)}`, {
+  async reorderVideo(videoId, categoryId, groupId, genreId, direction) {
+    return fetchJSON(`/api/videos/${encodeURIComponent(videoId)}/order?categoryId=${encodeURIComponent(categoryId)}&groupId=${encodeURIComponent(groupId)}&genreId=${encodeURIComponent(genreId)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ direction }),
@@ -86,36 +86,46 @@ function renderVideosList(data) {
     catTitle.textContent = `${cat.name} (${cat.id})`;
     catBlock.appendChild(catTitle);
 
-    for (const gnr of cat.genres || []) {
-      const gnrBlock = document.createElement('div');
-      gnrBlock.className = 'gnr-block';
+    for (const grp of cat.groups || []) {
+      const grpBlock = document.createElement('div');
+      grpBlock.className = 'grp-block';
+      const grpTitle = document.createElement('div');
+      grpTitle.className = 'grp-title';
+      grpTitle.textContent = `▸ ${grp.name} (${grp.id})`;
+      grpBlock.appendChild(grpTitle);
 
-      const gnrTitle = document.createElement('div');
-      gnrTitle.className = 'gnr-title';
-      const gnrName = document.createElement('span');
-      gnrName.className = 'gnr-name';
-      gnrName.textContent = `${gnr.name} (${gnr.id})`;
-      gnrTitle.appendChild(gnrName);
+      for (const gnr of grp.genres || []) {
+        const gnrBlock = document.createElement('div');
+        gnrBlock.className = 'gnr-block';
 
-      const count = (gnr.videos || []).length;
-      const pill = document.createElement('span');
-      pill.className = 'count-pill';
-      if (count < 5) pill.classList.add('count-red');
-      else if (count < 8) pill.classList.add('count-yellow');
-      pill.textContent = `${count} 件`;
-      gnrTitle.appendChild(pill);
-      gnrBlock.appendChild(gnrTitle);
+        const gnrTitle = document.createElement('div');
+        gnrTitle.className = 'gnr-title';
+        const gnrName = document.createElement('span');
+        gnrName.className = 'gnr-name';
+        gnrName.textContent = `${gnr.name} (${gnr.id})`;
+        gnrTitle.appendChild(gnrName);
 
-      for (const v of gnr.videos || []) {
-        gnrBlock.appendChild(buildVideoRow(v, cat.id, gnr.id));
+        const count = (gnr.videos || []).length;
+        const pill = document.createElement('span');
+        pill.className = 'count-pill';
+        if (count < 5) pill.classList.add('count-red');
+        else if (count < 8) pill.classList.add('count-yellow');
+        pill.textContent = `${count} 件`;
+        gnrTitle.appendChild(pill);
+        gnrBlock.appendChild(gnrTitle);
+
+        for (const v of gnr.videos || []) {
+          gnrBlock.appendChild(buildVideoRow(v, cat.id, grp.id, gnr.id));
+        }
+        grpBlock.appendChild(gnrBlock);
       }
-      catBlock.appendChild(gnrBlock);
+      catBlock.appendChild(grpBlock);
     }
     container.appendChild(catBlock);
   }
 }
 
-function buildVideoRow(v, catId, gnrId) {
+function buildVideoRow(v, catId, groupId, gnrId) {
   const row = document.createElement('div');
   row.className = 'video-row';
 
@@ -144,20 +154,20 @@ function buildVideoRow(v, catId, gnrId) {
   const upBtn = document.createElement('button');
   upBtn.type = 'button';
   upBtn.textContent = '↑';
-  upBtn.addEventListener('click', () => reorderAndReload(v.videoId, catId, gnrId, 'up'));
+  upBtn.addEventListener('click', () => reorderAndReload(v.videoId, catId, groupId, gnrId, 'up'));
   row.appendChild(upBtn);
 
   const downBtn = document.createElement('button');
   downBtn.type = 'button';
   downBtn.textContent = '↓';
-  downBtn.addEventListener('click', () => reorderAndReload(v.videoId, catId, gnrId, 'down'));
+  downBtn.addEventListener('click', () => reorderAndReload(v.videoId, catId, groupId, gnrId, 'down'));
   row.appendChild(downBtn);
 
   const delBtn = document.createElement('button');
   delBtn.type = 'button';
   delBtn.className = 'danger';
   delBtn.textContent = '削除';
-  delBtn.addEventListener('click', () => deleteAndReload(v.videoId, catId, gnrId));
+  delBtn.addEventListener('click', () => deleteAndReload(v.videoId, catId, groupId, gnrId));
   row.appendChild(delBtn);
 
   return row;
@@ -207,6 +217,7 @@ function renderBlocklist(bl) {
 async function populateCategorySelectors() {
   const cfg = await api.getCategories();
   const catSelect = document.getElementById('add-category');
+  const grpSelect = document.getElementById('add-group');
   const gnrSelect = document.getElementById('add-genre');
   catSelect.textContent = '';
   for (const c of cfg.categories || []) {
@@ -215,18 +226,31 @@ async function populateCategorySelectors() {
     opt.textContent = `${c.name} (${c.id})`;
     catSelect.appendChild(opt);
   }
+  const refreshGroups = () => {
+    const cat = (cfg.categories || []).find((c) => c.id === catSelect.value);
+    grpSelect.textContent = '';
+    for (const g of (cat && cat.groups) || []) {
+      const opt = document.createElement('option');
+      opt.value = g.id;
+      opt.textContent = `${g.name} (${g.id})`;
+      grpSelect.appendChild(opt);
+    }
+    refreshGenres();
+  };
   const refreshGenres = () => {
     const cat = (cfg.categories || []).find((c) => c.id === catSelect.value);
+    const grp = cat && (cat.groups || []).find((g) => g.id === grpSelect.value);
     gnrSelect.textContent = '';
-    for (const g of (cat && cat.genres) || []) {
+    for (const g of (grp && grp.genres) || []) {
       const opt = document.createElement('option');
       opt.value = g.id;
       opt.textContent = `${g.name} (${g.id})`;
       gnrSelect.appendChild(opt);
     }
   };
-  catSelect.addEventListener('change', refreshGenres);
-  refreshGenres();
+  catSelect.addEventListener('change', refreshGroups);
+  grpSelect.addEventListener('change', refreshGenres);
+  refreshGroups();
 }
 
 function renderDraftPreview(draft, current) {
@@ -250,9 +274,11 @@ function renderDraftPreview(draft, current) {
 
   const currentIds = new Set();
   for (const c of (current && current.categories) || []) {
-    for (const g of c.genres || []) {
-      for (const v of g.videos || []) {
-        if (v.source === 'auto') currentIds.add(v.videoId);
+    for (const grp of c.groups || []) {
+      for (const g of grp.genres || []) {
+        for (const v of g.videos || []) {
+          if (v.source === 'auto') currentIds.add(v.videoId);
+        }
       }
     }
   }
@@ -260,23 +286,24 @@ function renderDraftPreview(draft, current) {
   const diff = document.createElement('div');
   diff.className = 'draft-diff';
   for (const c of draft.categories || []) {
-    for (const g of c.genres || []) {
-      const ul = document.createElement('ul');
-      let touched = false;
-      for (const v of g.videos || []) {
-        const li = document.createElement('li');
-        if (!currentIds.has(v.videoId)) {
-          li.className = 'diff-add';
-          li.textContent = `[+ 新規] ${c.id}/${g.id} ${v.videoId} ${v.title}`;
+    for (const grp of c.groups || []) {
+      for (const g of grp.genres || []) {
+        const ul = document.createElement('ul');
+        let touched = false;
+        for (const v of g.videos || []) {
+          const li = document.createElement('li');
+          if (!currentIds.has(v.videoId)) {
+            li.className = 'diff-add';
+            li.textContent = `[+ 新規] ${c.id}/${grp.id}/${g.id} ${v.videoId} ${v.title}`;
+          } else {
+            li.className = 'diff-change';
+            li.textContent = `[更新] ${c.id}/${grp.id}/${g.id} ${v.videoId} ${v.title}`;
+          }
           touched = true;
-        } else {
-          li.className = 'diff-change';
-          li.textContent = `[更新] ${c.id}/${g.id} ${v.videoId} ${v.title}`;
-          touched = true;
+          ul.appendChild(li);
         }
-        ul.appendChild(li);
+        if (touched) diff.appendChild(ul);
       }
-      if (touched) diff.appendChild(ul);
     }
   }
   container.appendChild(diff);
@@ -306,17 +333,17 @@ async function reloadBlocklist() {
   renderBlocklist(bl);
 }
 
-async function reorderAndReload(videoId, catId, gnrId, direction) {
+async function reorderAndReload(videoId, catId, groupId, gnrId, direction) {
   try {
-    await api.reorderVideo(videoId, catId, gnrId, direction);
+    await api.reorderVideo(videoId, catId, groupId, gnrId, direction);
     await reloadAll();
   } catch (e) { alert(e.message); }
 }
 
-async function deleteAndReload(videoId, catId, gnrId) {
+async function deleteAndReload(videoId, catId, groupId, gnrId) {
   if (!confirm(`${videoId} を削除しますか？`)) return;
   try {
-    await api.deleteVideo(videoId, catId, gnrId);
+    await api.deleteVideo(videoId, catId, groupId, gnrId);
     await reloadAll();
   } catch (e) { alert(e.message); }
 }
@@ -364,9 +391,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     const categoryId = document.getElementById('add-category').value;
+    const groupId = document.getElementById('add-group').value;
     const genreId = document.getElementById('add-genre').value;
     try {
-      await api.addVideo({ videoId, categoryId, genreId });
+      await api.addVideo({ videoId, categoryId, groupId, genreId });
       showStatus('add-status', `追加成功: ${videoId}`, 'ok');
       document.getElementById('add-input').value = '';
       await reloadAll();

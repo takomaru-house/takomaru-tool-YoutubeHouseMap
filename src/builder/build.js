@@ -1,15 +1,11 @@
-// 静的サイトビルダー
+// 静的サイトビルダー（schema v1.2 3階層対応）
 // data/videos.json + data/categories.json → docs/data/videos.json
-// - dead 動画除外
-// - meta.last_updated を現在日付に更新
-// - categories.json との整合性チェック（孤立 ID 警告）
-// - writeJsonAtomic で安全書き込み
 
 const fs = require('fs').promises;
 const path = require('path');
 const { writeJsonAtomic } = require('../utils/fileUtils');
 
-const SCHEMA_VERSION = '1.1';
+const SCHEMA_VERSION = '1.2';
 
 const formatDateYYYYMMDD = (date) => {
   const y = date.getUTCFullYear();
@@ -18,13 +14,19 @@ const formatDateYYYYMMDD = (date) => {
   return `${y}-${m}-${d}`;
 };
 
+// データ契約：videos.json / categories.json は spec 通りに categories[].groups[].genres[].videos[] を持つ。
+// 空構造ビルド時は buildSite() 側で categories=[] を保証するので、ここでは安全網を最小限に。
+
 const filterDeadVideos = (data) => ({
   ...data,
-  categories: (data.categories || []).map((c) => ({
+  categories: data.categories.map((c) => ({
     ...c,
-    genres: (c.genres || []).map((g) => ({
-      ...g,
-      videos: (g.videos || []).filter((v) => v.status !== 'dead'),
+    groups: c.groups.map((grp) => ({
+      ...grp,
+      genres: grp.genres.map((g) => ({
+        ...g,
+        videos: g.videos.filter((v) => v.status !== 'dead'),
+      })),
     })),
   })),
 });
@@ -32,7 +34,7 @@ const filterDeadVideos = (data) => ({
 const updateLastUpdated = (data, date) => ({
   ...data,
   meta: {
-    ...(data.meta || {}),
+    ...data.meta,
     last_updated: formatDateYYYYMMDD(date || new Date()),
     schema_version: SCHEMA_VERSION,
   },
@@ -40,18 +42,22 @@ const updateLastUpdated = (data, date) => ({
 
 const checkCategoryIntegrity = (videos, categories, logger) => {
   const defined = new Set();
-  for (const c of (categories && categories.categories) || []) {
-    for (const g of c.genres || []) {
-      defined.add(`${c.id}/${g.id}`);
+  for (const c of categories.categories) {
+    for (const grp of c.groups) {
+      for (const g of grp.genres) {
+        defined.add(`${c.id}/${grp.id}/${g.id}`);
+      }
     }
   }
   let orphaned = 0;
-  for (const c of (videos && videos.categories) || []) {
-    for (const g of c.genres || []) {
-      const key = `${c.id}/${g.id}`;
-      if (!defined.has(key)) {
-        logger.warn(`孤立 ID 検出（categories.json に未定義）: ${key}`);
-        orphaned += 1;
+  for (const c of videos.categories) {
+    for (const grp of c.groups) {
+      for (const g of grp.genres) {
+        const key = `${c.id}/${grp.id}/${g.id}`;
+        if (!defined.has(key)) {
+          logger.warn(`孤立 ID 検出（categories.json に未定義）: ${key}`);
+          orphaned += 1;
+        }
       }
     }
   }
@@ -65,7 +71,7 @@ const buildSite = async (options) => {
   try {
     videosData = JSON.parse(await fs.readFile(videosPath, 'utf-8'));
   } catch (err) {
-    /* istanbul ignore else : 想定外の I/O エラーは呼び出し側へ */
+    /* istanbul ignore else */
     if (err && err.code === 'ENOENT') {
       logger.warn(`videos.json が存在しないため空構造でビルドします: ${videosPath}`);
       videosData = { meta: { schema_version: SCHEMA_VERSION }, categories: [] };
@@ -85,7 +91,7 @@ const buildSite = async (options) => {
   return { outputPath, orphaned };
 };
 
-/* istanbul ignore next : CLI 起動。tests は buildSite を直接呼ぶ */
+/* istanbul ignore next */
 const main = async () => {
   const projectRoot = path.join(__dirname, '..', '..');
   try {

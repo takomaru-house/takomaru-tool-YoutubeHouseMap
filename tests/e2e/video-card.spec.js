@@ -7,9 +7,9 @@ const openFirstAccordion = async (page) => {
   await page.setViewportSize({ width: 400, height: 800 });
   await page.goto('');
   await expect(page.locator('#mobile-view')).toBeVisible({ timeout: 5000 });
-  // カテゴリ「施主目線」展開
+  // 3階層: カテゴリ → グループ → ジャンル を順に展開
   await page.locator('.acc-cat-header').first().click();
-  // ジャンル「間取り」展開（GNR-01 がサンプルに 3 件）
+  await page.locator('.acc-grp-header').first().click();
   await page.locator('.acc-genre-header').first().click();
 };
 
@@ -57,9 +57,23 @@ test.describe('E2E-02: 動画カード', () => {
   });
 
   test('E2E-02-06: 長文タイトルは CSS line-clamp で 2行省略される', async ({ page }) => {
-    await openFirstAccordion(page);
-    // CAT-01 GNR-06 のキッチンに長文タイトル → アコーディオン開く必要
-    // GNR-06 のアコーディオン見出しを開く
+    await page.setViewportSize({ width: 400, height: 800 });
+    await page.goto('');
+    await expect(page.locator('#mobile-view')).toBeVisible({ timeout: 5000 });
+
+    // 全カテゴリ展開
+    const catHeaders = page.locator('.acc-cat-header');
+    const catCount = await catHeaders.count();
+    for (let i = 0; i < catCount; i++) {
+      await catHeaders.nth(i).click();
+    }
+    // 全グループ展開
+    const grpHeaders = page.locator('.acc-grp-header');
+    const grpCount = await grpHeaders.count();
+    for (let i = 0; i < grpCount; i++) {
+      await grpHeaders.nth(i).click();
+    }
+    // 「キッチン」ジャンルを探して展開
     const gnrHeaders = page.locator('.acc-genre-header');
     const count = await gnrHeaders.count();
     let opened = false;

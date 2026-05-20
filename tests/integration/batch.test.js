@@ -14,7 +14,7 @@ const {
   daysAgo,
 } = require('../mocks/youtube-api');
 
-// テスト用最小 categories.json（1カテゴリ×1ジャンル）を生成
+// テスト用最小 categories.json（1カテゴリ×1グループ×1ジャンル）を生成
 const minimalCategories = (extra = {}) => ({
   globalSettings: {
     blockedChannelIds: [],
@@ -26,13 +26,21 @@ const minimalCategories = (extra = {}) => ({
       id: 'CAT-01',
       name: '施主目線',
       order: 1,
-      genres: [
+      side: 'right',
+      groups: [
         {
-          id: 'GNR-01',
-          name: '間取り',
+          id: 'GRP-A',
+          name: '計画・間取り',
           order: 1,
-          searchQuery: '注文住宅 間取り 施主 体験談',
-          searchQueryAlt: '注文住宅 間取り 失敗 後悔',
+          genres: [
+            {
+              id: 'GNR-01',
+              name: '間取り',
+              order: 1,
+              searchQuery: '注文住宅 間取り 施主 体験談',
+              searchQueryAlt: '注文住宅 間取り 失敗 後悔',
+            },
+          ],
         },
       ],
     },
@@ -40,12 +48,18 @@ const minimalCategories = (extra = {}) => ({
 });
 
 const emptyPrev = {
-  meta: { last_updated: '2026-01-01', schema_version: '1.1' },
+  meta: { last_updated: '2026-01-01', schema_version: '1.2' },
   categories: [
     {
       id: 'CAT-01',
       name: '施主目線',
-      genres: [{ id: 'GNR-01', name: '間取り', videos: [] }],
+      groups: [
+        {
+          id: 'GRP-A',
+          name: '計画・間取り',
+          genres: [{ id: 'GNR-01', name: '間取り', videos: [] }],
+        },
+      ],
     },
   ],
 };
@@ -156,7 +170,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
     expect(stat.isFile()).toBe(true);
   });
 
-  test('IT-01-02: draft のスキーマが videos.json と一致する', async () => {
+  test('IT-01-02: draft のスキーマが videos.json と一致する（v1.2 3階層）', async () => {
     setupNormalApiMocks(10);
     const categoriesPath = await writeCategoriesJson(minimalCategories());
     const prevPath = await writePrevVideosJson(emptyPrev);
@@ -172,10 +186,10 @@ describe('IT-01: バッチフロー統合テスト', () => {
     });
 
     const draft = JSON.parse(await fs.readFile(draftPath, 'utf-8'));
-    expect(draft).toHaveProperty('meta.schema_version', '1.1');
+    expect(draft).toHaveProperty('meta.schema_version', '1.2');
     expect(draft).toHaveProperty('meta.last_updated');
     expect(Array.isArray(draft.categories)).toBe(true);
-    const v = draft.categories[0].genres[0].videos[0];
+    const v = draft.categories[0].groups[0].genres[0].videos[0];
     expect(v).toMatchObject({
       title: expect.any(String),
       channelName: expect.any(String),
@@ -201,22 +215,28 @@ describe('IT-01: バッチフロー統合テスト', () => {
         {
           id: 'CAT-01',
           name: '施主目線',
-          genres: [
+          groups: [
             {
-              id: 'GNR-01',
-              name: '間取り',
-              videos: [
+              id: 'GRP-A',
+              name: '計画・間取り',
+              genres: [
                 {
-                  videoId: 'manualxxxxx',
-                  title: 'manual video',
-                  channelName: 'ch',
-                  thumbnailUrl: 'https://img.youtube.com/vi/manualxxxxx/hqdefault.jpg',
-                  publishedAt: '2025-01-01',
-                  duration: 'PT5M',
-                  tags: ['manual'],
-                  source: 'manual',
-                  status: 'active',
-                  order: 1,
+                  id: 'GNR-01',
+                  name: '間取り',
+                  videos: [
+                    {
+                      videoId: 'manualxxxxx',
+                      title: 'manual video',
+                      channelName: 'ch',
+                      thumbnailUrl: 'https://img.youtube.com/vi/manualxxxxx/hqdefault.jpg',
+                      publishedAt: '2025-01-01',
+                      duration: 'PT5M',
+                      tags: ['manual'],
+                      source: 'manual',
+                      status: 'active',
+                      order: 1,
+                    },
+                  ],
                 },
               ],
             },
@@ -238,7 +258,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
 
     const draft = JSON.parse(await fs.readFile(draftPath, 'utf-8'));
     const allVideos = draft.categories.flatMap((c) =>
-      c.genres.flatMap((g) => g.videos)
+      (c.groups || []).flatMap((g) => (g.genres || []).flatMap((gn) => gn.videos))
     );
     expect(allVideos.every((v) => v.source === 'auto')).toBe(true);
     expect(allVideos.some((v) => v.videoId === 'manualxxxxx')).toBe(false);
@@ -265,7 +285,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
 
     const draft = JSON.parse(await fs.readFile(draftPath, 'utf-8'));
     const allVideoIds = draft.categories.flatMap((c) =>
-      c.genres.flatMap((g) => g.videos.map((v) => v.videoId))
+      (c.groups || []).flatMap((g) => (g.genres || []).flatMap((gn) => gn.videos.map((v) => v.videoId)))
     );
     expect(allVideoIds).not.toContain(blockedVideoId);
   });
@@ -288,7 +308,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
 
     const warnCalls = logger.warn.mock.calls.flat().join(' ');
     expect(warnCalls).toMatch(/件数不足|不足|insufficient/i);
-    expect(warnCalls).toMatch(/CAT-01|GNR-01/);
+    expect(warnCalls).toMatch(/CAT-01|GRP-A|GNR-01/);
   });
 
   test('IT-01-06: 前回 videos.json の manual 動画件数がログに記録される（補完データとして認識）', async () => {
@@ -299,34 +319,40 @@ describe('IT-01: バッチフロー統合テスト', () => {
         {
           id: 'CAT-01',
           name: '施主目線',
-          genres: [
+          groups: [
             {
-              id: 'GNR-01',
-              name: '間取り',
-              videos: [
+              id: 'GRP-A',
+              name: '計画・間取り',
+              genres: [
                 {
-                  videoId: 'manualAAAAA',
-                  title: 'M1',
-                  channelName: 'c',
-                  thumbnailUrl: 'https://img.youtube.com/vi/manualAAAAA/hqdefault.jpg',
-                  publishedAt: '2025-01-01',
-                  duration: 'PT5M',
-                  tags: ['manual'],
-                  source: 'manual',
-                  status: 'active',
-                  order: 1,
-                },
-                {
-                  videoId: 'manualBBBBB',
-                  title: 'M2',
-                  channelName: 'c',
-                  thumbnailUrl: 'https://img.youtube.com/vi/manualBBBBB/hqdefault.jpg',
-                  publishedAt: '2025-01-01',
-                  duration: 'PT5M',
-                  tags: ['manual'],
-                  source: 'manual',
-                  status: 'active',
-                  order: 2,
+                  id: 'GNR-01',
+                  name: '間取り',
+                  videos: [
+                    {
+                      videoId: 'manualAAAAA',
+                      title: 'M1',
+                      channelName: 'c',
+                      thumbnailUrl: 'https://img.youtube.com/vi/manualAAAAA/hqdefault.jpg',
+                      publishedAt: '2025-01-01',
+                      duration: 'PT5M',
+                      tags: ['manual'],
+                      source: 'manual',
+                      status: 'active',
+                      order: 1,
+                    },
+                    {
+                      videoId: 'manualBBBBB',
+                      title: 'M2',
+                      channelName: 'c',
+                      thumbnailUrl: 'https://img.youtube.com/vi/manualBBBBB/hqdefault.jpg',
+                      publishedAt: '2025-01-01',
+                      duration: 'PT5M',
+                      tags: ['manual'],
+                      source: 'manual',
+                      status: 'active',
+                      order: 2,
+                    },
+                  ],
                 },
               ],
             },
@@ -389,7 +415,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
     });
 
     const draft = JSON.parse(await fs.readFile(draftPath, 'utf-8'));
-    expect(draft.categories[0].genres[0].videos.length).toBeGreaterThan(0);
+    expect(draft.categories[0].groups[0].genres[0].videos.length).toBeGreaterThan(0);
     // 3回の sleep（3回のリトライ間隔）が発生
     expect(sleepCalls.length).toBeGreaterThanOrEqual(3);
   });
@@ -418,7 +444,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
     ).resolves.toBeDefined();
 
     const draft = JSON.parse(await fs.readFile(draftPath, 'utf-8'));
-    expect(draft.categories[0].genres[0].videos).toEqual([]);
+    expect(draft.categories[0].groups[0].genres[0].videos).toEqual([]);
     expect(logger.error).toHaveBeenCalled();
   });
 
@@ -450,34 +476,40 @@ describe('IT-01: バッチフロー統合テスト', () => {
         {
           id: 'CAT-01',
           name: '施主目線',
-          genres: [
+          groups: [
             {
-              id: 'GNR-01',
-              name: '間取り',
-              videos: [
+              id: 'GRP-A',
+              name: '計画・間取り',
+              genres: [
                 {
-                  videoId: 'prevAUTO001',
-                  title: 'prev auto 1',
-                  channelName: 'c',
-                  thumbnailUrl: 'https://img.youtube.com/vi/prevAUTO001/hqdefault.jpg',
-                  publishedAt: '2025-01-01',
-                  duration: 'PT5M',
-                  tags: [],
-                  source: 'auto',
-                  status: 'active',
-                  order: 1,
-                },
-                {
-                  videoId: 'prevAUTO002',
-                  title: 'prev auto 2',
-                  channelName: 'c',
-                  thumbnailUrl: 'https://img.youtube.com/vi/prevAUTO002/hqdefault.jpg',
-                  publishedAt: '2025-01-01',
-                  duration: 'PT5M',
-                  tags: [],
-                  source: 'auto',
-                  status: 'active',
-                  order: 2,
+                  id: 'GNR-01',
+                  name: '間取り',
+                  videos: [
+                    {
+                      videoId: 'prevAUTO001',
+                      title: 'prev auto 1',
+                      channelName: 'c',
+                      thumbnailUrl: 'https://img.youtube.com/vi/prevAUTO001/hqdefault.jpg',
+                      publishedAt: '2025-01-01',
+                      duration: 'PT5M',
+                      tags: [],
+                      source: 'auto',
+                      status: 'active',
+                      order: 1,
+                    },
+                    {
+                      videoId: 'prevAUTO002',
+                      title: 'prev auto 2',
+                      channelName: 'c',
+                      thumbnailUrl: 'https://img.youtube.com/vi/prevAUTO002/hqdefault.jpg',
+                      publishedAt: '2025-01-01',
+                      duration: 'PT5M',
+                      tags: [],
+                      source: 'auto',
+                      status: 'active',
+                      order: 2,
+                    },
+                  ],
                 },
               ],
             },
@@ -499,7 +531,7 @@ describe('IT-01: バッチフロー統合テスト', () => {
     });
 
     const draft = JSON.parse(await fs.readFile(draftPath, 'utf-8'));
-    const draftIds = draft.categories[0].genres[0].videos.map((v) => v.videoId);
+    const draftIds = draft.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
     expect(draftIds).toContain('prevAUTO001');
     expect(draftIds).toContain('prevAUTO002');
     expect(draftIds.length).toBe(5); // 3 新規 + 2 前回 auto

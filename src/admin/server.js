@@ -1,7 +1,4 @@
-// 管理 Web サーバ（localhost 限定）
-// - 127.0.0.1 バインド + Host ヘッダ検証ミドルウェアの二重防衛
-// - 11 エンドポイント：videos / batch / blocklist
-// - createServer() ファクトリで supertest テストに直接渡せる
+// 管理 Web サーバ（localhost 限定 / schema v1.2 3階層対応）
 
 const express = require('express');
 const fs = require('fs').promises;
@@ -30,7 +27,16 @@ const unlinkIfExists = async (filePath) => {
 
 const reorderVideos = (videos) => videos.map((v, i) => ({ ...v, order: i + 1 }));
 
-// async ルートハンドラを Express の next(err) へ簡潔に橋渡しするヘルパー
+const findGenreNode = (data, categoryId, groupId, genreId) => {
+  const cat = (data.categories || []).find((c) => c.id === categoryId);
+  if (!cat) return null;
+  const grp = (cat.groups || []).find((g) => g.id === groupId);
+  if (!grp) return null;
+  const gnr = (grp.genres || []).find((g) => g.id === genreId);
+  if (!gnr) return null;
+  return { cat, grp, gnr };
+};
+
 const asyncH = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
 const createServer = (options = {}) => {
@@ -49,7 +55,6 @@ const createServer = (options = {}) => {
   const app = express();
   app.use(express.json());
 
-  // NS-010: Host ヘッダ検証（L7 防衛）
   app.use((req, res, next) => {
     const host = req.hostname;
     if (!ALLOWED_HOSTS.has(host)) {
@@ -68,7 +73,7 @@ const createServer = (options = {}) => {
   }));
 
   app.post('/api/videos/add', asyncH(async (req, res) => {
-    const { videoId, categoryId, genreId } = req.body || {};
+    const { videoId, categoryId, groupId, genreId } = req.body || {};
     if (!validateVideoId(videoId)) {
       return res.status(400).json({ error: 'invalid videoId' });
     }
@@ -92,25 +97,23 @@ const createServer = (options = {}) => {
     };
 
     const data = await readJSON(videosPath);
-    const cat = (data.categories || []).find((c) => c.id === categoryId);
-    const gnr = cat && (cat.genres || []).find((g) => g.id === genreId);
-    if (!gnr) return res.status(404).json({ error: 'category/genre not found' });
+    const node = findGenreNode(data, categoryId, groupId, genreId);
+    if (!node) return res.status(404).json({ error: 'category/group/genre not found' });
 
-    gnr.videos = reorderVideos([...gnr.videos, newVideo]);
+    node.gnr.videos = reorderVideos([...node.gnr.videos, newVideo]);
     await writeJsonAtomic(videosPath, data);
     res.status(201).json({ videoId });
   }));
 
   app.delete('/api/videos/:id', asyncH(async (req, res) => {
     const { id } = req.params;
-    const { categoryId, genreId } = req.query;
+    const { categoryId, groupId, genreId } = req.query;
     const data = await readJSON(videosPath);
-    const cat = (data.categories || []).find((c) => c.id === categoryId);
-    const gnr = cat && (cat.genres || []).find((g) => g.id === genreId);
-    if (!gnr) return res.status(404).json({ error: 'category/genre not found' });
-    const before = gnr.videos.length;
-    gnr.videos = reorderVideos(gnr.videos.filter((v) => v.videoId !== id));
-    if (gnr.videos.length === before) {
+    const node = findGenreNode(data, categoryId, groupId, genreId);
+    if (!node) return res.status(404).json({ error: 'category/group/genre not found' });
+    const before = node.gnr.videos.length;
+    node.gnr.videos = reorderVideos(node.gnr.videos.filter((v) => v.videoId !== id));
+    if (node.gnr.videos.length === before) {
       return res.status(404).json({ error: 'video not found' });
     }
     await writeJsonAtomic(videosPath, data);
@@ -119,24 +122,23 @@ const createServer = (options = {}) => {
 
   app.put('/api/videos/:id/order', asyncH(async (req, res) => {
     const { id } = req.params;
-    const { categoryId, genreId } = req.query;
+    const { categoryId, groupId, genreId } = req.query;
     const { direction } = req.body || {};
     if (direction !== 'up' && direction !== 'down') {
       return res.status(400).json({ error: 'direction must be up or down' });
     }
     const data = await readJSON(videosPath);
-    const cat = (data.categories || []).find((c) => c.id === categoryId);
-    const gnr = cat && (cat.genres || []).find((g) => g.id === genreId);
-    if (!gnr) return res.status(404).json({ error: 'category/genre not found' });
-    const idx = gnr.videos.findIndex((v) => v.videoId === id);
+    const node = findGenreNode(data, categoryId, groupId, genreId);
+    if (!node) return res.status(404).json({ error: 'category/group/genre not found' });
+    const idx = node.gnr.videos.findIndex((v) => v.videoId === id);
     if (idx < 0) return res.status(404).json({ error: 'video not found' });
     const swapWith = direction === 'up' ? idx - 1 : idx + 1;
-    if (swapWith < 0 || swapWith >= gnr.videos.length) {
+    if (swapWith < 0 || swapWith >= node.gnr.videos.length) {
       return res.status(200).json({ status: 'unchanged' });
     }
-    const next = [...gnr.videos];
+    const next = [...node.gnr.videos];
     [next[idx], next[swapWith]] = [next[swapWith], next[idx]];
-    gnr.videos = reorderVideos(next);
+    node.gnr.videos = reorderVideos(next);
     await writeJsonAtomic(videosPath, data);
     res.json({ status: 'reordered' });
   }));
@@ -168,7 +170,7 @@ const createServer = (options = {}) => {
       const draft = await readJSON(draftPath);
       res.json(draft);
     } catch (err) {
-      /* istanbul ignore else : 想定外エラーは共通ハンドラへ */
+      /* istanbul ignore else */
       if (err && err.code === 'ENOENT') {
         return res.status(404).json({ error: 'no draft' });
       }
@@ -221,14 +223,13 @@ const createServer = (options = {}) => {
     res.json({ status: 'deleted' });
   }));
 
-  // ---- /api/categories (UI 用：カテゴリ・ジャンル定義) ----
+  // ---- /api/categories ----
   app.get('/api/categories', asyncH(async (_req, res) => {
     const cfg = await readJSON(categoriesPath);
     res.json(cfg);
   }));
 
-  // 共通エラーハンドラ
-  // eslint-disable-next-line no-unused-vars
+  /* istanbul ignore next */
   app.use((err, req, res, _next) => {
     console.error('admin api error:', err);
     res.status(500).json({ error: err.message || 'internal error' });
@@ -237,7 +238,7 @@ const createServer = (options = {}) => {
   return app;
 };
 
-/* istanbul ignore next : CLI 起動。テストは createServer をsupertest経由で呼ぶ */
+/* istanbul ignore next */
 const startServer = (port) => {
   const app = createServer();
   const listenPort = port || parseInt(process.env.ADMIN_PORT || '3000', 10);
@@ -246,7 +247,7 @@ const startServer = (port) => {
   });
 };
 
-/* istanbul ignore if : CLI 起動。テストは createServer をsupertest経由で呼ぶ */
+/* istanbul ignore if */
 if (require.main === module) {
   startServer();
 }

@@ -1,10 +1,10 @@
 /* =========================================================================
-   注文住宅YouTube動画マップ - Sprint 1 公開サイトJS
+   注文住宅YouTube動画マップ - Sprint 4.5 公開サイトJS（schema v1.2 3階層）
    - JSONロード（5秒タイムアウト）+ エラーUI
    - formatDuration: ISO 8601 → MM:SS / HH:MM:SS
-   - 動画カード生成（XSS対策: textContent / DOM API のみ使用、innerHTML禁止）
-   - モバイル：アコーディオン（300ms ease-in-out + stagger 50ms）
-   - PC：D3.js カスタムツリーマインドマップ + サイドパネル
+   - 動画カード生成（XSS対策: textContent / DOM API のみ、innerHTML不使用）
+   - モバイル：アコーディオン 3階層（カテゴリ → グループ → ジャンル → 動画）
+   - PC：D3.js カスタムツリーマインドマップ（ROOT 中央、CAT-02 左、CAT-01 右）+ サイドパネル
    - 768px ブレークポイント切替
    ========================================================================= */
 
@@ -49,7 +49,7 @@ async function loadVideos() {
   }
 }
 
-/* ---------- 動画カード生成（XSS対策：DOM API のみ） ---------- */
+/* ---------- 動画カード生成 ---------- */
 
 function createVideoCard(video) {
   const card = document.createElement('a');
@@ -109,12 +109,11 @@ function createVideoCard(video) {
   return card;
 }
 
-/* ---------- アコーディオン（モバイル） ---------- */
+/* ---------- アコーディオン（モバイル）3階層 ---------- */
 
 function toggleAccordion(button, content) {
   const expanded = button.getAttribute('aria-expanded') === 'true';
   button.setAttribute('aria-expanded', String(!expanded));
-  // 折りたたみ時は inert で子の focusable をtab 順序から除外（a11y: aria-hidden-focus 対策）
   if (expanded) {
     content.setAttribute('aria-hidden', 'true');
     content.setAttribute('inert', '');
@@ -124,9 +123,9 @@ function toggleAccordion(button, content) {
   }
 }
 
-function buildAccordionHeader(label, count) {
+function buildAccordionHeader(label, count, levelClass) {
   const btn = document.createElement('button');
-  btn.className = 'acc-header';
+  btn.className = `acc-header ${levelClass}`;
   btn.type = 'button';
   btn.setAttribute('aria-expanded', 'false');
 
@@ -149,8 +148,15 @@ function buildAccordionHeader(label, count) {
     btn.appendChild(document.createTextNode(' '));
     btn.appendChild(countEl);
   }
-
   return btn;
+}
+
+function buildAccordionContent(extraClass) {
+  const div = document.createElement('div');
+  div.className = `acc-content ${extraClass || ''}`.trim();
+  div.setAttribute('aria-hidden', 'true');
+  div.setAttribute('inert', '');
+  return div;
 }
 
 function renderAccordion(data, container) {
@@ -159,39 +165,48 @@ function renderAccordion(data, container) {
     const catEl = document.createElement('section');
     catEl.className = 'acc-category';
 
-    const catBtn = buildAccordionHeader(cat.name);
-    catBtn.classList.add('acc-cat-header');
+    const catBtn = buildAccordionHeader(cat.name, undefined, 'acc-cat-header');
     catEl.appendChild(catBtn);
 
-    const catContent = document.createElement('div');
-    catContent.className = 'acc-content';
-    catContent.setAttribute('aria-hidden', 'true');
-    catContent.setAttribute('inert', '');
+    const catContent = buildAccordionContent();
+    (cat.groups || []).forEach((grp) => {
+      const totalInGroup = (grp.genres || []).reduce(
+        (s, gn) => s + ((gn.videos && gn.videos.length) || 0),
+        0
+      );
+      if (totalInGroup === 0) return;
 
-    cat.genres.forEach((gnr) => {
-      if (!gnr.videos || gnr.videos.length === 0) return;
+      const grpEl = document.createElement('div');
+      grpEl.className = 'acc-group';
 
-      const gnrEl = document.createElement('div');
-      gnrEl.className = 'acc-genre';
+      const grpBtn = buildAccordionHeader(grp.name, totalInGroup, 'acc-grp-header');
+      grpEl.appendChild(grpBtn);
 
-      const gnrBtn = buildAccordionHeader(gnr.name, gnr.videos.length);
-      gnrBtn.classList.add('acc-genre-header');
-      gnrEl.appendChild(gnrBtn);
+      const grpContent = buildAccordionContent();
+      (grp.genres || []).forEach((gnr) => {
+        if (!gnr.videos || gnr.videos.length === 0) return;
 
-      const gnrContent = document.createElement('div');
-      gnrContent.className = 'acc-content video-list';
-      gnrContent.setAttribute('aria-hidden', 'true');
-      gnrContent.setAttribute('inert', '');
+        const gnrEl = document.createElement('div');
+        gnrEl.className = 'acc-genre';
 
-      gnr.videos.forEach((video, i) => {
-        const card = createVideoCard(video);
-        card.style.setProperty('--idx', i);
-        gnrContent.appendChild(card);
+        const gnrBtn = buildAccordionHeader(gnr.name, gnr.videos.length, 'acc-genre-header');
+        gnrEl.appendChild(gnrBtn);
+
+        const gnrContent = buildAccordionContent('video-list');
+        gnr.videos.forEach((video, i) => {
+          const card = createVideoCard(video);
+          card.style.setProperty('--idx', i);
+          gnrContent.appendChild(card);
+        });
+        gnrEl.appendChild(gnrContent);
+
+        gnrBtn.addEventListener('click', () => toggleAccordion(gnrBtn, gnrContent));
+        grpContent.appendChild(gnrEl);
       });
-      gnrEl.appendChild(gnrContent);
+      grpEl.appendChild(grpContent);
 
-      gnrBtn.addEventListener('click', () => toggleAccordion(gnrBtn, gnrContent));
-      catContent.appendChild(gnrEl);
+      grpBtn.addEventListener('click', () => toggleAccordion(grpBtn, grpContent));
+      catContent.appendChild(grpEl);
     });
 
     catEl.appendChild(catContent);
@@ -200,46 +215,67 @@ function renderAccordion(data, container) {
   });
 }
 
-/* ---------- D3.js マインドマップ（PC） ---------- */
+/* ---------- D3.js マインドマップ（PC、左右分割 3階層） ---------- */
+
+function buildHierarchy(data) {
+  return {
+    name: '',
+    type: 'root',
+    children: (data.categories || []).map((cat) => ({
+      name: cat.name,
+      type: 'category',
+      id: cat.id,
+      side: cat.side || (cat.id === 'CAT-02' ? 'left' : 'right'),
+      children: (cat.groups || []).map((grp) => ({
+        name: grp.name,
+        type: 'group',
+        id: grp.id,
+        side: cat.side,
+        children: (grp.genres || []).map((gnr) => ({
+          name: gnr.name,
+          type: 'genre',
+          id: gnr.id,
+          side: cat.side,
+          categoryId: cat.id,
+          groupId: grp.id,
+          videos: gnr.videos || [],
+        })),
+      })),
+    })),
+  };
+}
 
 function renderMindmap(data, container) {
   if (typeof d3 === 'undefined') {
     container.textContent = 'D3.js の読み込みに失敗しました。';
     return null;
   }
-
   container.textContent = '';
-  const width = container.clientWidth || 800;
-  const height = Math.max(container.clientHeight, 600);
 
-  const hierarchyData = {
-    name: 'ROOT',
-    type: 'root',
-    children: data.categories.map((cat) => ({
-      name: cat.name,
-      type: 'category',
-      id: cat.id,
-      children: cat.genres.map((gnr) => ({
-        name: gnr.name,
-        type: 'genre',
-        id: gnr.id,
-        categoryId: cat.id,
-        videos: gnr.videos || [],
-      })),
-    })),
-  };
+  const width = container.clientWidth || 1000;
+  const height = Math.max(container.clientHeight, 700);
+  const halfWidth = width / 2;
+  const treeHeight = height - 80;
+  const treeReach = halfWidth - 80; // 中央から左右への展開幅
 
-  const root = d3.hierarchy(hierarchyData);
-  const treeLayout = d3.tree().size([height - 80, width - 240]);
-  treeLayout(root);
+  const root = d3.hierarchy(buildHierarchy(data));
+  // tree layout: x=兄弟方向（縦）、y=深さ方向（横） → 中央が 0
+  d3.tree().size([treeHeight, treeReach])(root);
+
+  // 'left' は y を反転して左方向へ
+  root.descendants().forEach((d) => {
+    if (d.data && d.data.side === 'left') {
+      d.y = -d.y;
+    }
+  });
 
   const svg = d3
     .select(container)
     .append('svg')
-    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('viewBox', `${-halfWidth} 0 ${width} ${height}`)
     .attr('preserveAspectRatio', 'xMidYMid meet');
 
-  const g = svg.append('g').attr('transform', 'translate(100, 40)');
+  const g = svg.append('g').attr('transform', `translate(0, 40)`);
 
   const zoom = d3
     .zoom()
@@ -249,6 +285,7 @@ function renderMindmap(data, container) {
     });
   svg.call(zoom);
 
+  // リンク描画（水平リンク）
   g.selectAll('path.link')
     .data(root.links())
     .enter()
@@ -264,13 +301,15 @@ function renderMindmap(data, container) {
     .attr('class', (d) => `node node-${d.data.type || 'root'}`)
     .attr('transform', (d) => `translate(${d.y}, ${d.x})`);
 
-  node.append('circle').attr('r', 6);
+  node.append('circle').attr('r', (d) => (d.data.type === 'root' ? 4 : 6));
   node
     .append('text')
-    .attr('dx', 12)
+    .attr('dx', (d) => (d.data.side === 'left' ? -12 : 12))
+    .attr('text-anchor', (d) => (d.data.side === 'left' ? 'end' : 'start'))
     .attr('dy', '0.32em')
     .text((d) => d.data.name);
 
+  // ジャンルノードクリックでサイドパネル
   node
     .filter((d) => d.data.type === 'genre')
     .on('click', (_event, d) => {
@@ -375,8 +414,6 @@ async function bootstrap() {
     if (currentData) renderForView(currentData);
   });
 }
-
-/* ---------- 環境分岐：ブラウザ実行 / Node.js テスト用エクスポート ---------- */
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (document.readyState === 'loading') {

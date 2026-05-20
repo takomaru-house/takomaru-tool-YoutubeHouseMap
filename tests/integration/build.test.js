@@ -16,45 +16,59 @@ const baseCategories = {
       id: 'CAT-01',
       name: '施主目線',
       order: 1,
-      genres: [{ id: 'GNR-01', name: '間取り', order: 1, searchQuery: 'q', searchQueryAlt: 'q' }],
+      side: 'right',
+      groups: [
+        {
+          id: 'GRP-A',
+          name: '計画・間取り',
+          order: 1,
+          genres: [{ id: 'GNR-01', name: '間取り', order: 1, searchQuery: 'q', searchQueryAlt: 'q' }],
+        },
+      ],
     },
   ],
 };
 
 const baseVideos = {
-  meta: { last_updated: '2025-01-01', schema_version: '1.1' },
+  meta: { last_updated: '2025-01-01', schema_version: '1.2' },
   categories: [
     {
       id: 'CAT-01',
       name: '施主目線',
-      genres: [
+      groups: [
         {
-          id: 'GNR-01',
-          name: '間取り',
-          videos: [
+          id: 'GRP-A',
+          name: '計画・間取り',
+          genres: [
             {
-              videoId: 'aliveAAAAAA',
-              title: 'alive',
-              channelName: 'c',
-              thumbnailUrl: 'https://img.youtube.com/vi/aliveAAAAAA/hqdefault.jpg',
-              publishedAt: '2025-06-01',
-              duration: 'PT10M',
-              tags: [],
-              source: 'auto',
-              status: 'active',
-              order: 1,
-            },
-            {
-              videoId: 'deadBBBBBBB',
-              title: 'dead',
-              channelName: 'c',
-              thumbnailUrl: 'https://img.youtube.com/vi/deadBBBBBBB/hqdefault.jpg',
-              publishedAt: '2025-06-01',
-              duration: 'PT10M',
-              tags: [],
-              source: 'auto',
-              status: 'dead',
-              order: 2,
+              id: 'GNR-01',
+              name: '間取り',
+              videos: [
+                {
+                  videoId: 'aliveAAAAAA',
+                  title: 'alive',
+                  channelName: 'c',
+                  thumbnailUrl: 'https://img.youtube.com/vi/aliveAAAAAA/hqdefault.jpg',
+                  publishedAt: '2025-06-01',
+                  duration: 'PT10M',
+                  tags: [],
+                  source: 'auto',
+                  status: 'active',
+                  order: 1,
+                },
+                {
+                  videoId: 'deadBBBBBBB',
+                  title: 'dead',
+                  channelName: 'c',
+                  thumbnailUrl: 'https://img.youtube.com/vi/deadBBBBBBB/hqdefault.jpg',
+                  publishedAt: '2025-06-01',
+                  duration: 'PT10M',
+                  tags: [],
+                  source: 'auto',
+                  status: 'dead',
+                  order: 2,
+                },
+              ],
             },
           ],
         },
@@ -77,7 +91,7 @@ afterEach(async () => {
   await fs.rm(tmpDir, { recursive: true, force: true });
 });
 
-describe('IT-05: 静的ビルド統合', () => {
+describe('IT-05: 静的ビルド統合 (v1.2 3階層)', () => {
   test('IT-05-01: ビルド後に docs/data/videos.json 相当のファイルが生成される', async () => {
     await fs.writeFile(videosPath, JSON.stringify(baseVideos), 'utf-8');
     await buildSite({ videosPath, categoriesPath, outputPath, logger });
@@ -89,7 +103,7 @@ describe('IT-05: 静的ビルド統合', () => {
     await fs.writeFile(videosPath, JSON.stringify(baseVideos), 'utf-8');
     await buildSite({ videosPath, categoriesPath, outputPath, logger });
     const out = JSON.parse(await fs.readFile(outputPath, 'utf-8'));
-    const ids = out.categories[0].genres[0].videos.map((v) => v.videoId);
+    const ids = out.categories[0].groups[0].genres[0].videos.map((v) => v.videoId);
     expect(ids).toContain('aliveAAAAAA');
     expect(ids).not.toContain('deadBBBBBBB');
   });
@@ -108,10 +122,9 @@ describe('IT-05: 静的ビルド統合', () => {
   });
 
   test('IT-05-04: videos.json が存在しない場合も空構造でビルドされる', async () => {
-    // videos.json を書かない
     await buildSite({ videosPath, categoriesPath, outputPath, logger });
     const out = JSON.parse(await fs.readFile(outputPath, 'utf-8'));
-    expect(out).toHaveProperty('meta.schema_version', '1.1');
+    expect(out).toHaveProperty('meta.schema_version', '1.2');
     expect(out.categories).toEqual([]);
   });
 
@@ -122,7 +135,13 @@ describe('IT-05: 静的ビルド統合', () => {
         {
           id: 'CAT-99',
           name: 'orphan',
-          genres: [{ id: 'GNR-99', name: 'orphan-gnr', videos: [] }],
+          groups: [
+            {
+              id: 'GRP-99',
+              name: 'orphan-grp',
+              genres: [{ id: 'GNR-99', name: 'orphan-gnr', videos: [] }],
+            },
+          ],
         },
       ],
     };

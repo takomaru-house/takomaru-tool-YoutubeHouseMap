@@ -5,184 +5,242 @@
   },
   "categories": [
     {
-      "id": "CAT-01",
-      "name": "施主目線",
+      "id": "CAT-02",
+      "name": "専門家目線",
       "order": 1,
-      "genres": [
+      "side": "left",
+      "groups": [
         {
-          "id": "GNR-01",
-          "name": "間取り",
+          "id": "GRP-A",
+          "name": "計画・間取り",
           "order": 1,
-          "searchQuery": "注文住宅 間取り 施主 体験談",
-          "searchQueryAlt": "注文住宅 間取り 失敗 後悔"
+          "genres": [
+            {
+              "id": "GNR-01",
+              "name": "間取り",
+              "order": 1,
+              "searchQuery": "注文住宅 間取り 設計士 プロ",
+              "searchQueryAlt": "注文住宅 間取り 失敗 後悔"
+            },
+            {
+              "id": "GNR-08",
+              "name": "リビング",
+              "order": 2,
+              "searchQuery": "注文住宅 リビング 設計士 間取り",
+              "searchQueryAlt": "注文住宅 リビング 後悔"
+            },
+            {
+              "id": "GNR-09",
+              "name": "ダイニング",
+              "order": 3,
+              "searchQuery": "注文住宅 ダイニング 設計士 おすすめ",
+              "searchQueryAlt": "注文住宅 ダイニング 選び方"
+            }
+          ]
         },
         {
-          "id": "GNR-02",
-          "name": "外壁",
+          "id": "GRP-B",
+          "name": "水回り",
           "order": 2,
-          "searchQuery": "注文住宅 外壁 施主 選び方",
-          "searchQueryAlt": "注文住宅 外壁 種類 比較"
+          "genres": [
+            {
+              "id": "GNR-04",
+              "name": "風呂",
+              "order": 1,
+              "searchQuery": "注文住宅 お風呂 設計士 おすすめ",
+              "searchQueryAlt": "注文住宅 浴室 選び方"
+            },
+            {
+              "id": "GNR-05",
+              "name": "トイレ",
+              "order": 2,
+              "searchQuery": "注文住宅 トイレ 設計士 おすすめ",
+              "searchQueryAlt": "注文住宅 トイレ 選び方"
+            },
+            {
+              "id": "GNR-06",
+              "name": "キッチン",
+              "order": 3,
+              "searchQuery": "注文住宅 キッチン 設計士 おすすめ",
+              "searchQueryAlt": "注文住宅 キッチン 選び方"
+            },
+            {
+              "id": "GNR-12",
+              "name": "ランドリールーム",
+              "order": 4,
+              "searchQuery": "注文住宅 ランドリールーム 設計士 解説",
+              "searchQueryAlt": "注文住宅 洗濯 動線"
+            }
+          ]
         },
         {
-          "id": "GNR-03",
-          "name": "屋根",
+          "id": "GRP-C",
+          "name": "外装",
           "order": 3,
-          "searchQuery": "注文住宅 屋根 施主 選び方",
-          "searchQueryAlt": "注文住宅 屋根 種類 比較"
+          "genres": [
+            {
+              "id": "GNR-02",
+              "name": "外壁",
+              "order": 1,
+              "searchQuery": "注文住宅 外壁 工務店 おすすめ",
+              "searchQueryAlt": "注文住宅 外壁 種類 比較"
+            },
+            {
+              "id": "GNR-03",
+              "name": "屋根",
+              "order": 2,
+              "searchQuery": "注文住宅 屋根 工務店 おすすめ",
+              "searchQueryAlt": "注文住宅 屋根 種類 比較"
+            },
+            {
+              "id": "GNR-11",
+              "name": "庭",
+              "order": 3,
+              "searchQuery": "注文住宅 外構 工務店 おすすめ",
+              "searchQueryAlt": "注文住宅 庭 ガーデニング"
+            }
+          ]
         },
         {
-          "id": "GNR-04",
-          "name": "風呂",
+          "id": "GRP-D",
+          "name": "内装・設備",
           "order": 4,
-          "searchQuery": "注文住宅 お風呂 施主 体験談",
-          "searchQueryAlt": "注文住宅 浴室 選び方"
-        },
-        {
-          "id": "GNR-05",
-          "name": "トイレ",
-          "order": 5,
-          "searchQuery": "注文住宅 トイレ 施主 体験談",
-          "searchQueryAlt": "注文住宅 トイレ 選び方"
-        },
-        {
-          "id": "GNR-06",
-          "name": "キッチン",
-          "order": 6,
-          "searchQuery": "注文住宅 キッチン 施主 体験談",
-          "searchQueryAlt": "注文住宅 キッチン 選び方"
-        },
-        {
-          "id": "GNR-07",
-          "name": "床",
-          "order": 7,
-          "searchQuery": "注文住宅 床材 施主 体験談",
-          "searchQueryAlt": "注文住宅 フローリング 選び方"
-        },
-        {
-          "id": "GNR-08",
-          "name": "リビング",
-          "order": 8,
-          "searchQuery": "注文住宅 リビング 施主 体験談",
-          "searchQueryAlt": "注文住宅 リビング 後悔"
-        },
-        {
-          "id": "GNR-09",
-          "name": "ダイニング",
-          "order": 9,
-          "searchQuery": "注文住宅 ダイニング 施主 体験談",
-          "searchQueryAlt": "注文住宅 ダイニング 選び方"
-        },
-        {
-          "id": "GNR-10",
-          "name": "照明計画",
-          "order": 10,
-          "searchQuery": "注文住宅 照明 施主 体験談",
-          "searchQueryAlt": "注文住宅 照明 後悔"
-        },
-        {
-          "id": "GNR-11",
-          "name": "庭",
-          "order": 11,
-          "searchQuery": "注文住宅 外構 庭 施主 体験談",
-          "searchQueryAlt": "注文住宅 庭 ガーデニング"
-        },
-        {
-          "id": "GNR-12",
-          "name": "ランドリールーム",
-          "order": 12,
-          "searchQuery": "注文住宅 ランドリールーム 施主 体験談",
-          "searchQueryAlt": "注文住宅 洗濯 動線"
+          "genres": [
+            {
+              "id": "GNR-07",
+              "name": "床",
+              "order": 1,
+              "searchQuery": "注文住宅 床材 工務店 おすすめ",
+              "searchQueryAlt": "注文住宅 フローリング 選び方"
+            },
+            {
+              "id": "GNR-10",
+              "name": "照明計画",
+              "order": 2,
+              "searchQuery": "注文住宅 照明計画 設計士 解説",
+              "searchQueryAlt": "注文住宅 照明 後悔"
+            }
+          ]
         }
       ]
     },
     {
-      "id": "CAT-02",
-      "name": "専門家目線",
+      "id": "CAT-01",
+      "name": "施主目線",
       "order": 2,
-      "genres": [
+      "side": "right",
+      "groups": [
         {
-          "id": "GNR-01",
-          "name": "間取り",
+          "id": "GRP-A",
+          "name": "計画・間取り",
           "order": 1,
-          "searchQuery": "注文住宅 間取り 設計士 プロ",
-          "searchQueryAlt": "注文住宅 間取り 失敗 後悔"
+          "genres": [
+            {
+              "id": "GNR-01",
+              "name": "間取り",
+              "order": 1,
+              "searchQuery": "注文住宅 間取り 施主 体験談",
+              "searchQueryAlt": "注文住宅 間取り 失敗 後悔"
+            },
+            {
+              "id": "GNR-08",
+              "name": "リビング",
+              "order": 2,
+              "searchQuery": "注文住宅 リビング 施主 体験談",
+              "searchQueryAlt": "注文住宅 リビング 後悔"
+            },
+            {
+              "id": "GNR-09",
+              "name": "ダイニング",
+              "order": 3,
+              "searchQuery": "注文住宅 ダイニング 施主 体験談",
+              "searchQueryAlt": "注文住宅 ダイニング 選び方"
+            }
+          ]
         },
         {
-          "id": "GNR-02",
-          "name": "外壁",
+          "id": "GRP-B",
+          "name": "水回り",
           "order": 2,
-          "searchQuery": "注文住宅 外壁 工務店 おすすめ",
-          "searchQueryAlt": "注文住宅 外壁 種類 比較"
+          "genres": [
+            {
+              "id": "GNR-04",
+              "name": "風呂",
+              "order": 1,
+              "searchQuery": "注文住宅 お風呂 施主 体験談",
+              "searchQueryAlt": "注文住宅 浴室 選び方"
+            },
+            {
+              "id": "GNR-05",
+              "name": "トイレ",
+              "order": 2,
+              "searchQuery": "注文住宅 トイレ 施主 体験談",
+              "searchQueryAlt": "注文住宅 トイレ 選び方"
+            },
+            {
+              "id": "GNR-06",
+              "name": "キッチン",
+              "order": 3,
+              "searchQuery": "注文住宅 キッチン 施主 体験談",
+              "searchQueryAlt": "注文住宅 キッチン 選び方"
+            },
+            {
+              "id": "GNR-12",
+              "name": "ランドリールーム",
+              "order": 4,
+              "searchQuery": "注文住宅 ランドリールーム 施主 体験談",
+              "searchQueryAlt": "注文住宅 洗濯 動線"
+            }
+          ]
         },
         {
-          "id": "GNR-03",
-          "name": "屋根",
+          "id": "GRP-C",
+          "name": "外装",
           "order": 3,
-          "searchQuery": "注文住宅 屋根 工務店 おすすめ",
-          "searchQueryAlt": "注文住宅 屋根 種類 比較"
+          "genres": [
+            {
+              "id": "GNR-02",
+              "name": "外壁",
+              "order": 1,
+              "searchQuery": "注文住宅 外壁 施主 選び方",
+              "searchQueryAlt": "注文住宅 外壁 種類 比較"
+            },
+            {
+              "id": "GNR-03",
+              "name": "屋根",
+              "order": 2,
+              "searchQuery": "注文住宅 屋根 施主 選び方",
+              "searchQueryAlt": "注文住宅 屋根 種類 比較"
+            },
+            {
+              "id": "GNR-11",
+              "name": "庭",
+              "order": 3,
+              "searchQuery": "注文住宅 外構 庭 施主 体験談",
+              "searchQueryAlt": "注文住宅 庭 ガーデニング"
+            }
+          ]
         },
         {
-          "id": "GNR-04",
-          "name": "風呂",
+          "id": "GRP-D",
+          "name": "内装・設備",
           "order": 4,
-          "searchQuery": "注文住宅 お風呂 設計士 おすすめ",
-          "searchQueryAlt": "注文住宅 浴室 選び方"
-        },
-        {
-          "id": "GNR-05",
-          "name": "トイレ",
-          "order": 5,
-          "searchQuery": "注文住宅 トイレ 設計士 おすすめ",
-          "searchQueryAlt": "注文住宅 トイレ 選び方"
-        },
-        {
-          "id": "GNR-06",
-          "name": "キッチン",
-          "order": 6,
-          "searchQuery": "注文住宅 キッチン 設計士 おすすめ",
-          "searchQueryAlt": "注文住宅 キッチン 選び方"
-        },
-        {
-          "id": "GNR-07",
-          "name": "床",
-          "order": 7,
-          "searchQuery": "注文住宅 床材 工務店 おすすめ",
-          "searchQueryAlt": "注文住宅 フローリング 選び方"
-        },
-        {
-          "id": "GNR-08",
-          "name": "リビング",
-          "order": 8,
-          "searchQuery": "注文住宅 リビング 設計士 間取り",
-          "searchQueryAlt": "注文住宅 リビング 後悔"
-        },
-        {
-          "id": "GNR-09",
-          "name": "ダイニング",
-          "order": 9,
-          "searchQuery": "注文住宅 ダイニング 設計士 おすすめ",
-          "searchQueryAlt": "注文住宅 ダイニング 選び方"
-        },
-        {
-          "id": "GNR-10",
-          "name": "照明計画",
-          "order": 10,
-          "searchQuery": "注文住宅 照明計画 設計士 解説",
-          "searchQueryAlt": "注文住宅 照明 後悔"
-        },
-        {
-          "id": "GNR-11",
-          "name": "庭",
-          "order": 11,
-          "searchQuery": "注文住宅 外構 工務店 おすすめ",
-          "searchQueryAlt": "注文住宅 庭 ガーデニング"
-        },
-        {
-          "id": "GNR-12",
-          "name": "ランドリールーム",
-          "order": 12,
-          "searchQuery": "注文住宅 ランドリールーム 設計士 解説",
-          "searchQueryAlt": "注文住宅 洗濯 動線"
+          "genres": [
+            {
+              "id": "GNR-07",
+              "name": "床",
+              "order": 1,
+              "searchQuery": "注文住宅 床材 施主 体験談",
+              "searchQueryAlt": "注文住宅 フローリング 選び方"
+            },
+            {
+              "id": "GNR-10",
+              "name": "照明計画",
+              "order": 2,
+              "searchQuery": "注文住宅 照明 施主 体験談",
+              "searchQueryAlt": "注文住宅 照明 後悔"
+            }
+          ]
         }
       ]
     }
