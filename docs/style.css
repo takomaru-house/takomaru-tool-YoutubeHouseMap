@@ -753,23 +753,23 @@ body { min-height: 100vh; }
 }
 
 .mindmap-radial .node-radial-root circle {
-  r: 60;
+  r: 50;
   fill: var(--sage-deep);
-  filter: drop-shadow(0 0 16px rgba(61, 74, 50, 0.45));
+  filter: drop-shadow(0 0 14px rgba(61, 74, 50, 0.45));
 }
 .mindmap-radial .node-radial-root text {
-  font-size: 16px;
+  font-size: 15px;
   fill: var(--bg);
   letter-spacing: 0.04em;
 }
 
 .mindmap-radial .node-radial-group circle {
-  r: 44;
+  r: 40;
   fill: var(--wood);
   filter: drop-shadow(0 0 10px rgba(198, 158, 108, 0.45));
 }
 .mindmap-radial .node-radial-group text {
-  font-size: 14px;
+  font-size: 12.5px;
   fill: var(--ink);
 }
 
@@ -777,18 +777,18 @@ body { min-height: 100vh; }
   cursor: pointer;
 }
 .mindmap-radial .node-radial-genre circle {
-  r: 33;
+  r: 36;
   fill: var(--wood-deep);
   filter: drop-shadow(0 0 8px rgba(138, 103, 64, 0.35));
 }
 .mindmap-radial .node-radial-genre:hover circle,
 .mindmap-radial .node-radial-genre:focus-visible circle {
-  r: 38;
+  r: 40;
   fill: var(--rust);
   filter: drop-shadow(0 0 14px rgba(179, 90, 58, 0.55));
 }
 .mindmap-radial .node-radial-genre text {
-  font-size: 12px;
+  font-size: 11.5px;
   fill: var(--bg);
 }
 

@@ -307,16 +307,15 @@ function renderMindmapTree(cat, container) {
 
 // 放射状マインドマップ（CAT-01 施主目線専用）
 // ROOT 中央 → グループ 4個を等角度配置 → ジャンルは親グループ方向に扇形展開
-// 円形ノード（root 120 / group 88 / genre 66）でクリックしやすく
+// 1画面に全体像が見通せるよう、コンパクト寸法・長文ラベルは2行折り返し
 function renderMindmapRadial(cat, container) {
   container.textContent = '';
 
-  const ROOT_D = 120;
-  const GROUP_D = 88;
-  const GENRE_D = 66;
-  const GAP = 18;
-  const R1 = ROOT_D / 2 + GROUP_D / 2 + GAP + 20;
-  const R2 = GROUP_D / 2 + GENRE_D / 2 + GAP + 55;
+  const ROOT_D = 100;
+  const GROUP_D = 80;
+  const GENRE_D = 72;
+  const R1 = 110; // ROOT 中心 → GROUP 中心の距離
+  const R2 = 95;  // GROUP 中心 → GENRE 中心の距離
 
   const nodes = [];
   const edges = [];
@@ -430,11 +429,29 @@ function renderMindmapRadial(cat, container) {
     .attr('transform', (n) => `translate(${n.x}, ${n.y})`);
 
   node.append('circle');
-  node
-    .append('text')
-    .attr('text-anchor', 'middle')
-    .attr('dy', '0.32em')
-    .text((d) => d.label);
+
+  // ラベル折り返し: 5文字超は2行、それ以下は1行
+  const wrapLabel = (label) => {
+    if (!label) return [''];
+    if (label.length <= 4) return [label];
+    const mid = Math.ceil(label.length / 2);
+    return [label.slice(0, mid), label.slice(mid)];
+  };
+
+  node.each(function (d) {
+    const lines = wrapLabel(d.label);
+    const text = d3
+      .select(this)
+      .append('text')
+      .attr('text-anchor', 'middle');
+    lines.forEach((line, i) => {
+      text
+        .append('tspan')
+        .attr('x', 0)
+        .attr('dy', i === 0 ? (lines.length === 1 ? '0.32em' : '-0.2em') : '1.1em')
+        .text(line);
+    });
+  });
 
   node
     .filter((d) => d.type === 'genre')
