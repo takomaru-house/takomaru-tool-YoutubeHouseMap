@@ -114,7 +114,14 @@ function createVideoCard(video) {
 function toggleAccordion(button, content) {
   const expanded = button.getAttribute('aria-expanded') === 'true';
   button.setAttribute('aria-expanded', String(!expanded));
-  content.setAttribute('aria-hidden', String(expanded));
+  // 折りたたみ時は inert で子の focusable をtab 順序から除外（a11y: aria-hidden-focus 対策）
+  if (expanded) {
+    content.setAttribute('aria-hidden', 'true');
+    content.setAttribute('inert', '');
+  } else {
+    content.setAttribute('aria-hidden', 'false');
+    content.removeAttribute('inert');
+  }
 }
 
 function buildAccordionHeader(label, count) {
@@ -159,6 +166,7 @@ function renderAccordion(data, container) {
     const catContent = document.createElement('div');
     catContent.className = 'acc-content';
     catContent.setAttribute('aria-hidden', 'true');
+    catContent.setAttribute('inert', '');
 
     cat.genres.forEach((gnr) => {
       if (!gnr.videos || gnr.videos.length === 0) return;
@@ -173,6 +181,7 @@ function renderAccordion(data, container) {
       const gnrContent = document.createElement('div');
       gnrContent.className = 'acc-content video-list';
       gnrContent.setAttribute('aria-hidden', 'true');
+      gnrContent.setAttribute('inert', '');
 
       gnr.videos.forEach((video, i) => {
         const card = createVideoCard(video);

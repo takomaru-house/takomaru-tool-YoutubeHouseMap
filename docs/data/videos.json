@@ -1,8 +1,7 @@
 {
   "meta": {
     "last_updated": "2026-05-20",
-    "schema_version": "1.1",
-    "_note": "Sprint 1 開発用サンプルデータ。Sprint 4 のビルドで本番データに上書きされる。videoId は架空のためサムネは404→fallback表示の確認用としても機能する。"
+    "schema_version": "1.1"
   },
   "categories": [
     {
@@ -20,7 +19,9 @@
               "thumbnailUrl": "https://img.youtube.com/vi/abcDEF12345/hqdefault.jpg",
               "publishedAt": "2025-09-12",
               "duration": "PT12M34S",
-              "tags": ["trending"],
+              "tags": [
+                "trending"
+              ],
               "source": "auto",
               "status": "active",
               "order": 1
@@ -32,7 +33,9 @@
               "thumbnailUrl": "https://img.youtube.com/vi/xyz67890abc/hqdefault.jpg",
               "publishedAt": "2025-06-01",
               "duration": "PT8M15S",
-              "tags": ["manual"],
+              "tags": [
+                "manual"
+              ],
               "source": "manual",
               "status": "active",
               "order": 2
@@ -62,7 +65,9 @@
               "thumbnailUrl": "https://img.youtube.com/vi/wallSample1/hqdefault.jpg",
               "publishedAt": "2025-03-15",
               "duration": "PT15M00S",
-              "tags": ["trending"],
+              "tags": [
+                "trending"
+              ],
               "source": "auto",
               "status": "active",
               "order": 1
@@ -107,7 +112,9 @@
               "thumbnailUrl": "https://img.youtube.com/vi/kitchen5678/hqdefault.jpg",
               "publishedAt": "2025-01-22",
               "duration": "PT9M48S",
-              "tags": ["trending"],
+              "tags": [
+                "trending"
+              ],
               "source": "auto",
               "status": "active",
               "order": 2
@@ -174,7 +181,9 @@
               "thumbnailUrl": "https://img.youtube.com/vi/proPlan0001/hqdefault.jpg",
               "publishedAt": "2025-10-30",
               "duration": "PT19M55S",
-              "tags": ["trending"],
+              "tags": [
+                "trending"
+              ],
               "source": "auto",
               "status": "active",
               "order": 1
@@ -186,7 +195,9 @@
               "thumbnailUrl": "https://img.youtube.com/vi/proPlan0002/hqdefault.jpg",
               "publishedAt": "2025-04-18",
               "duration": "PT14M07S",
-              "tags": ["manual"],
+              "tags": [
+                "manual"
+              ],
               "source": "manual",
               "status": "active",
               "order": 2

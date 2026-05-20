@@ -22,6 +22,11 @@
   box-sizing: border-box;
 }
 
+/* HTML hidden 属性が class スタイル（display:flex 等）に上書きされないように強制 */
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Kaku Gothic ProN",
