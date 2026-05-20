@@ -16,7 +16,7 @@ test.describe('E2E-03: レスポンシブ切替', () => {
     await page.goto('');
     await expect(page.locator('#main-content')).toBeVisible();
     await expect(page.locator('#mobile-view')).toBeVisible();
-    await expect(page.locator('#accordion .acc-category').first()).toBeVisible();
+    await expect(page.locator('#accordion .acc-group').first()).toBeVisible();
     await expect(page.locator('#pc-view')).toBeHidden();
   });
 

@@ -7,8 +7,8 @@ const openFirstAccordion = async (page) => {
   await page.setViewportSize({ width: 400, height: 800 });
   await page.goto('');
   await expect(page.locator('#mobile-view')).toBeVisible({ timeout: 5000 });
-  // 3階層: カテゴリ → グループ → ジャンル を順に展開
-  await page.locator('.acc-cat-header').first().click();
+  // タブで初期選択される「施主目線」のままアコーディオンを展開
+  // 2階層: グループ → ジャンル を順に展開
   await page.locator('.acc-grp-header').first().click();
   await page.locator('.acc-genre-header').first().click();
 };
@@ -61,14 +61,8 @@ test.describe('E2E-02: 動画カード', () => {
     await page.goto('');
     await expect(page.locator('#mobile-view')).toBeVisible({ timeout: 5000 });
 
-    // 全カテゴリ展開
-    const catHeaders = page.locator('.acc-cat-header');
-    const catCount = await catHeaders.count();
-    for (let i = 0; i < catCount; i++) {
-      await catHeaders.nth(i).click();
-    }
-    // 全グループ展開
-    const grpHeaders = page.locator('.acc-grp-header');
+    // 全グループ展開（タブで「施主目線」初期選択済み、長文タイトルは GRP-B 水回り > キッチンに配置）
+    const grpHeaders = page.locator('.acc-grp-header:not([disabled])');
     const grpCount = await grpHeaders.count();
     for (let i = 0; i < grpCount; i++) {
       await grpHeaders.nth(i).click();
