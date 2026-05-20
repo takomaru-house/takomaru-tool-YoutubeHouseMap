@@ -314,8 +314,8 @@ function renderMindmapRadial(cat, container) {
   const ROOT_D = 100;
   const GROUP_D = 80;
   const GENRE_D = 72;
-  const R1 = 110; // ROOT 中心 → GROUP 中心の距離
-  const R2 = 95;  // GROUP 中心 → GENRE 中心の距離
+  const R1 = 110; // ROOT 中心 → GROUP 中心の距離（枝番号1）
+  const R2 = 155; // GROUP 中心 → GENRE 中心の距離（枝番号2）— 円が被らないよう長め
 
   const nodes = [];
   const edges = [];
@@ -333,7 +333,8 @@ function renderMindmapRadial(cat, container) {
 
     const genres = grp.genres || [];
     const nGn = genres.length;
-    const spread = nGn <= 3 ? Math.PI * 0.55 : Math.PI * 0.65;
+    // 4 GROUP × 90° 配置のため、各 GROUP のジャンル広がり角は ±45° 以内に抑えて隣 GROUP へ食い込まない
+    const spread = nGn <= 3 ? Math.PI * 0.45 : Math.PI * 0.5;
     genres.forEach((gnr, j) => {
       const offset = nGn > 1 ? (j / (nGn - 1) - 0.5) * spread : 0;
       const a2 = a1 + offset;
