@@ -13,6 +13,7 @@ const { writeJsonAtomic } = require('../utils/fileUtils');
 const { fetchForGenre } = require('./fetch');
 const { isTrending } = require('./score');
 const { deduplicateVideos } = require('./dedup');
+const { classifyChannel } = require('./classifier');
 
 const MAX_VIDEOS_PER_GENRE = 8;
 const SCHEMA_VERSION = '1.2';
@@ -66,6 +67,44 @@ const formatDateYYYYMMDD = (date) => {
 const stripTempApiData = (video, order) => {
   const { _tempApiData, ...rest } = video;
   return { ...rest, order };
+};
+
+// チャンネル属性で各動画を CAT-01（individual / 施主目線）または CAT-02（company / 専門家目線）へ振り分け直す
+const reclassifyByChannel = (data, overrides) => {
+  const genreMap = {};
+  for (const c of data.categories) {
+    genreMap[c.id] = {};
+    for (const g of c.groups) {
+      for (const gn of g.genres) {
+        genreMap[c.id][g.id + '/' + gn.id] = gn;
+      }
+    }
+  }
+  let moves = 0;
+  for (const c of data.categories) {
+    for (const g of c.groups) {
+      for (const gn of g.genres) {
+        const keep = [];
+        for (const v of gn.videos) {
+          const expectedCat =
+            classifyChannel(v.channelName, overrides) === 'company' ? 'CAT-02' : 'CAT-01';
+          if (expectedCat === c.id) {
+            keep.push(v);
+          } else {
+            const target = genreMap[expectedCat] && genreMap[expectedCat][g.id + '/' + gn.id];
+            if (target) {
+              target.videos.push(v);
+              moves += 1;
+            } else {
+              keep.push(v);
+            }
+          }
+        }
+        gn.videos = keep;
+      }
+    }
+  }
+  return moves;
 };
 
 const runBatch = async (options) => {
@@ -148,7 +187,27 @@ const runBatch = async (options) => {
     },
     categories: draftCategories,
   };
+
+  // チャンネル属性で再分類（施主目線/専門家目線への振り分け）
+  const overrides =
+    (config.globalSettings && config.globalSettings.channelOverrides) || {};
+  const reclassifyMoves = reclassifyByChannel(draftData, overrides);
+  if (reclassifyMoves > 0) {
+    logger.log(`チャンネル属性で ${reclassifyMoves} 件の動画をカテゴリ間で移動`);
+  }
+
   draftData = deduplicateVideos(draftData);
+
+  // 再分類後にジャンルが 8件超になっている可能性 → 再 slice + order 再付与
+  for (const c of draftData.categories) {
+    for (const g of c.groups) {
+      for (const gn of g.genres) {
+        gn.videos = gn.videos
+          .slice(0, MAX_VIDEOS_PER_GENRE)
+          .map((v, i) => ({ ...v, order: i + 1 }));
+      }
+    }
+  }
 
   // dedup後にorderフィールドを除去（公開データには不要、categories.jsonが正本）
   draftData = {

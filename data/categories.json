@@ -1,7 +1,8 @@
 {
   "globalSettings": {
     "blockedChannelIds": [],
-    "blockedVideoIds": []
+    "blockedVideoIds": [],
+    "channelOverrides": {}
   },
   "categories": [
     {
