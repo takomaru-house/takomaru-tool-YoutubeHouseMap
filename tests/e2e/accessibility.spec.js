@@ -5,7 +5,7 @@ const { injectAxe, getViolations } = require('axe-playwright');
 test.describe('E2E-04: アクセシビリティ', () => {
   test('E2E-04-01: サムネイルに alt 属性が設定されている', async ({ page }) => {
     await page.setViewportSize({ width: 400, height: 800 });
-    await page.goto('/');
+    await page.goto('');
     await expect(page.locator('#mobile-view')).toBeVisible();
     // アコーディオン展開で動画カード描画
     await page.locator('.acc-cat-header').first().click();
@@ -22,7 +22,7 @@ test.describe('E2E-04: アクセシビリティ', () => {
 
   test('E2E-04-02: Tabキーで動画カードを順に移動できる', async ({ page }) => {
     await page.setViewportSize({ width: 400, height: 800 });
-    await page.goto('/');
+    await page.goto('');
     await page.locator('.acc-cat-header').first().click();
     await page.locator('.acc-genre-header').first().click();
     const firstCard = page.locator('.video-card').first();
@@ -34,7 +34,7 @@ test.describe('E2E-04: アクセシビリティ', () => {
   });
 
   test('E2E-04-03: axe-playwright によるアクセシビリティ違反が 0 件', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('');
     await expect(page.locator('#main-content')).toBeVisible({ timeout: 5000 });
     await injectAxe(page);
     const violations = await getViolations(page, null, {

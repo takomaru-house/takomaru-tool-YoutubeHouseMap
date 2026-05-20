@@ -5,7 +5,7 @@ const { test, expect } = require('@playwright/test');
 const openFirstAccordion = async (page) => {
   // モバイル幅に固定
   await page.setViewportSize({ width: 400, height: 800 });
-  await page.goto('/');
+  await page.goto('');
   await expect(page.locator('#mobile-view')).toBeVisible({ timeout: 5000 });
   // カテゴリ「施主目線」展開
   await page.locator('.acc-cat-header').first().click();
