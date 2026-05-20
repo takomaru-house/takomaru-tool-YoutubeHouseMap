@@ -2,7 +2,10 @@
   "globalSettings": {
     "blockedChannelIds": [],
     "blockedVideoIds": [],
-    "channelOverrides": {}
+    "channelOverrides": {
+      "家づくり せやま大学【ちょうどいい塩梅の家づくり】": "company",
+      "ぎゃなの家ハウス【現役現場監督の家づくり講座】": "individual"
+    }
   },
   "categories": [
     {

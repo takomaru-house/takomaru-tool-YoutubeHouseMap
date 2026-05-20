@@ -241,6 +241,15 @@ function renderMindmap(cat, container) {
     container.textContent = 'D3.js の読み込みに失敗しました。';
     return null;
   }
+  // 施主目線（CAT-01）は放射状レイアウト（大きめノードでクリックしやすく）
+  if (cat.id === 'CAT-01') {
+    return renderMindmapRadial(cat, container);
+  }
+  // 専門家目線（CAT-02）等は従来のツリーレイアウト
+  return renderMindmapTree(cat, container);
+}
+
+function renderMindmapTree(cat, container) {
   container.textContent = '';
 
   const width = container.clientWidth || 1000;
@@ -291,6 +300,146 @@ function renderMindmap(cat, container) {
     .filter((d) => d.data.type === 'genre')
     .on('click', (_event, d) => {
       showSidePanel(d.data);
+    });
+
+  return { svg, zoom };
+}
+
+// 放射状マインドマップ（CAT-01 施主目線専用）
+// ROOT 中央 → グループ 4個を等角度配置 → ジャンルは親グループ方向に扇形展開
+// 円形ノード（root 120 / group 88 / genre 66）でクリックしやすく
+function renderMindmapRadial(cat, container) {
+  container.textContent = '';
+
+  const ROOT_D = 120;
+  const GROUP_D = 88;
+  const GENRE_D = 66;
+  const GAP = 18;
+  const R1 = ROOT_D / 2 + GROUP_D / 2 + GAP + 20;
+  const R2 = GROUP_D / 2 + GENRE_D / 2 + GAP + 55;
+
+  const nodes = [];
+  const edges = [];
+
+  nodes.push({ id: cat.id, type: 'root', label: cat.name, x: 0, y: 0, d: ROOT_D });
+
+  const groups = cat.groups || [];
+  const nG = groups.length;
+  groups.forEach((grp, i) => {
+    const a1 = (i / nG) * Math.PI * 2 - Math.PI / 2;
+    const gx = Math.cos(a1) * R1;
+    const gy = Math.sin(a1) * R1;
+    nodes.push({ id: grp.id, type: 'group', label: grp.name, x: gx, y: gy, d: GROUP_D });
+    edges.push({ source: cat.id, target: grp.id, tier: 'root' });
+
+    const genres = grp.genres || [];
+    const nGn = genres.length;
+    const spread = nGn <= 3 ? Math.PI * 0.55 : Math.PI * 0.65;
+    genres.forEach((gnr, j) => {
+      const offset = nGn > 1 ? (j / (nGn - 1) - 0.5) * spread : 0;
+      const a2 = a1 + offset;
+      const gnx = gx + Math.cos(a2) * R2;
+      const gny = gy + Math.sin(a2) * R2;
+      const nodeId = grp.id + '/' + gnr.id;
+      nodes.push({
+        id: nodeId,
+        type: 'genre',
+        label: gnr.name,
+        x: gnx, y: gny, d: GENRE_D,
+        // showSidePanel が利用するフィールド
+        name: gnr.name,
+        videos: gnr.videos || [],
+        categoryId: cat.id,
+        groupId: grp.id,
+        genreId: gnr.id,
+      });
+      edges.push({ source: grp.id, target: nodeId, tier: 'group' });
+    });
+  });
+
+  // viewBox 用 bounding box
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const n of nodes) {
+    x0 = Math.min(x0, n.x - n.d / 2);
+    y0 = Math.min(y0, n.y - n.d / 2);
+    x1 = Math.max(x1, n.x + n.d / 2);
+    y1 = Math.max(y1, n.y + n.d / 2);
+  }
+  const pad = 60;
+  const vbX = x0 - pad;
+  const vbY = y0 - pad;
+  const vbW = (x1 - x0) + pad * 2;
+  const vbH = (y1 - y0) + pad * 2;
+
+  const svg = d3
+    .select(container)
+    .append('svg')
+    .attr('class', 'mindmap-radial')
+    .attr('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  const g = svg.append('g');
+
+  const zoom = d3
+    .zoom()
+    .scaleExtent([0.3, 3])
+    .on('zoom', (event) => {
+      g.attr('transform', event.transform);
+    });
+  svg.call(zoom);
+
+  const nodeMap = {};
+  for (const n of nodes) nodeMap[n.id] = n;
+
+  const edgePath = (e) => {
+    const s = nodeMap[e.source];
+    const t = nodeMap[e.target];
+    const dx = t.x - s.x;
+    const dy = t.y - s.y;
+    const cx1 = s.x + dx * 0.4;
+    const cy1 = s.y + dy * 0.15;
+    const cx2 = s.x + dx * 0.6;
+    const cy2 = s.y + dy * 0.85;
+    return `M${s.x} ${s.y} C${cx1} ${cy1} ${cx2} ${cy2} ${t.x} ${t.y}`;
+  };
+
+  // glow + 点線の2 レイヤーで参考HTMLの暖色グロー風を再現
+  const glowLayer = g.append('g').attr('class', 'radial-glow-layer');
+  const dotLayer = g.append('g').attr('class', 'radial-dot-layer');
+
+  glowLayer.selectAll('path')
+    .data(edges)
+    .enter()
+    .append('path')
+    .attr('class', (e) => `radial-edge radial-edge-glow radial-edge-${e.tier}`)
+    .attr('d', edgePath);
+
+  dotLayer.selectAll('path')
+    .data(edges)
+    .enter()
+    .append('path')
+    .attr('class', (e) => `radial-edge radial-edge-${e.tier}`)
+    .attr('d', edgePath);
+
+  const node = g
+    .selectAll('g.radial-node')
+    .data(nodes)
+    .enter()
+    .append('g')
+    .attr('class', (n) => `radial-node node-radial-${n.type}`)
+    .attr('transform', (n) => `translate(${n.x}, ${n.y})`);
+
+  node.append('circle');
+  node
+    .append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.32em')
+    .text((d) => d.label);
+
+  node
+    .filter((d) => d.type === 'genre')
+    .on('click', (_event, d) => {
+      showSidePanel(d);
     });
 
   return { svg, zoom };
