@@ -600,7 +600,8 @@ body { min-height: 100vh; }
    ============================================================================ */
 .mindmap-container {
   position: relative;
-  flex: 1 1 60%;
+  flex: 1 1 50%;
+  max-width: 50%;
   min-width: 0;
   background:
     /* extremely faint grid like architect's vellum */
@@ -631,8 +632,8 @@ body { min-height: 100vh; }
 .mindmap {
   width: 100%;
   height: 100%;
-  min-height: 560px;
-  max-height: 600px;
+  min-height: 610px;
+  max-height: 650px;
   cursor: grab;
 }
 .mindmap:active { cursor: grabbing; }
@@ -882,9 +883,9 @@ body { min-height: 100vh; }
    SIDE PANEL — magazine right column
    ============================================================================ */
 .side-panel {
-  flex: 1 1 40%;
-  min-width: 360px;
-  max-width: 520px;
+  flex: 1 1 50%;
+  min-width: 0;
+  max-width: 50%;
   padding: 40px 32px 56px;
   overflow-y: auto;
   background: var(--bg);
@@ -1162,21 +1163,21 @@ body { min-height: 100vh; }
   /* PC view */
   .pc-view {
     display: flex;
-    height: 600px;
-    max-height: 600px;
+    height: 650px;
+    max-height: 650px;
   }
   .mobile-view { display: none !important; }
 
   .mindmap-container {
-    max-height: 600px;
+    max-height: 650px;
   }
   .mindmap {
-    min-height: 560px;
-    max-height: 600px;
+    min-height: 610px;
+    max-height: 650px;
     height: 100%;
   }
   .side-panel {
-    max-height: 600px;
+    max-height: 650px;
   }
 
   /* footer 3 columns */
@@ -1221,8 +1222,8 @@ body { min-height: 100vh; }
   }
   .side-panel {
     padding: 56px 48px 64px;
-    min-width: 420px;
-    max-width: 580px;
+    min-width: 0;
+    max-width: 50%;
   }
   .side-panel h2 { font-size: 40px; }
   .footer-inner { padding: 72px 64px 32px; }
