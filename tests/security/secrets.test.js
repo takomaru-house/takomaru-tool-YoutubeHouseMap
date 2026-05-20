@@ -48,4 +48,23 @@ describe('セキュリティチェック', () => {
     expect(content).not.toMatch(/"subscriberCount"/);
     expect(content).not.toMatch(/_tempApiData/);
   });
+
+  test('SEC-04: ブラウザ実行JSで innerHTML を使用していない（XSS対策・E-14）', () => {
+    // チャンネル名や動画タイトルなど外部データを innerHTML 経由で挿入すると XSS リスク
+    // 全ブラウザ JS で textContent / DOM API のみ使用していることを静的検査
+    const targetFiles = [
+      path.join(PROJECT_ROOT, 'docs', 'app.js'),
+      path.join(PROJECT_ROOT, 'src', 'admin', 'public', 'admin.js'),
+    ];
+    for (const file of targetFiles) {
+      const lines = fs.readFileSync(file, 'utf-8').split('\n');
+      for (const line of lines) {
+        const trimmed = line.trim();
+        // 行頭コメント、ブロックコメント中の // / * は除外
+        if (trimmed.startsWith('//') || trimmed.startsWith('*') || trimmed.startsWith('/*')) continue;
+        // コード中の innerHTML 使用は許可しない
+        expect(line).not.toMatch(/\.innerHTML\s*=/);
+      }
+    }
+  });
 });
