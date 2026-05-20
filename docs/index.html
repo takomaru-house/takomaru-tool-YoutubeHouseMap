@@ -8,20 +8,47 @@
   <meta property="og:title" content="注文住宅YouTube動画マップ">
   <meta property="og:description" content="注文住宅を検討中の方向けに、YouTube動画をカテゴリ別にまとめたナビゲーションサイトです。">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="images/no-thumbnail.svg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v7.min.js" defer></script>
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <header>
+  <header class="site-header">
     <h1>🏠 注文住宅 YouTube ガイドマップ</h1>
+    <p class="last-updated" id="last-updated"></p>
   </header>
-  <main id="app">
-    <p>Hello World — Sprint 0 基盤構築中</p>
+
+  <div id="loading" class="loading" role="status" aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div>
+    <p>読み込み中...</p>
+  </div>
+
+  <div id="error" class="error" role="alert" hidden>
+    <p class="error-message">データの読み込みに失敗しました。ページを再読み込みしてください。</p>
+    <button id="reload-btn" type="button" class="reload-btn">再読み込み</button>
+  </div>
+
+  <main id="main-content" hidden>
+    <div id="pc-view" class="pc-view">
+      <div id="mindmap-container" class="mindmap-container">
+        <button id="mindmap-reset" type="button" class="mindmap-reset" aria-label="マインドマップをリセット">⟳ リセット</button>
+        <div id="mindmap" class="mindmap"></div>
+      </div>
+      <aside id="side-panel" class="side-panel" aria-label="動画リスト">
+        <p class="side-panel-placeholder">左のジャンルを選択してください</p>
+      </aside>
+    </div>
+
+    <div id="mobile-view" class="mobile-view">
+      <div id="accordion" class="accordion"></div>
+    </div>
   </main>
-  <footer>
+
+  <footer class="site-footer">
     <p>本サイトはGoogleおよびYouTubeとは無関係の独立したサービスです。動画の権利は各動画制作者に帰属します。</p>
     <p>Powered by YouTube Data API | <a href="https://www.youtube.com/static?template=terms" target="_blank" rel="noopener">YouTube利用規約</a></p>
   </footer>
-  <script src="app.js"></script>
 </body>
 </html>
