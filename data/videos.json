@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "last_updated": "2026-05-20",
+    "schema_version": "1.1"
+  },
+  "categories": [
+    {
+      "id": "CAT-01",
+      "name": "施主目線",
+      "genres": [
+        { "id": "GNR-01", "name": "間取り", "videos": [] },
+        { "id": "GNR-02", "name": "外壁", "videos": [] },
+        { "id": "GNR-03", "name": "屋根", "videos": [] },
+        { "id": "GNR-04", "name": "風呂", "videos": [] },
+        { "id": "GNR-05", "name": "トイレ", "videos": [] },
+        { "id": "GNR-06", "name": "キッチン", "videos": [] },
+        { "id": "GNR-07", "name": "床", "videos": [] },
+        { "id": "GNR-08", "name": "リビング", "videos": [] },
+        { "id": "GNR-09", "name": "ダイニング", "videos": [] },
+        { "id": "GNR-10", "name": "照明計画", "videos": [] },
+        { "id": "GNR-11", "name": "庭", "videos": [] },
+        { "id": "GNR-12", "name": "ランドリールーム", "videos": [] }
+      ]
+    },
+    {
+      "id": "CAT-02",
+      "name": "専門家目線",
+      "genres": [
+        { "id": "GNR-01", "name": "間取り", "videos": [] },
+        { "id": "GNR-02", "name": "外壁", "videos": [] },
+        { "id": "GNR-03", "name": "屋根", "videos": [] },
+        { "id": "GNR-04", "name": "風呂", "videos": [] },
+        { "id": "GNR-05", "name": "トイレ", "videos": [] },
+        { "id": "GNR-06", "name": "キッチン", "videos": [] },
+        { "id": "GNR-07", "name": "床", "videos": [] },
+        { "id": "GNR-08", "name": "リビング", "videos": [] },
+        { "id": "GNR-09", "name": "ダイニング", "videos": [] },
+        { "id": "GNR-10", "name": "照明計画", "videos": [] },
+        { "id": "GNR-11", "name": "庭", "videos": [] },
+        { "id": "GNR-12", "name": "ランドリールーム", "videos": [] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "takomaru-tool-youtubehousemap",
+  "version": "0.1.0",
+  "description": "注文住宅YouTube動画マップ - 初心者向けカテゴリ別ナビゲーションサイト",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "batch": "node src/batch/index.js",
+    "build": "node src/builder/build.js",
+    "admin": "node src/admin/server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "playwright test",
+    "test:all": "jest && playwright test",
+    "serve": "npx serve docs -p 8080"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "axe-playwright": "^2.2.2",
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "nock": "^14.0.15",
+    "supertest": "^7.2.2"
+  }
+}
