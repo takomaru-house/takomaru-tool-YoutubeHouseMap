@@ -2,9 +2,13 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe('E2E-01: 公開サイト基本動作', () => {
-  test('E2E-01-01: ページが妥当な時間内に DOM 読み込みを完了する（参考: Lighthouse Performance ≥ 80）', async ({ page }) => {
+  test('E2E-01-01: ページが妥当な時間内に DOM 読み込みを完了する（参考: Lighthouse Performance ≥ 80）', async ({ page, baseURL }) => {
     // Spec.md FR-01「3秒以内」は本番Lighthouse評価のターゲット。
-    // E2E ではローカル serve 起動オーバーヘッドや Google Fonts ロードを許容して 4秒以内とする。
+    // 本番URL (github.io) はネットワーク遅延が変動するため、E2E ではローカル serve のみ測定。
+    test.skip(
+      Boolean(baseURL && /\.github\.io/i.test(baseURL)),
+      '本番URLでの応答時間は Lighthouse で評価。E2E ではローカル serve のみ測定。'
+    );
     const t0 = Date.now();
     await page.goto('', { waitUntil: 'domcontentloaded' });
     const elapsed = Date.now() - t0;
