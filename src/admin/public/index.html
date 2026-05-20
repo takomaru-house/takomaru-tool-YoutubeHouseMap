@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>管理画面 | 注文住宅YouTube動画マップ</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <h1>🛠 管理画面（localhost）</h1>
+    <p>注文住宅YouTube動画マップ — videos.json の管理・バッチ承認</p>
+  </header>
+
+  <main>
+    <section class="panel" aria-labelledby="actions-h">
+      <h2 id="actions-h">バッチ・承認操作</h2>
+      <div class="action-row">
+        <button id="btn-batch" type="button">▶ バッチ実行（draft 生成）</button>
+        <button id="btn-approve" type="button">✅ draft 承認（マージ）</button>
+        <button id="btn-reject" type="button">❌ draft 差し戻し</button>
+      </div>
+      <p id="action-status" class="action-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="draft-h">
+      <h2 id="draft-h">バッチ結果プレビュー（videos.draft.json）</h2>
+      <div id="draft-preview" class="draft-preview">
+        <p class="placeholder">バッチ実行後、ここに差分が表示されます。</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="videos-h">
+      <h2 id="videos-h">動画一覧（本番 videos.json）</h2>
+      <p class="hint">凡例：<span class="legend red">赤</span> = 5件未満、<span class="legend yellow">黄</span> = 8件未満</p>
+      <div id="videos-list" class="videos-list">
+        <p class="placeholder">読み込み中...</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="add-h">
+      <h2 id="add-h">動画手動追加</h2>
+      <form id="add-form" class="add-form">
+        <label>
+          YouTube URL または videoID（11文字）
+          <input type="text" id="add-input" required placeholder="https://www.youtube.com/watch?v=... または videoID">
+        </label>
+        <label>
+          カテゴリ
+          <select id="add-category" required></select>
+        </label>
+        <label>
+          ジャンル
+          <select id="add-genre" required></select>
+        </label>
+        <button type="submit">⭐ manual 動画として追加</button>
+      </form>
+      <p id="add-status" class="action-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="block-h">
+      <h2 id="block-h">ブロックリスト</h2>
+      <form id="block-form" class="block-form">
+        <label>
+          種別
+          <select id="block-type" required>
+            <option value="channel">チャンネルID</option>
+            <option value="video">videoID</option>
+          </select>
+        </label>
+        <label>
+          ID
+          <input type="text" id="block-id" required>
+        </label>
+        <button type="submit">追加</button>
+      </form>
+      <div id="blocklist-display" class="blocklist-display"></div>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
