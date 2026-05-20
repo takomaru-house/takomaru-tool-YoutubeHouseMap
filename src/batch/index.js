@@ -186,6 +186,7 @@ const runBatch = async (options) => {
 
 /* istanbul ignore next : CLI 起動 */
 const main = async () => {
+  require('dotenv').config();
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) {
     console.error('YOUTUBE_API_KEY 環境変数が設定されていません。.env を確認してください。');

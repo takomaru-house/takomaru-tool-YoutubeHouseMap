@@ -240,6 +240,7 @@ const createServer = (options = {}) => {
 
 /* istanbul ignore next */
 const startServer = (port) => {
+  require('dotenv').config();
   const app = createServer();
   const listenPort = port || parseInt(process.env.ADMIN_PORT || '3000', 10);
   app.listen(listenPort, '127.0.0.1', () => {

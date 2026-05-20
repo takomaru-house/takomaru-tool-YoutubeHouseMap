@@ -17,28 +17,102 @@
               "name": "間取り",
               "videos": [
                 {
-                  "videoId": "proPlan0001",
-                  "title": "設計士が解説する〝家事動線が良い間取り〟の作り方",
-                  "channelName": "一級建築士のチャンネル",
-                  "thumbnailUrl": "https://img.youtube.com/vi/proPlan0001/hqdefault.jpg",
-                  "publishedAt": "2025-10-30",
-                  "duration": "PT19M55S",
-                  "tags": ["trending"],
+                  "videoId": "GpVWM3uOAmc",
+                  "title": "【住んで実感】最高すぎました…「我が家の楽間取り厳選10選」【注文住宅】【マイホーム】",
+                  "channelName": "きょんのおうち",
+                  "thumbnailUrl": "https://img.youtube.com/vi/GpVWM3uOAmc/hqdefault.jpg",
+                  "publishedAt": "2025-05-09",
+                  "duration": "PT17M42S",
+                  "tags": [],
                   "source": "auto",
                   "status": "active",
                   "order": 1
                 },
                 {
-                  "videoId": "proPlan0002",
-                  "title": "管理者おすすめ：プロが教える土地形状別の最適な間取り",
-                  "channelName": "設計事務所〇〇",
-                  "thumbnailUrl": "https://img.youtube.com/vi/proPlan0002/hqdefault.jpg",
-                  "publishedAt": "2025-04-18",
-                  "duration": "PT14M07S",
-                  "tags": ["manual"],
-                  "source": "manual",
+                  "videoId": "tfz4d3iPRoI",
+                  "title": "【設計士に聞いた】設計のコツ、押さえておきたいポイントをお伝えします！",
+                  "channelName": "木の家専門店 谷口工務店【家づくりセミナー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/tfz4d3iPRoI/hqdefault.jpg",
+                  "publishedAt": "2022-06-17",
+                  "duration": "PT12M24S",
+                  "tags": [],
+                  "source": "auto",
                   "status": "active",
                   "order": 2
+                },
+                {
+                  "videoId": "10y4qJS-P0I",
+                  "title": "一級建築士が解説！誰でもできる間取りの作り方！コウシューの間取り講習#1",
+                  "channelName": "オタク社長の情熱家づくり【愛知の国松工務店】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/10y4qJS-P0I/hqdefault.jpg",
+                  "publishedAt": "2024-08-07",
+                  "duration": "PT16M58S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "EiLhd3LIsbE",
+                  "title": "間取りの作り方！手順を７STEPに分けて徹底解説！良い間取りをを作るにはコツがあります/注文住宅で後悔しない/失敗しない/間取りの考え方",
+                  "channelName": "間取り解説TV【間取りのセカンドオピニオン】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/EiLhd3LIsbE/hqdefault.jpg",
+                  "publishedAt": "2024-05-07",
+                  "duration": "PT16M12S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "EejFw0B0q94",
+                  "title": "【設計士の施工事例徹底解説】ギミック多めなお家をプロ目線で徹底解説",
+                  "channelName": "ロゴスホームの賢い家づくりチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/EejFw0B0q94/hqdefault.jpg",
+                  "publishedAt": "2022-10-06",
+                  "duration": "PT11M32S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "Z4aS6eVBsUE",
+                  "title": "注文住宅の間取りをつくり始める前に絶対に決めておいた方がいいこと４選！",
+                  "channelName": "お家大好き!channel 〜NAOMI.と一緒に家づくり〜",
+                  "thumbnailUrl": "https://img.youtube.com/vi/Z4aS6eVBsUE/hqdefault.jpg",
+                  "publishedAt": "2022-03-14",
+                  "duration": "PT10M23S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "h874hNoXhYU",
+                  "title": "プロ顔負け！新入社員が描いた斬新な間取りが凄すぎた",
+                  "channelName": "【アート建工】公式チャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/h874hNoXhYU/hqdefault.jpg",
+                  "publishedAt": "2025-08-15",
+                  "duration": "PT14M17S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "qlfyGrJGzjM",
+                  "title": "【間取り解説】注文住宅で最高の間取り特徴3選",
+                  "channelName": "まかろにお【工務店&ハウスメーカー攻略法】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/qlfyGrJGzjM/hqdefault.jpg",
+                  "publishedAt": "2021-07-11",
+                  "duration": "PT15M28S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
                 }
               ]
             },
@@ -47,47 +121,1101 @@
               "name": "リビング",
               "videos": [
                 {
-                  "videoId": "proLive0001",
-                  "title": "プロが間取り図で解説する開放感あるLDKの設計手法",
-                  "channelName": "建築設計のプロ",
-                  "thumbnailUrl": "https://img.youtube.com/vi/proLive0001/hqdefault.jpg",
-                  "publishedAt": "2025-02-09",
-                  "duration": "PT16M12S",
+                  "videoId": "WwS3_cE2PsQ",
+                  "title": "【一級建築士が厳選】間取り診断で見かける「ダメなリビング」５選　　【リビング 間取り レイアウト】",
+                  "channelName": "アキラ先生の住まいの間取り教室【船渡亮】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/WwS3_cE2PsQ/hqdefault.jpg",
+                  "publishedAt": "2024-07-23",
+                  "duration": "PT16M53S",
                   "tags": [],
                   "source": "auto",
                   "status": "active",
                   "order": 1
+                },
+                {
+                  "videoId": "hZr1XztCnI0",
+                  "title": "【ルームツアー】木&グレーで心地よく落ち着いた家づくりアイデア。ナチュラルでモダンなシンプルインテリア｜新築一戸建て｜ 家族3人暮らしのハウスツアー",
+                  "channelName": "Roommyルームツアー",
+                  "thumbnailUrl": "https://img.youtube.com/vi/hZr1XztCnI0/hqdefault.jpg",
+                  "publishedAt": "2025-08-29",
+                  "duration": "PT10M39S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "EFlWOx5ZQYE",
+                  "title": "【間取り】まさか！間取り打ち合わせ中では絶対に気づかない後悔ポイント11選【注文住宅】",
+                  "channelName": "住宅四天王 エース【ハウスメーカー選びの専門家】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/EFlWOx5ZQYE/hqdefault.jpg",
+                  "publishedAt": "2026-01-31",
+                  "duration": "PT19M51S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "ybV7w8zGggw",
+                  "title": "【LDK】おすすめリビング！ロフト＋階段下収納で空間活用！間取りアイデアを紹介！",
+                  "channelName": "ちょっとニッチな家づくりch -空間デザイナーようさんの本音ログ-",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ybV7w8zGggw/hqdefault.jpg",
+                  "publishedAt": "2025-06-18",
+                  "duration": "PT13M6S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "qxGpIyN7F2s",
+                  "title": "【トレンド激変！】2026年に流行る間取り&廃れる間取りを徹底解説！【注文住宅】",
+                  "channelName": "HAPINICE【愛知県 豊橋市の工務店】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/qxGpIyN7F2s/hqdefault.jpg",
+                  "publishedAt": "2026-03-05",
+                  "duration": "PT9M44S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "TBTYt62uhCE",
+                  "title": "部屋干しランドリールームのある家の間取り　リビング階段の住宅プラン　Clean and healthy Japanese house floor plan",
+                  "channelName": "間取りチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/TBTYt62uhCE/hqdefault.jpg",
+                  "publishedAt": "2020-05-15",
+                  "duration": "PT9M25S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
                 }
               ]
             },
-            { "id": "GNR-09", "name": "ダイニング", "videos": [] }
+            {
+              "id": "GNR-09",
+              "name": "ダイニング",
+              "videos": [
+                {
+                  "videoId": "GjWwovnJdYs",
+                  "title": "注文住宅の家づくりに絶対取り入れたいオススメ８点セット③『ダイニングテーブルと一体化したキッチン』",
+                  "channelName": "お家大好き!channel 〜NAOMI.と一緒に家づくり〜",
+                  "thumbnailUrl": "https://img.youtube.com/vi/GjWwovnJdYs/hqdefault.jpg",
+                  "publishedAt": "2022-05-13",
+                  "duration": "PT8M40S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "EcI9tbc1KZA",
+                  "title": "【完全保存版】失敗しないダイニングテーブル選び | 3つのポイント",
+                  "channelName": "カリモク家具｜公式チャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/EcI9tbc1KZA/hqdefault.jpg",
+                  "publishedAt": "2023-07-19",
+                  "duration": "PT7M18S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "b3qV5y7SLfk",
+                  "title": "【4章】15万円以上でおしゃれで日本の住宅にも合うペンダントライト10選 | 住宅設計士が厳選した新築のダイニング照明",
+                  "channelName": "418BASE家づくり部",
+                  "thumbnailUrl": "https://img.youtube.com/vi/b3qV5y7SLfk/hqdefault.jpg",
+                  "publishedAt": "2026-01-09",
+                  "duration": "PT10M11S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "PyXm2M3KRKs",
+                  "title": "【注文住宅】キャンプギアは見せる収納が最高!!｜まるでお店のようなダイニングキッチン｜ルームツアー｜自由設計｜設計士とつくる｜四国注文住宅｜大阪注文住宅",
+                  "channelName": "【公式】コラボハウス一級建築士事務所",
+                  "thumbnailUrl": "https://img.youtube.com/vi/PyXm2M3KRKs/hqdefault.jpg",
+                  "publishedAt": "2026-03-06",
+                  "duration": "PT12M54S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "l8_iPVWlYi8",
+                  "title": "【新築一戸建て】絶対後悔しない！コンセントの成功８選&後悔ポイント３選&失敗しない４つのポイントとは…Ｉ配線計画Ｉ家づくりＩマイホームＩルームツアーＩROOMTOURＩ5LDKＩ４人家族",
+                  "channelName": "KEINAchannel  けいなちゃんねる",
+                  "thumbnailUrl": "https://img.youtube.com/vi/l8_iPVWlYi8/hqdefault.jpg",
+                  "publishedAt": "2021-12-22",
+                  "duration": "PT9M50S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "1GvwPkMtxk0",
+                  "title": "【炎上覚悟】キッチン横並びダイニングを採用したいと設計士に伝えてしまうと間取り作成は失敗に終わるかもしれません…【間取り検討編③】【第32話】",
+                  "channelName": "柊の住処  ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/1GvwPkMtxk0/hqdefault.jpg",
+                  "publishedAt": "2025-04-27",
+                  "duration": "PT12M6S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "Vhg36cIhHlo",
+                  "title": "【実例あり】失敗しないソファダイニングの選び方をプロが解説！高さやレイアウトのコツを紹介",
+                  "channelName": "418BASE家づくり部",
+                  "thumbnailUrl": "https://img.youtube.com/vi/Vhg36cIhHlo/hqdefault.jpg",
+                  "publishedAt": "2025-02-05",
+                  "duration": "PT7M57S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                }
+              ]
+            }
           ]
         },
         {
           "id": "GRP-B",
           "name": "水回り",
           "genres": [
-            { "id": "GNR-04", "name": "風呂", "videos": [] },
-            { "id": "GNR-05", "name": "トイレ", "videos": [] },
-            { "id": "GNR-06", "name": "キッチン", "videos": [] },
-            { "id": "GNR-12", "name": "ランドリールーム", "videos": [] }
+            {
+              "id": "GNR-04",
+              "name": "風呂",
+              "videos": [
+                {
+                  "videoId": "m42xU3hrAg4",
+                  "title": "【新築 お風呂】新築でお風呂を選ぶなら吹き抜けがオススメ✨もう黒カビが生えない秘密とは？",
+                  "channelName": "島根をぬくめる建築家 ルラクホーム",
+                  "thumbnailUrl": "https://img.youtube.com/vi/m42xU3hrAg4/hqdefault.jpg",
+                  "publishedAt": "2025-05-17",
+                  "duration": "PT12M8S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "L92Ba6P9ujg",
+                  "title": "【2026年最新版】リフォーム屋が選ぶオススメお風呂1選！",
+                  "channelName": "ReMoreのリフォーム",
+                  "thumbnailUrl": "https://img.youtube.com/vi/L92Ba6P9ujg/hqdefault.jpg",
+                  "publishedAt": "2026-03-28",
+                  "duration": "PT17M54S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "UzvCIUbIphY",
+                  "title": "【お風呂リフォーム】二大人気ユニットバスを徹底比較!!どちらのほうがおすすめかプロが解説！",
+                  "channelName": "おうちリフォームのハウスドゥ《YouTube公式ch》",
+                  "thumbnailUrl": "https://img.youtube.com/vi/UzvCIUbIphY/hqdefault.jpg",
+                  "publishedAt": "2024-11-08",
+                  "duration": "PT9M23S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "PqSAYSWi2NM",
+                  "title": "【2025年最新】タカラスタンダードのお風呂が凄すぎた！一瞬で採用したくなる理由とは？",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/PqSAYSWi2NM/hqdefault.jpg",
+                  "publishedAt": "2025-06-14",
+                  "duration": "PT13M12S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "KRrM01Lrg6o",
+                  "title": "自宅のお風呂リフォーム　「安いのでイイや！」　コスパの良かったユニットバス選定",
+                  "channelName": "注文住宅 専門 建築士【武田 憲昭（※個人チャンネル）】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/KRrM01Lrg6o/hqdefault.jpg",
+                  "publishedAt": "2025-06-25",
+                  "duration": "PT6M17S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "jPM71z2jF0c",
+                  "title": "【グランスパ&プレデンシアに新商品】タカラスタンダードのおすすめお風呂リフォーム！",
+                  "channelName": "(株)CRLOWN 栃木県のリフォーム屋さん",
+                  "thumbnailUrl": "https://img.youtube.com/vi/jPM71z2jF0c/hqdefault.jpg",
+                  "publishedAt": "2025-10-24",
+                  "duration": "PT9M8S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "IreF6WBVMq4",
+                  "title": "時代遅れのお風呂設備5選！プロなら絶対に付ける浴室設備も7つ紹介【2025年最新の新築・家づくり】",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/IreF6WBVMq4/hqdefault.jpg",
+                  "publishedAt": "2025-10-29",
+                  "duration": "PT14M26S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "pRr6UdSnBEk",
+                  "title": "【正直レビュー】TOTOサザナを1年間使った結果、後悔だらけでした【注文住宅】【新築一戸建て】【マイホーム】",
+                  "channelName": "なすびのおうち",
+                  "thumbnailUrl": "https://img.youtube.com/vi/pRr6UdSnBEk/hqdefault.jpg",
+                  "publishedAt": "2024-02-03",
+                  "duration": "PT17M35S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            },
+            {
+              "id": "GNR-05",
+              "name": "トイレ",
+              "videos": [
+                {
+                  "videoId": "FvUHlHEYp-M",
+                  "title": "【完全攻略】後悔しないトイレ選び方！25の極意【最新版/新築・リフォーム】",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/FvUHlHEYp-M/hqdefault.jpg",
+                  "publishedAt": "2025-10-25",
+                  "duration": "PT19M33S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "DO-YUo8Ik_I",
+                  "title": "【2025年最新】トイレのオススメはコレ！TOTOに潜入して費用、価格、性能を解説！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/DO-YUo8Ik_I/hqdefault.jpg",
+                  "publishedAt": "2025-08-26",
+                  "duration": "PT13M56S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "X884nYY09G0",
+                  "title": "トイレの壁紙・床を10のテイスト別にデザイン！リフォームでの失敗を回避できます！",
+                  "channelName": "インテリア王国",
+                  "thumbnailUrl": "https://img.youtube.com/vi/X884nYY09G0/hqdefault.jpg",
+                  "publishedAt": "2023-10-14",
+                  "duration": "PT16M52S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "CaUUpSV5dqE",
+                  "title": "【保存版】TOTOトイレ徹底比較！一体型vs組み合わせのメリット・デメリット【TOTO/トイレ/注文住宅】",
+                  "channelName": "海まち大工のイトウくん",
+                  "thumbnailUrl": "https://img.youtube.com/vi/CaUUpSV5dqE/hqdefault.jpg",
+                  "publishedAt": "2025-11-14",
+                  "duration": "PT8M51S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "4_eRWmQ1_B4",
+                  "title": "【トイレリフォーム】2025年最新のトイレの選び方!正直おススメのトイレは1択？",
+                  "channelName": "おうちリフォームのハウスドゥ《YouTube公式ch》",
+                  "thumbnailUrl": "https://img.youtube.com/vi/4_eRWmQ1_B4/hqdefault.jpg",
+                  "publishedAt": "2025-05-30",
+                  "duration": "PT8M37S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "F-IdSbV5eoM",
+                  "title": "【トイレ選びの正解】住宅のプロが選ぶトイレはこれ！主要3メーカーを忖度なしで徹底比較【TOTO/Panasonic/LIXIL】",
+                  "channelName": "ちょっとニッチな家づくりch -空間デザイナーようさんの本音ログ-",
+                  "thumbnailUrl": "https://img.youtube.com/vi/F-IdSbV5eoM/hqdefault.jpg",
+                  "publishedAt": "2025-12-24",
+                  "duration": "PT15M25S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "rX1JBDfeeKU",
+                  "title": "【トイレの床材選び】トイレの床どれがおススメ？失敗しないトイレの床材の選び方",
+                  "channelName": "おうちリフォームのハウスドゥ《YouTube公式ch》",
+                  "thumbnailUrl": "https://img.youtube.com/vi/rX1JBDfeeKU/hqdefault.jpg",
+                  "publishedAt": "2023-09-01",
+                  "duration": "PT11M30S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                }
+              ]
+            },
+            {
+              "id": "GNR-06",
+              "name": "キッチン",
+              "videos": [
+                {
+                  "videoId": "5S93y0LwyZw",
+                  "title": "【最新版】住宅のプロが今一番おすすめするキッチンメーカー5選！【注文住宅/キッチン/ハウスメーカー】",
+                  "channelName": "まかろにお【工務店&ハウスメーカー攻略法】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/5S93y0LwyZw/hqdefault.jpg",
+                  "publishedAt": "2025-08-21",
+                  "duration": "PT19M49S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "d3EVIuEWU0A",
+                  "title": "【図解】キッチンメーカーの特徴・見るべきポイント・選び方を分かりやすく解説！【注文住宅】",
+                  "channelName": "住宅四天王 エース【ハウスメーカー選びの専門家】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/d3EVIuEWU0A/hqdefault.jpg",
+                  "publishedAt": "2023-10-07",
+                  "duration": "PT14M58S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "k-9wkxahX4w",
+                  "title": "【注文住宅】知らなきゃ後悔します！おしゃれなキッチンの考え方、徹底解説します！",
+                  "channelName": "金髪設計士 ムラさんの家づくりch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/k-9wkxahX4w/hqdefault.jpg",
+                  "publishedAt": "2024-06-04",
+                  "duration": "PT9M23S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "2PpybYD-wxc",
+                  "title": "キッチンメーカー5社を徹底比較！どこが一番おすすめ？",
+                  "channelName": "感動ハウスの住まいチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/2PpybYD-wxc/hqdefault.jpg",
+                  "publishedAt": "2025-11-08",
+                  "duration": "PT17M55S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "w6VIrSHmyPE",
+                  "title": "【注文住宅】最高のキッチン！トップクラスの高級メーカー5社を工務店社長が解説！",
+                  "channelName": "HAPINICE【愛知県 豊橋市の工務店】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/w6VIrSHmyPE/hqdefault.jpg",
+                  "publishedAt": "2022-12-24",
+                  "duration": "PT7M27S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "dt-BXsdC5AY",
+                  "title": "【キッチン】結局おすすめのキッチンはどれ？キッチン格付けチェック2024ミドル・ハイグレード部門前編",
+                  "channelName": "おうちリフォームのハウスドゥ《YouTube公式ch》",
+                  "thumbnailUrl": "https://img.youtube.com/vi/dt-BXsdC5AY/hqdefault.jpg",
+                  "publishedAt": "2024-08-24",
+                  "duration": "PT10M31S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "j7m321XlNwk",
+                  "title": "【保存版】迷ったらこれ選べ！人気キッチンメーカー6社を徹底比較！プロが選ぶ最強はこれ！【キッチン比較】【2025最新】",
+                  "channelName": "【家づくりチャンネル】姉ちゃんと僕は一級建築士【大矢建工】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/j7m321XlNwk/hqdefault.jpg",
+                  "publishedAt": "2025-09-24",
+                  "duration": "PT16M59S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "Zs6IZo-OUH0",
+                  "title": "迷ったらコレが正解！新築で入れて大満足のキッチン設備9選【注文住宅】",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/Zs6IZo-OUH0/hqdefault.jpg",
+                  "publishedAt": "2025-10-01",
+                  "duration": "PT13M23S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            },
+            {
+              "id": "GNR-12",
+              "name": "ランドリールーム",
+              "videos": [
+                {
+                  "videoId": "o0Sw2JTWOjY",
+                  "title": "【プロが教える｜注文住宅】ランドリールーム　人気の3パターン",
+                  "channelName": "森住建【公式】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/o0Sw2JTWOjY/hqdefault.jpg",
+                  "publishedAt": "2023-06-23",
+                  "duration": "PT11M12S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "iJn5SrCUt4g",
+                  "title": "【注文住宅】ランドリールームを絶対つくるべき5つの理由 / 室内洗濯室の魅力を徹底解説",
+                  "channelName": "お家大好き!channel 〜NAOMI.と一緒に家づくり〜",
+                  "thumbnailUrl": "https://img.youtube.com/vi/iJn5SrCUt4g/hqdefault.jpg",
+                  "publishedAt": "2024-06-29",
+                  "duration": "PT6M57S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "R8wKFK4IxgU",
+                  "title": "【注文住宅】たった7分でわかるランドリールームの最適な広さ",
+                  "channelName": "店長磯野の『広く深く!!超かんたん家づくり解説』",
+                  "thumbnailUrl": "https://img.youtube.com/vi/R8wKFK4IxgU/hqdefault.jpg",
+                  "publishedAt": "2021-11-20",
+                  "duration": "PT7M21S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "cJzUyJBlfhU",
+                  "title": "【家事ラク＆時短】ランドリールームのつくり方【後編】動線と5つのポイント",
+                  "channelName": "お家大好き!channel 〜NAOMI.と一緒に家づくり〜",
+                  "thumbnailUrl": "https://img.youtube.com/vi/cJzUyJBlfhU/hqdefault.jpg",
+                  "publishedAt": "2021-04-11",
+                  "duration": "PT10M50S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "u7gJrY8iKUo",
+                  "title": "【家づくり】絶対やめて！一生後悔するランドリールーム7選【洗濯機・乾燥機・新築・戸建て】",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/u7gJrY8iKUo/hqdefault.jpg",
+                  "publishedAt": "2024-02-14",
+                  "duration": "PT19M37S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "VtQfbeW7Ylo",
+                  "title": "【家づくり！それ要りますか？】ランドリールームってイラない！？高性能な家づくりで洗濯物をどこに干しますか？ユーティリティルーム造ろう！ #ラクジュ",
+                  "channelName": "ラクジュ建築と不動産",
+                  "thumbnailUrl": "https://img.youtube.com/vi/VtQfbeW7Ylo/hqdefault.jpg",
+                  "publishedAt": "2021-04-06",
+                  "duration": "PT13M",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "mCFcTp7Of1s",
+                  "title": "【洗濯革命】ランドリールームは2畳にすると一生後悔します！設計士が選ぶ最適解は3畳でした",
+                  "channelName": "はる.ズボラ設計士の家",
+                  "thumbnailUrl": "https://img.youtube.com/vi/mCFcTp7Of1s/hqdefault.jpg",
+                  "publishedAt": "2026-02-23",
+                  "duration": "PT9M50S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "MYdFjWwy7nE",
+                  "title": "【クイズ全5問】ランドリールームの残念ポイントはどこ？克服すれば大満足【注文住宅】",
+                  "channelName": "ぶっちゃけハウジング / 間取りの専門家ケイタ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/MYdFjWwy7nE/hqdefault.jpg",
+                  "publishedAt": "2026-03-20",
+                  "duration": "PT7M49S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            }
           ]
         },
         {
           "id": "GRP-C",
           "name": "外装",
           "genres": [
-            { "id": "GNR-02", "name": "外壁", "videos": [] },
-            { "id": "GNR-03", "name": "屋根", "videos": [] },
-            { "id": "GNR-11", "name": "庭", "videos": [] }
+            {
+              "id": "GNR-02",
+              "name": "外壁",
+              "videos": [
+                {
+                  "videoId": "kTAbimUIwus",
+                  "title": "【注文住宅】外壁はこれを選べ！家オタクが厳選した「オシャすぎる窯業系サイディング3選」【マイホーム】【新築一戸建て】",
+                  "channelName": "なすびのおうち",
+                  "thumbnailUrl": "https://img.youtube.com/vi/kTAbimUIwus/hqdefault.jpg",
+                  "publishedAt": "2024-06-21",
+                  "duration": "PT13M13S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "55MEcWqHHd8",
+                  "title": "【2026年最新】実際に外壁材を実験してどれがオススメなのか検証してみました！【ガルバリウム鋼板 窯業系サイディング】",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/55MEcWqHHd8/hqdefault.jpg",
+                  "publishedAt": "2026-01-19",
+                  "duration": "PT12M17S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "CGhzMOBcd9Q",
+                  "title": "最強の外壁はこれです！住宅のプロがオススメする外壁7選【注文住宅/新築】",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/CGhzMOBcd9Q/hqdefault.jpg",
+                  "publishedAt": "2024-02-16",
+                  "duration": "PT14M45S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "tgIzY-yXDi4",
+                  "title": "【窯業系サイディングvs金属サイディング】結局どっちがいいの？どっちの良さも知ってる外壁のプロに実物を見せらもらいながら解説してもらいました！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/tgIzY-yXDi4/hqdefault.jpg",
+                  "publishedAt": "2025-12-18",
+                  "duration": "PT15M49S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "nBeBrsCUJO0",
+                  "title": "【2025年最新版】最強の外壁材の選び方教えます！",
+                  "channelName": "まかろにお【工務店&ハウスメーカー攻略法】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/nBeBrsCUJO0/hqdefault.jpg",
+                  "publishedAt": "2025-07-17",
+                  "duration": "PT12M26S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "fRdE6aDxTZY",
+                  "title": "【施工事例あり】2025年外壁はコレ！コスパ最悪の外壁とプロがおすすめする人気の色を紹介！【外壁塗装/外壁色/注文住宅】",
+                  "channelName": "こだわり社長の家づくり革命ch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/fRdE6aDxTZY/hqdefault.jpg",
+                  "publishedAt": "2024-12-08",
+                  "duration": "PT17M38S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "hgk-J6a6EcY",
+                  "title": "【人気外壁材を徹底比較！】業者は言わない正しい外壁材の選び方と種類を解説します！【注文住宅】",
+                  "channelName": "7代目社長の後悔しない家づくりch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/hgk-J6a6EcY/hqdefault.jpg",
+                  "publishedAt": "2025-01-10",
+                  "duration": "PT17M19S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "NVOiEUf5mPE",
+                  "title": "【外壁塗装】この色、絶対選ばないでください！後悔しない色選びの方法",
+                  "channelName": "塗装屋社長の現場リアルチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/NVOiEUf5mPE/hqdefault.jpg",
+                  "publishedAt": "2025-09-26",
+                  "duration": "PT8M18S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            },
+            {
+              "id": "GNR-03",
+              "name": "屋根",
+              "videos": [
+                {
+                  "videoId": "EMxNdJLHo_Y",
+                  "title": "屋根に命を賭けた職人が選ぶ屋根材で一番オススメはコレ！ガルバリウム・スレート・瓦などを実験検証して答えを見つけました！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/EMxNdJLHo_Y/hqdefault.jpg",
+                  "publishedAt": "2025-08-17",
+                  "duration": "PT14M55S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "NPfHOuN2SzY",
+                  "title": "【2025年最新】おすすめ屋根材ランキング！ガルバリウム・スレート・瓦屋根の費用・性能を徹底比較",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/NPfHOuN2SzY/hqdefault.jpg",
+                  "publishedAt": "2025-06-29",
+                  "duration": "PT11M26S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "ppuOXf7SC9A",
+                  "title": "家を建てるならハウスメーカー or 工務店どっちがオススメ？",
+                  "channelName": "不動産Gメン滝島",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ppuOXf7SC9A/hqdefault.jpg",
+                  "publishedAt": "2023-01-06",
+                  "duration": "PT10M38S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "uywuFkDM1Kc",
+                  "title": "【衝撃比較】ガルバリウム鋼板より「本当に強い」屋根材TOP3を徹底比較！あなたの家を守る最適な屋根とは？【ガルバリウム vs SGL vs 石粒付き鋼板】",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/uywuFkDM1Kc/hqdefault.jpg",
+                  "publishedAt": "2025-05-20",
+                  "duration": "PT10M9S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "5re7HxbOfJM",
+                  "title": "屋根材3種類を比較！おすすめは〇〇です！【瓦/ガルバリウム/スレート屋根】",
+                  "channelName": "家づくりマスターズ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/5re7HxbOfJM/hqdefault.jpg",
+                  "publishedAt": "2022-01-25",
+                  "duration": "PT8M24S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "ptQLASN0GMQ",
+                  "title": "【注文住宅】瓦とガルバリウム鋼板はどっちがいいの？それぞれのメリットデメリットを解説！",
+                  "channelName": "こだわり社長の家づくり革命ch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ptQLASN0GMQ/hqdefault.jpg",
+                  "publishedAt": "2024-09-28",
+                  "duration": "PT14M39S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "5TXj1Lz9J0E",
+                  "title": "工務店社長が教えます！戸建て住宅でよく使われている瓦と人気のガルバリウム鋼板を徹底比較！【注文住宅/住宅設備】",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/5TXj1Lz9J0E/hqdefault.jpg",
+                  "publishedAt": "2024-05-01",
+                  "duration": "PT18M22S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "IFmlrok4va0",
+                  "title": "外壁塗装の業者、どこがおすすめ？徹底比較！【ハウスメーカー・工務店・リフォーム会社・塗装専門店】",
+                  "channelName": "あかつきチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/IFmlrok4va0/hqdefault.jpg",
+                  "publishedAt": "2025-05-23",
+                  "duration": "PT15M59S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            },
+            {
+              "id": "GNR-11",
+              "name": "庭",
+              "videos": [
+                {
+                  "videoId": "y8GzDP3iZXc",
+                  "title": "後悔しない外構業者の選び方 教えます！「ハウスメーカーorハウスメーカー以外」のメリットデメリット徹底解説！　ハウスメーカー/一括見積サイト/デザイン重視の外構業者/近隣の外構業者",
+                  "channelName": "外構工事のガーデンプラス【お庭づくり・外構エクステリア工事の専門店】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/y8GzDP3iZXc/hqdefault.jpg",
+                  "publishedAt": "2023-05-03",
+                  "duration": "PT14M10S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "_227uYUJ1CE",
+                  "title": "【プロが厳選！】外構づくりで絶対買うべき高見え商品7選！",
+                  "channelName": "ウェルミカ・外構エクステリアのすべて",
+                  "thumbnailUrl": "https://img.youtube.com/vi/_227uYUJ1CE/hqdefault.jpg",
+                  "publishedAt": "2024-04-13",
+                  "duration": "PT10M29S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "VEqRQPUxoKk",
+                  "title": "外構業者ってどうやって選べばいい？後から損しない5つのポイントをプロが解説！【注文住宅】",
+                  "channelName": "こだわり社長の家づくり革命ch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/VEqRQPUxoKk/hqdefault.jpg",
+                  "publishedAt": "2024-10-07",
+                  "duration": "PT13M50S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "6_OVFBnY27s",
+                  "title": "【注文住宅】意見が分かれる！工務店社長がおすすめの住宅外構設備を徹底解説！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/6_OVFBnY27s/hqdefault.jpg",
+                  "publishedAt": "2023-05-25",
+                  "duration": "PT16M33S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "bGSqEPa-zo4",
+                  "title": "【注文住宅】プロがこだわる外構設備！ジャンル別に徹底紹介します！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/bGSqEPa-zo4/hqdefault.jpg",
+                  "publishedAt": "2023-05-17",
+                  "duration": "PT13M54S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "ibQlmrVlOjE",
+                  "title": "外構計画中の人必見！独断と偏見で選ぶオシャレな外構ランキングトップ5【注文住宅】【マイホーム】【新築一戸建て】",
+                  "channelName": "なすびのおうち",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ibQlmrVlOjE/hqdefault.jpg",
+                  "publishedAt": "2024-03-26",
+                  "duration": "PT13M37S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                }
+              ]
+            }
           ]
         },
         {
           "id": "GRP-D",
           "name": "内装・設備",
           "genres": [
-            { "id": "GNR-07", "name": "床", "videos": [] },
-            { "id": "GNR-10", "name": "照明計画", "videos": [] }
+            {
+              "id": "GNR-07",
+              "name": "床",
+              "videos": [
+                {
+                  "videoId": "KFO1iAcPauE",
+                  "title": "【家買う前に見るべき！】フローリング・床材の選び方をプロが徹底解説【注文住宅】",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/KFO1iAcPauE/hqdefault.jpg",
+                  "publishedAt": "2023-07-30",
+                  "duration": "PT15M58S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "QlmvBphgm_w",
+                  "title": "【これが床材のスタンダード】2026年オススメしたくなる床材を見つけました！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/QlmvBphgm_w/hqdefault.jpg",
+                  "publishedAt": "2026-01-04",
+                  "duration": "PT9M11S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "ot_zxwYOG48",
+                  "title": "【おすすめ床材】注文住宅は無垢フローリング一強!!...ではない",
+                  "channelName": "共感住宅 ray-out",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ot_zxwYOG48/hqdefault.jpg",
+                  "publishedAt": "2020-08-21",
+                  "duration": "PT11M34S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "040Yr__wGC4",
+                  "title": "【注文住宅】大人気床材を徹底比較！無垢床と複合フローリングのメリットとデメリットをお教えします！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/040Yr__wGC4/hqdefault.jpg",
+                  "publishedAt": "2024-08-13",
+                  "duration": "PT15M1S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "7_tWM-a9iFk",
+                  "title": "【注文住宅】後悔しない床材を解説！安さだけで選ぶと大変な事になります。【LIVE切り抜き】",
+                  "channelName": "家づくりヒーロー",
+                  "thumbnailUrl": "https://img.youtube.com/vi/7_tWM-a9iFk/hqdefault.jpg",
+                  "publishedAt": "2024-02-13",
+                  "duration": "PT10M8S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "qFQtxOY7XTk",
+                  "title": "【まとめ】床材20枚&一条工務店の床材も集めて実験してみた【冷えやすさ・金額・総評】",
+                  "channelName": "住宅四天王 エース【ハウスメーカー選びの専門家】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/qFQtxOY7XTk/hqdefault.jpg",
+                  "publishedAt": "2021-02-13",
+                  "duration": "PT8M29S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "-G6iu2tOd9o",
+                  "title": "【床材 オススメ】無垢の床材オススメ3選！工務店が教えるオススメ床材はコレだ！つくばの工務店ワカバハウス",
+                  "channelName": "ワカバハウス",
+                  "thumbnailUrl": "https://img.youtube.com/vi/-G6iu2tOd9o/hqdefault.jpg",
+                  "publishedAt": "2025-01-18",
+                  "duration": "PT5M37S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "XPY9uGevZxs",
+                  "title": "【2025年最新】本当におすすめの床材ランキングTOP10！",
+                  "channelName": "職人社長の家づくり工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/XPY9uGevZxs/hqdefault.jpg",
+                  "publishedAt": "2025-09-21",
+                  "duration": "PT16M30S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            },
+            {
+              "id": "GNR-10",
+              "name": "照明計画",
+              "videos": [
+                {
+                  "videoId": "DMHNnBVJtF0",
+                  "title": "【注文住宅】理想的な部屋は照明で決まる!?照明計画を徹底解説",
+                  "channelName": "女性建築家と学ぶ家づくりスタジオ　設計士 MATSUI",
+                  "thumbnailUrl": "https://img.youtube.com/vi/DMHNnBVJtF0/hqdefault.jpg",
+                  "publishedAt": "2023-11-20",
+                  "duration": "PT18M27S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "8xPu2K8Aa-c",
+                  "title": "【注文住宅】我が家の照明計画詳しく解説！/ダウンライト少なめでも失敗しない家作り/FLOS /Ambientec【照明】",
+                  "channelName": "SORAHhouse~29坪コンパクトな2人暮らし~",
+                  "thumbnailUrl": "https://img.youtube.com/vi/8xPu2K8Aa-c/hqdefault.jpg",
+                  "publishedAt": "2025-06-21",
+                  "duration": "PT14M33S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "TnWTDZbpW0w",
+                  "title": "照明計画は失敗だらけ！？住んでみてから気づくポイントが多いのが照明です。照明で後悔しない為にも、ポイント10選を意識して下さい【注文住宅】",
+                  "channelName": "ファンタジスタふじもと【家づくりお役立ちチャンネル】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/TnWTDZbpW0w/hqdefault.jpg",
+                  "publishedAt": "2021-06-19",
+                  "duration": "PT8M25S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "ulI4J50ufVA",
+                  "title": "【注文住宅｜照明計画】ダウンライトで部屋は変わる！上質な空間設計のポイントを解説｜ウェルネストホーム九州",
+                  "channelName": "ウェルネストホーム九州 -世界基準の超高性能住宅-",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ulI4J50ufVA/hqdefault.jpg",
+                  "publishedAt": "2025-07-30",
+                  "duration": "PT15M17S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "b5KDRDCQzec",
+                  "title": "【後悔なし】家づくりに人生を捧げた僕が考えた照明計画を徹底的に解説します【照明計画】【注文住宅】",
+                  "channelName": "柊の住処  ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/b5KDRDCQzec/hqdefault.jpg",
+                  "publishedAt": "2025-11-16",
+                  "duration": "PT18M47S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "X5_EIe82vas",
+                  "title": "【夜のルームツアー】設計士自邸の可変できる照明配置",
+                  "channelName": "木の家専門店 谷口工務店【家づくりセミナー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/X5_EIe82vas/hqdefault.jpg",
+                  "publishedAt": "2024-12-19",
+                  "duration": "PT19M42S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "r30o409Jsm4",
+                  "title": "【家づくり】失敗しがちな照明計画！我が家の成功と後悔12選",
+                  "channelName": "ぎゅうの住みやすい暮らし術",
+                  "thumbnailUrl": "https://img.youtube.com/vi/r30o409Jsm4/hqdefault.jpg",
+                  "publishedAt": "2025-09-29",
+                  "duration": "PT15M38S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "2jpdJNLvaZg",
+                  "title": "【注文住宅】照明で失敗する人続出！？必ず知っておきたい照明の基礎｜リゾートライクな家づくり｜一級建築士",
+                  "channelName": "ありそうでなかった家づくり　マレアハウスデザイン",
+                  "thumbnailUrl": "https://img.youtube.com/vi/2jpdJNLvaZg/hqdefault.jpg",
+                  "publishedAt": "2025-09-19",
+                  "duration": "PT9M9S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            }
           ]
         }
       ]
@@ -105,40 +1233,104 @@
               "name": "間取り",
               "videos": [
                 {
-                  "videoId": "abcDEF12345",
-                  "title": "【施主体験談】後悔しない間取りの考え方〜実際に住んでわかった注意点〜",
-                  "channelName": "マイホームちゃんねる",
-                  "thumbnailUrl": "https://img.youtube.com/vi/abcDEF12345/hqdefault.jpg",
-                  "publishedAt": "2025-09-12",
-                  "duration": "PT12M34S",
-                  "tags": ["trending"],
+                  "videoId": "gAJ3Y2pvUEI",
+                  "title": "【必見】圧倒的な満足感──建築家との家づくり｜インタビューで語るお施主様のリアルな声｜愛知・名古屋の設計事務所が手がけるフルオーダー注文住宅",
+                  "channelName": "設計事務所 タビ【TAWKS & Tabi Architects】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/gAJ3Y2pvUEI/hqdefault.jpg",
+                  "publishedAt": "2025-09-29",
+                  "duration": "PT12M11S",
+                  "tags": [
+                    "trending"
+                  ],
                   "source": "auto",
                   "status": "active",
                   "order": 1
                 },
                 {
-                  "videoId": "xyz67890abc",
-                  "title": "管理者おすすめ：間取りで失敗しないための3つのポイント",
-                  "channelName": "注文住宅ガイド",
-                  "thumbnailUrl": "https://img.youtube.com/vi/xyz67890abc/hqdefault.jpg",
-                  "publishedAt": "2025-06-01",
-                  "duration": "PT8M15S",
-                  "tags": ["manual"],
-                  "source": "manual",
+                  "videoId": "g5yRlDE3yPo",
+                  "title": "【注文住宅2年住んでわかったリアルな体験談】一級建築士がお施主様に聞く「これ実際どうですか？！」｜インタビュー｜ルームツアー",
+                  "channelName": "アーキブラスト　東京狭小地でも空間を最大に生かす家づくり",
+                  "thumbnailUrl": "https://img.youtube.com/vi/g5yRlDE3yPo/hqdefault.jpg",
+                  "publishedAt": "2023-07-22",
+                  "duration": "PT10M9S",
+                  "tags": [],
+                  "source": "auto",
                   "status": "active",
                   "order": 2
                 },
                 {
-                  "videoId": "qweRTY12345",
-                  "title": "リビング・ダイニング・キッチンの動線設計",
-                  "channelName": "建築士の住まい相談室",
-                  "thumbnailUrl": "https://img.youtube.com/vi/qweRTY12345/hqdefault.jpg",
-                  "publishedAt": "2024-11-20",
-                  "duration": "PT18M42S",
+                  "videoId": "E6LEZfrFuPA",
+                  "title": "【家事楽ルームツアー前編】注文住宅2年住んでわかった、この間取り最高！家事が楽になったTOP7とは？！設計士がお施主様に聞いてみました！",
+                  "channelName": "アーキブラスト　東京狭小地でも空間を最大に生かす家づくり",
+                  "thumbnailUrl": "https://img.youtube.com/vi/E6LEZfrFuPA/hqdefault.jpg",
+                  "publishedAt": "2023-05-27",
+                  "duration": "PT9M53S",
                   "tags": [],
                   "source": "auto",
                   "status": "active",
                   "order": 3
+                },
+                {
+                  "videoId": "cVWAjW9NnV4",
+                  "title": "建築後マイホーム後悔3選|プロでも見落としがちポイント（注文住宅新築10年経過のお客様に謝ってきた）",
+                  "channelName": "間取り新築大学・りくのビーバー",
+                  "thumbnailUrl": "https://img.youtube.com/vi/cVWAjW9NnV4/hqdefault.jpg",
+                  "publishedAt": "2022-01-08",
+                  "duration": "PT14M29S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "KkATRFoupqo",
+                  "title": "【家事楽ルームツアー後編】注文住宅2年住んでわかった、家事が楽になったTOP3とは？！この間取り最高？設計士がお施主様に聞いてみました！",
+                  "channelName": "アーキブラスト　東京狭小地でも空間を最大に生かす家づくり",
+                  "thumbnailUrl": "https://img.youtube.com/vi/KkATRFoupqo/hqdefault.jpg",
+                  "publishedAt": "2023-06-24",
+                  "duration": "PT9M12S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "aLZoiMl0jq8",
+                  "title": "【ルームツアー】大容量の収納計画で子育て世帯に嬉しい家事ラク間取り！シンプル×ナチュラルな32坪 3LDKの注文住宅【新築｜戸建て｜吹き抜け｜家事動線｜リビング｜グレージュ】",
+                  "channelName": "家づくり学校 / 新築・リフォームで後悔しないための知識をつけよう!",
+                  "thumbnailUrl": "https://img.youtube.com/vi/aLZoiMl0jq8/hqdefault.jpg",
+                  "publishedAt": "2021-09-30",
+                  "duration": "PT9M28S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "tda5g-HZIDo",
+                  "title": "【ルームツアー】吹抜けのある開放的な空間！29坪でムダのない間取りと収納を実現　お施主様ｎのこだわりとセンスの光るお洒落な二階建て/3LDK新築一戸建注文住宅マイホーム",
+                  "channelName": "【注文住宅ルームツアー】HAPINICE 豊橋市の工務店",
+                  "thumbnailUrl": "https://img.youtube.com/vi/tda5g-HZIDo/hqdefault.jpg",
+                  "publishedAt": "2025-08-24",
+                  "duration": "PT4M48S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "j-69i_JiAts",
+                  "title": "【施主様インタビュー】木のぬくもりのある家／33坪＋ロフト付平屋",
+                  "channelName": "【公式】東宝ホーム家づくりチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/j-69i_JiAts/hqdefault.jpg",
+                  "publishedAt": "2023-01-21",
+                  "duration": "PT5M43S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
                 }
               ]
             },
@@ -147,59 +1339,509 @@
               "name": "リビング",
               "videos": [
                 {
-                  "videoId": "livingABCDE",
-                  "title": "20畳リビングを快適にする工夫",
-                  "channelName": "施主のリアル",
-                  "thumbnailUrl": "https://img.youtube.com/vi/livingABCDE/hqdefault.jpg",
-                  "publishedAt": "2025-07-04",
-                  "duration": "PT11M22S",
-                  "tags": [],
+                  "videoId": "dKSfuNw9G-k",
+                  "title": "【注文住宅】宝塚市「街中でも開放感あふれる吹き抜けリビングとルーフバルコニーのあるお家」お客様インタビュー",
+                  "channelName": "アーキホームライフ【お客様インタビュー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/dKSfuNw9G-k/hqdefault.jpg",
+                  "publishedAt": "2026-01-31",
+                  "duration": "PT8M32S",
+                  "tags": [
+                    "trending"
+                  ],
                   "source": "auto",
                   "status": "active",
                   "order": 1
+                },
+                {
+                  "videoId": "0dcOZTbn0VY",
+                  "title": "【施主様インタビュー】吹き抜け付リビングのマイホームが出来るまで",
+                  "channelName": "【公式】東宝ホーム家づくりチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/0dcOZTbn0VY/hqdefault.jpg",
+                  "publishedAt": "2023-04-29",
+                  "duration": "PT7M32S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "S4fOHhMgRYo",
+                  "title": "【注文住宅】高槻市「リビングに集まりたくなる家！カウンターキッチンで家事楽なシンプルモダンハウス」お客様インタビュー",
+                  "channelName": "アーキホームライフ【お客様インタビュー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/S4fOHhMgRYo/hqdefault.jpg",
+                  "publishedAt": "2024-11-09",
+                  "duration": "PT10M2S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "_LFc_1FjflA",
+                  "title": "【施主様インタビュー】我が家で過ごす時間は家族の宝物！ストレスフリーな住まいが出来るまで",
+                  "channelName": "【公式】東宝ホーム家づくりチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/_LFc_1FjflA/hqdefault.jpg",
+                  "publishedAt": "2023-05-13",
+                  "duration": "PT10M39S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "vw6Pqd_Zrg4",
+                  "title": "【施主様インタビュー】二世帯住宅の家づくりポイント！家族が楽しく過ごせる空間づくり",
+                  "channelName": "【公式】東宝ホーム家づくりチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/vw6Pqd_Zrg4/hqdefault.jpg",
+                  "publishedAt": "2023-06-17",
+                  "duration": "PT7M9S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "X9z9aJZ1txk",
+                  "title": "【ヤマワリビング 】WEBCM「木心家-kigokochi- インタビュー」篇",
+                  "channelName": "ヤマワリビング",
+                  "thumbnailUrl": "https://img.youtube.com/vi/X9z9aJZ1txk/hqdefault.jpg",
+                  "publishedAt": "2021-05-27",
+                  "duration": "PT5M13S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
                 }
               ]
             },
-            { "id": "GNR-09", "name": "ダイニング", "videos": [] }
-          ]
-        },
-        {
-          "id": "GRP-B",
-          "name": "水回り",
-          "genres": [
-            { "id": "GNR-04", "name": "風呂", "videos": [] },
-            { "id": "GNR-05", "name": "トイレ", "videos": [] },
             {
-              "id": "GNR-06",
-              "name": "キッチン",
+              "id": "GNR-09",
+              "name": "ダイニング",
               "videos": [
                 {
-                  "videoId": "kitchen1234",
-                  "title": "オーダーキッチンとシステムキッチンの違い・選び方を徹底比較してみた結果わかった意外な落とし穴と知っておくべき重要ポイント",
-                  "channelName": "キッチンプランナー田中",
-                  "thumbnailUrl": "https://img.youtube.com/vi/kitchen1234/hqdefault.jpg",
-                  "publishedAt": "2025-08-10",
-                  "duration": "PT1H5M30S",
+                  "videoId": "z_II38mGgXA",
+                  "title": "【家づくり「後悔」発表会！建てる前にCheck】注文住宅 | レンジフード | 玄関ドアの色 | 冷蔵庫前の床 | スイッチの数 | 3口すべてIH | 自分で間取り | 工務店選び | 女性建築士",
+                  "channelName": "木絆の家づくりch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/z_II38mGgXA/hqdefault.jpg",
+                  "publishedAt": "2023-06-25",
+                  "duration": "PT13M13S",
                   "tags": [],
                   "source": "auto",
                   "status": "active",
                   "order": 1
                 },
                 {
-                  "videoId": "kitchen5678",
-                  "title": "失敗しないキッチンレイアウト5選",
-                  "channelName": "施主のつぶやき",
-                  "thumbnailUrl": "https://img.youtube.com/vi/kitchen5678/hqdefault.jpg",
-                  "publishedAt": "2025-01-22",
-                  "duration": "PT9M48S",
-                  "tags": ["trending"],
+                  "videoId": "lvM5GfbjyNE",
+                  "title": "【ルームツアー】34坪の地元工務店で建てた中庭のあるロの字型の注文住宅 / 吹き抜け階段のある4人家族が暮らす3LDK新築一戸建て",
+                  "channelName": "THE ROOM TOUR",
+                  "thumbnailUrl": "https://img.youtube.com/vi/lvM5GfbjyNE/hqdefault.jpg",
+                  "publishedAt": "2021-12-25",
+                  "duration": "PT13M48S",
+                  "tags": [],
                   "source": "auto",
                   "status": "active",
                   "order": 2
+                },
+                {
+                  "videoId": "ONXfIY9wVqg",
+                  "title": "【ルームツアー】地元工務店で建てた40坪の注文住宅 / 細部までこだわり抜かれた海外スタイルの新築一戸建て",
+                  "channelName": "THE ROOM TOUR",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ONXfIY9wVqg/hqdefault.jpg",
+                  "publishedAt": "2022-04-30",
+                  "duration": "PT10M51S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "JzEXZXCbQtw",
+                  "title": "【ルームツアー】地元工務店で建てた38坪3LDKの注文住宅 / 開放感のあるシンプルで美しすぎる新築一戸建て",
+                  "channelName": "THE ROOM TOUR",
+                  "thumbnailUrl": "https://img.youtube.com/vi/JzEXZXCbQtw/hqdefault.jpg",
+                  "publishedAt": "2022-10-06",
+                  "duration": "PT19M5S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "owIAUxxBqjQ",
+                  "title": "注文住宅に住んでみて分かった窓の失敗【5選】",
+                  "channelName": "ヨシローの家【安全な家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/owIAUxxBqjQ/hqdefault.jpg",
+                  "publishedAt": "2020-06-26",
+                  "duration": "PT9M2S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "QgGkA4V7vlA",
+                  "title": "【ルームツアー】地元工務店で建てた32坪セミオーダーの一戸建てルームツアー / 憧れの北欧風ナチュラルスタイルで心地いい空間づくり",
+                  "channelName": "THE ROOM TOUR",
+                  "thumbnailUrl": "https://img.youtube.com/vi/QgGkA4V7vlA/hqdefault.jpg",
+                  "publishedAt": "2022-04-26",
+                  "duration": "PT11M8S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "pKWu6JiqaEI",
+                  "title": "【衝撃】ケチって採用せず後悔した有料オプション８選を正直に白状します【注文住宅/家づくり/新築一戸建て/マイホーム/家づくり/設備/仕様/間取り/無印良品/後悔/失敗/反省/半面教科書/キッチン】",
+                  "channelName": "むちまるCH【マイホーム＆注文住宅情報発信】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/pKWu6JiqaEI/hqdefault.jpg",
+                  "publishedAt": "2021-10-31",
+                  "duration": "PT8M1S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "GRP-B",
+          "name": "水回り",
+          "genres": [
+            {
+              "id": "GNR-04",
+              "name": "風呂",
+              "videos": [
+                {
+                  "videoId": "pnVaz0U5yJk",
+                  "title": "【住宅の闇】お風呂で絶対やってはいけないこと3選！マイホームに潜む危険を解説【新築一戸建て】",
+                  "channelName": "ヨシローの家【安全な家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/pnVaz0U5yJk/hqdefault.jpg",
+                  "publishedAt": "2021-01-25",
+                  "duration": "PT8M1S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "IVyPcC45mpo",
+                  "title": "【注文住宅】施主に聞くリアルな家づくりの成功/失敗談＆リカバリーで住み心地はどう変わる？",
+                  "channelName": "家のサプリ【住まいの健康情報】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/IVyPcC45mpo/hqdefault.jpg",
+                  "publishedAt": "2022-04-30",
+                  "duration": "PT18M29S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "yJ2k3byJJyo",
+                  "title": "【バスルーム】パナソニックのユニットバスを現場のプロがわかりやすく解説！雑学付",
+                  "channelName": "ぎゃなの家ハウス【現役現場監督の家づくり講座】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/yJ2k3byJJyo/hqdefault.jpg",
+                  "publishedAt": "2020-09-26",
+                  "duration": "PT6M37S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "uaAmjT01UQk",
+                  "title": "やっちまった！注文住宅の大失敗体験をお話しします",
+                  "channelName": "むちまるCH【マイホーム＆注文住宅情報発信】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/uaAmjT01UQk/hqdefault.jpg",
+                  "publishedAt": "2023-07-04",
+                  "duration": "PT9M5S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "17P8n2HAJi4",
+                  "title": "【新築一戸建て】後悔ポイント/おすすめの仕様を都心で家づくりした施主さんに聞いてみた",
+                  "channelName": "家のサプリ【住まいの健康情報】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/17P8n2HAJi4/hqdefault.jpg",
+                  "publishedAt": "2022-06-04",
+                  "duration": "PT18M46S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "P-tsvkSwhJQ",
+                  "title": "【コラボ】自由なはずの注文住宅が不自由に？！今の注文住宅とは！？",
+                  "channelName": "Amigo住宅ゼミ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/P-tsvkSwhJQ/hqdefault.jpg",
+                  "publishedAt": "2021-10-04",
+                  "duration": "PT18M",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "BogmxxAgZ_c",
+                  "title": "これぞ家事らく！｜タカラスタンダードのキッチン・お風呂をご紹介｜決め手はお掃除手間いらず",
+                  "channelName": "大阪・兵庫・奈良の注文住宅ならゆめすみか",
+                  "thumbnailUrl": "https://img.youtube.com/vi/BogmxxAgZ_c/hqdefault.jpg",
+                  "publishedAt": "2023-07-07",
+                  "duration": "PT11M52S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "dphpD-cwJsc",
+                  "title": "【注文住宅】居室に収納は必要！？無くても良い理由とあった方が良い理由！収納には意外な効果が！？ #注文住宅 #マイホーム #新築 #収納",
+                  "channelName": "おうちチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/dphpD-cwJsc/hqdefault.jpg",
+                  "publishedAt": "2022-10-10",
+                  "duration": "PT10M40S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
                 }
               ]
             },
-            { "id": "GNR-12", "name": "ランドリールーム", "videos": [] }
+            {
+              "id": "GNR-05",
+              "name": "トイレ",
+              "videos": [
+                {
+                  "videoId": "Zym-M50DUNk",
+                  "title": "【お願い】注文住宅のトイレをシッカリ考えて欲しい…（ストレス軽減のトイレの知識）",
+                  "channelName": "Amigo住宅ゼミ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/Zym-M50DUNk/hqdefault.jpg",
+                  "publishedAt": "2021-01-22",
+                  "duration": "PT18M47S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "oo_9pcUZB3E",
+                  "title": "【トイレ掃除】あなたのトイレは大丈夫？意外と知らない清潔機能。知らずに数年悲劇が起きます。",
+                  "channelName": "水廻専科 河村",
+                  "thumbnailUrl": "https://img.youtube.com/vi/oo_9pcUZB3E/hqdefault.jpg",
+                  "publishedAt": "2022-03-17",
+                  "duration": "PT12M1S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "jrsw8b6IBdQ",
+                  "title": "♯14　【積水ハウス】TOTOエスクア採用不可。妻の「規格外」な要望を満たす唯一の洗面台とは？",
+                  "channelName": "48歳から家を建てるおじさん",
+                  "thumbnailUrl": "https://img.youtube.com/vi/jrsw8b6IBdQ/hqdefault.jpg",
+                  "publishedAt": "2025-12-28",
+                  "duration": "PT12M20S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "LrLKxgF71WI",
+                  "title": "【実際にあったクレーム】新築建売の販売物件のトイレが使われた形跡がある・・・",
+                  "channelName": "建売新築を買うなら【株式会社おるすま】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/LrLKxgF71WI/hqdefault.jpg",
+                  "publishedAt": "2021-10-03",
+                  "duration": "PT6M43S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "tqBrm86e7kQ",
+                  "title": "マイホームが完成しない施主たちの叫び",
+                  "channelName": "社畜の檻【世の中・働き方・業界・生活の口コミ】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/tqBrm86e7kQ/hqdefault.jpg",
+                  "publishedAt": "2026-04-25",
+                  "duration": "PT8M30S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "sVN15n8K56s",
+                  "title": "【造作洗面台】見た目は最高…！だけど正直これは後悔してます…。「我が家の造作洗面台の後悔＆成功10選」リアルな声をお届けします！【注文住宅】【アイカ工業】",
+                  "channelName": "やまのや",
+                  "thumbnailUrl": "https://img.youtube.com/vi/sVN15n8K56s/hqdefault.jpg",
+                  "publishedAt": "2025-05-31",
+                  "duration": "PT17M46S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "1nrFIULvODY",
+                  "title": "【住宅会社の選び方】決定する前にOBの施主にここを確認しないと失敗する",
+                  "channelName": "住まいのコンシェルジュ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/1nrFIULvODY/hqdefault.jpg",
+                  "publishedAt": "2020-12-25",
+                  "duration": "PT9M10S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                }
+              ]
+            },
+            {
+              "id": "GNR-06",
+              "name": "キッチン",
+              "videos": [
+                {
+                  "videoId": "8w9m6HqOpk8",
+                  "title": "【施主支給の落とし穴】ネット購入品で失敗しないための注意点をプロが徹底解説！保証や施工費はどうなる？",
+                  "channelName": "幸栄住建",
+                  "thumbnailUrl": "https://img.youtube.com/vi/8w9m6HqOpk8/hqdefault.jpg",
+                  "publishedAt": "2026-03-15",
+                  "duration": "PT15M47S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "eCkIJx7VFv4",
+                  "title": "【お施主様の声】大きな吹き抜けのあるナチュラルテイストの家",
+                  "channelName": "カスケホームのリフォームリノベーション大図鑑",
+                  "thumbnailUrl": "https://img.youtube.com/vi/eCkIJx7VFv4/hqdefault.jpg",
+                  "publishedAt": "2023-05-01",
+                  "duration": "PT6M15S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "Epvw-ei1yNc",
+                  "title": "【建てて10年建ったお家】本当に快適？実際のお施主様に聞いてみました",
+                  "channelName": "岡谷工務店 大工のけんチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/Epvw-ei1yNc/hqdefault.jpg",
+                  "publishedAt": "2026-05-15",
+                  "duration": "PT11M35S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "SUpFF7DpCqc",
+                  "title": "事例紹介③キッチンデザイナーがつくるオーダーキッチン_前編",
+                  "channelName": "キッチンカレッジ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/SUpFF7DpCqc/hqdefault.jpg",
+                  "publishedAt": "2023-05-08",
+                  "duration": "PT16M10S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "CxZ5_zJj3SU",
+                  "title": "【安くリフォームする知恵】ネットでシステムキッチンを購入してリフォーム",
+                  "channelName": "一級建築士×宅建士の 相続不動産・売却・住み替えチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/CxZ5_zJj3SU/hqdefault.jpg",
+                  "publishedAt": "2022-02-19",
+                  "duration": "PT4M3S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "oxVatFFx5rc",
+                  "title": "2025年にお施主さんから大人気だった仕様を紹介！キッチンは何が一番人気だった？【タカラ/土間収納/クリナップ/平屋】",
+                  "channelName": "こだわり社長の家づくり革命ch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/oxVatFFx5rc/hqdefault.jpg",
+                  "publishedAt": "2025-12-19",
+                  "duration": "PT16M43S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                }
+              ]
+            },
+            {
+              "id": "GNR-12",
+              "name": "ランドリールーム",
+              "videos": [
+                {
+                  "videoId": "QRN3J44j57Y",
+                  "title": "【ルームツアー】オシャレな家は住みづらい！？の常識を覆した家／ホテルライク×全方位回遊動線×ランドリールーム洗濯動線×最適収納=ラク家事間取り！（K-LIVINGコラボ）",
+                  "channelName": "ウィンウィンホーム(建築ザムライ語り部屋)",
+                  "thumbnailUrl": "https://img.youtube.com/vi/QRN3J44j57Y/hqdefault.jpg",
+                  "publishedAt": "2021-09-10",
+                  "duration": "PT16M28S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "5_JEicOaCXM",
+                  "title": "【ルームツアー】スーモが選ぶ！同棲カップルが絶対憧れる最新モデルハウス | 戸建て | ファミリークローゼット | ランドリールーム | 土間 | 寝室",
+                  "channelName": "ゼクシィTV",
+                  "thumbnailUrl": "https://img.youtube.com/vi/5_JEicOaCXM/hqdefault.jpg",
+                  "publishedAt": "2023-02-15",
+                  "duration": "PT6M14S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "W8Uax_G5NqQ",
+                  "title": "【施主様インタビュー】インスタを参考にする時の注意点、後悔のない家づくりについて",
+                  "channelName": "【公式】東宝ホーム家づくりチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/W8Uax_G5NqQ/hqdefault.jpg",
+                  "publishedAt": "2023-05-20",
+                  "duration": "PT9M26S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "bKnLTz_BE2I",
+                  "title": "【注文住宅】朝来市「1階でほぼ完結！趣味スペースや家事動線にこだわったナチュラルモダンハウス」お客様インタビュー",
+                  "channelName": "アーキホームライフ【お客様インタビュー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/bKnLTz_BE2I/hqdefault.jpg",
+                  "publishedAt": "2024-03-02",
+                  "duration": "PT14M38S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                }
+              ]
+            }
           ]
         },
         {
@@ -211,29 +1853,339 @@
               "name": "外壁",
               "videos": [
                 {
-                  "videoId": "wallSample1",
-                  "title": "外壁材の選び方〜サイディング・タイル・塗り壁の比較〜",
-                  "channelName": "外壁の専門家",
-                  "thumbnailUrl": "https://img.youtube.com/vi/wallSample1/hqdefault.jpg",
-                  "publishedAt": "2025-03-15",
-                  "duration": "PT15M00S",
-                  "tags": ["trending"],
+                  "videoId": "w3WoQ3pRM0E",
+                  "title": "外壁材の選び方！沿岸地域にお住いの方必見！塩害をふせぐには〇〇！",
+                  "channelName": "katayama gaisou",
+                  "thumbnailUrl": "https://img.youtube.com/vi/w3WoQ3pRM0E/hqdefault.jpg",
+                  "publishedAt": "2020-11-27",
+                  "duration": "PT10M7S",
+                  "tags": [],
                   "source": "auto",
                   "status": "active",
                   "order": 1
+                },
+                {
+                  "videoId": "ql5HCUj_5Uo",
+                  "title": "【かなりハイリスク】注文住宅で施主支給すると後悔します！その理由と対策を徹底解説！",
+                  "channelName": "HAPINICE【愛知県 豊橋市の工務店】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ql5HCUj_5Uo/hqdefault.jpg",
+                  "publishedAt": "2022-03-26",
+                  "duration": "PT9M58S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "CUiatzI8WbQ",
+                  "title": "【外壁選びの心得】外壁選びに失敗した元営業マンが考える、失敗＆後悔しない外壁選びのポイント９選！！",
+                  "channelName": "ファンタジスタふじもと【家づくりお役立ちチャンネル】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/CUiatzI8WbQ/hqdefault.jpg",
+                  "publishedAt": "2022-02-26",
+                  "duration": "PT9M12S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "P2n_xCxVOBg",
+                  "title": "【プロも本気で羨む】10年後も色褪せしない！人気外壁色と選び方のコツを紹介します",
+                  "channelName": "7代目社長の後悔しない家づくりch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/P2n_xCxVOBg/hqdefault.jpg",
+                  "publishedAt": "2024-12-19",
+                  "duration": "PT17M58S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
                 }
               ]
             },
-            { "id": "GNR-03", "name": "屋根", "videos": [] },
-            { "id": "GNR-11", "name": "庭", "videos": [] }
+            {
+              "id": "GNR-03",
+              "name": "屋根",
+              "videos": [
+                {
+                  "videoId": "rCfC1UuQdGk",
+                  "title": "【屋根選びのコツ】雨漏りの原因になる屋根材と屋根形状",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/rCfC1UuQdGk/hqdefault.jpg",
+                  "publishedAt": "2022-12-28",
+                  "duration": "PT16M5S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "4-sNQhWyZFM",
+                  "title": "どんな屋根を選べばいいの！？台風で飛びにくい屋根とは！？瓦？板金屋根？それとも、、、家づくりノウハウ Q&Aシリーズ",
+                  "channelName": "【家づくりノウハウ配信中】 注文住宅ハウスメーカー WELLNEST HOME",
+                  "thumbnailUrl": "https://img.youtube.com/vi/4-sNQhWyZFM/hqdefault.jpg",
+                  "publishedAt": "2019-11-19",
+                  "duration": "PT10M31S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "eNJWmNFF6i8",
+                  "title": "【注文住宅の外壁選び方】窯業系サイディング・ガルバリウム他！後悔・失敗しないように元ハウスメーカーのプロ建築士が解説",
+                  "channelName": "中立公正な総合住宅相談所",
+                  "thumbnailUrl": "https://img.youtube.com/vi/eNJWmNFF6i8/hqdefault.jpg",
+                  "publishedAt": "2021-09-04",
+                  "duration": "PT12M55S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "9zTWFP7A0A0",
+                  "title": "屋根・ルーフィング・バルコニーの選び方｜瓦？ガルバ？スレート？",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/9zTWFP7A0A0/hqdefault.jpg",
+                  "publishedAt": "2020-08-08",
+                  "duration": "PT9M55S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "qcoBBmonRyA",
+                  "title": "【標準仕様】外部設備とデザインの選び方｜外壁・屋根・玄関ドア",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/qcoBBmonRyA/hqdefault.jpg",
+                  "publishedAt": "2020-12-12",
+                  "duration": "PT11M29S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "zahry4_YVEU",
+                  "title": "【屋根】注文住宅の屋根・デザイン・種類「基本知識」",
+                  "channelName": "Amigo住宅ゼミ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/zahry4_YVEU/hqdefault.jpg",
+                  "publishedAt": "2021-05-07",
+                  "duration": "PT15M39S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "YthkfwFVz9E",
+                  "title": "注文住宅の施主支給を工務店が嫌がる3つの理由",
+                  "channelName": "家づくり せやま大学【ちょうどいい塩梅の家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/YthkfwFVz9E/hqdefault.jpg",
+                  "publishedAt": "2022-06-08",
+                  "duration": "PT10M36S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                }
+              ]
+            },
+            {
+              "id": "GNR-11",
+              "name": "庭",
+              "videos": [
+                {
+                  "videoId": "I707O2rOlso",
+                  "title": "【庭】これを見れば外構工事にかかる金額がわかる！現役現場監督が徹底解説！新築マイホームエクステリア",
+                  "channelName": "ぎゃなの家ハウス【現役現場監督の家づくり講座】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/I707O2rOlso/hqdefault.jpg",
+                  "publishedAt": "2020-10-09",
+                  "duration": "PT8M25S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "UMQpD69Q8kM",
+                  "title": "こんなに違う！？？ウッドデッキを選ぶポイント＆メンテナンス体験記【外構計画】",
+                  "channelName": "ファンタジスタふじもと【家づくりお役立ちチャンネル】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/UMQpD69Q8kM/hqdefault.jpg",
+                  "publishedAt": "2022-07-29",
+                  "duration": "PT8M31S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "P-qYuJxaGqU",
+                  "title": "【外構計画】120坪の土地の外構費用大公開！",
+                  "channelName": "おうちチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/P-qYuJxaGqU/hqdefault.jpg",
+                  "publishedAt": "2024-03-13",
+                  "duration": "PT11M26S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "FFQQglf25-4",
+                  "title": "【体験談をもとに解説】外構工事のオススメ５選",
+                  "channelName": "yukai/ch",
+                  "thumbnailUrl": "https://img.youtube.com/vi/FFQQglf25-4/hqdefault.jpg",
+                  "publishedAt": "2021-05-15",
+                  "duration": "PT4M41S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "ON45TELsb6s",
+                  "title": "暮らしを彩る庭づくり【ガーデンギャラリータケウチ】",
+                  "channelName": "TheCowtelevision",
+                  "thumbnailUrl": "https://img.youtube.com/vi/ON45TELsb6s/hqdefault.jpg",
+                  "publishedAt": "2015-03-05",
+                  "duration": "PT10M51S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                },
+                {
+                  "videoId": "wiQpICueS-I",
+                  "title": "【注文住宅】 #66 電動ワイドオーバードアS5 リクシル タマホーム 大安心の家 外構工事の進捗報告8月21日 クローズ外構 内覧 字幕付き 注文住宅",
+                  "channelName": "ハッピーライフな家造り 4kidsパパ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/wiQpICueS-I/hqdefault.jpg",
+                  "publishedAt": "2020-08-21",
+                  "duration": "PT12M51S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 6
+                },
+                {
+                  "videoId": "jakf8YebQW0",
+                  "title": "【要望多すぎ】現場監督ぎゃなはこんな家に住みたいと思ってます。",
+                  "channelName": "ぎゃなの家ハウス【現役現場監督の家づくり講座】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/jakf8YebQW0/hqdefault.jpg",
+                  "publishedAt": "2021-06-19",
+                  "duration": "PT11M26S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 7
+                },
+                {
+                  "videoId": "soB8PHf61v4",
+                  "title": "【失敗談】家を売る人要注意！現場監督が築1年半の家を売る時に不動産屋に騙された話！エピソード",
+                  "channelName": "ぎゃなの家ハウス【現役現場監督の家づくり講座】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/soB8PHf61v4/hqdefault.jpg",
+                  "publishedAt": "2021-08-31",
+                  "duration": "PT13M57S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 8
+                }
+              ]
+            }
           ]
         },
         {
           "id": "GRP-D",
           "name": "内装・設備",
           "genres": [
-            { "id": "GNR-07", "name": "床", "videos": [] },
-            { "id": "GNR-10", "name": "照明計画", "videos": [] }
+            {
+              "id": "GNR-07",
+              "name": "床",
+              "videos": [
+                {
+                  "videoId": "UPYFseX3Vlc",
+                  "title": "【注文住宅の悩み】マイホームに選んだほうがいい床材は？フローリングvs畳の家づくりで必要な考え方【新築一戸建て】",
+                  "channelName": "ヨシローの家【安全な家づくり】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/UPYFseX3Vlc/hqdefault.jpg",
+                  "publishedAt": "2021-02-22",
+                  "duration": "PT8M51S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "z1IPwR3iZts",
+                  "title": "【住宅の床】現場監督はフローリングに○○を選ぶ！床材選びに迷ったら！前回の失敗から学ぶ！",
+                  "channelName": "ぎゃなの家ハウス【現役現場監督の家づくり講座】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/z1IPwR3iZts/hqdefault.jpg",
+                  "publishedAt": "2021-08-21",
+                  "duration": "PT12M9S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "8ciOVBRrKSY",
+                  "title": "住んで半年…正直どう？お施主様に本音を聞きました",
+                  "channelName": "岡谷工務店 大工のけんチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/8ciOVBRrKSY/hqdefault.jpg",
+                  "publishedAt": "2026-03-08",
+                  "duration": "PT8M39S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                },
+                {
+                  "videoId": "_AE2kcDRLn4",
+                  "title": "【注文住宅】水回りの床選びに迷っている方へ！床材別特徴とメリットデメリット！",
+                  "channelName": "ぎゃなの家ハウス【現役現場監督の家づくり講座】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/_AE2kcDRLn4/hqdefault.jpg",
+                  "publishedAt": "2022-05-28",
+                  "duration": "PT9M40S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 4
+                },
+                {
+                  "videoId": "xIVgYvdeoNc",
+                  "title": "【注文住宅】どの床材にすればいい…？プロおすすめの床材を徹底解説！【床材】",
+                  "channelName": "まっつんTV【失敗しない家づくりセミナー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/xIVgYvdeoNc/hqdefault.jpg",
+                  "publishedAt": "2022-04-03",
+                  "duration": "PT9M4S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 5
+                }
+              ]
+            },
+            {
+              "id": "GNR-10",
+              "name": "照明計画",
+              "videos": [
+                {
+                  "videoId": "lcGPG4iqug8",
+                  "title": "【注文住宅】高槻市「吹き抜けで開放的！スキップフロアのあるLDKのお家」お客様インタビュー",
+                  "channelName": "アーキホームライフ【お客様インタビュー】",
+                  "thumbnailUrl": "https://img.youtube.com/vi/lcGPG4iqug8/hqdefault.jpg",
+                  "publishedAt": "2026-02-07",
+                  "duration": "PT7M35S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                }
+              ]
+            }
           ]
         }
       ]
