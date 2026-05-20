@@ -1,0 +1,326 @@
+{
+  "meta": {
+    "last_updated": "2026-05-20",
+    "schema_version": "1.2"
+  },
+  "categories": [
+    {
+      "id": "CAT-02",
+      "name": "専門家目線",
+      "groups": [
+        {
+          "id": "GRP-A",
+          "name": "計画・間取り",
+          "genres": [
+            {
+              "id": "GNR-01",
+              "name": "間取り",
+              "videos": [
+                {
+                  "videoId": "proPlan0001",
+                  "title": "設計士が解説する〝家事動線が良い間取り〟の作り方",
+                  "channelName": "一級建築士のチャンネル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/proPlan0001/hqdefault.jpg",
+                  "publishedAt": "2025-10-30",
+                  "duration": "PT19M55S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "proPlan0002",
+                  "title": "管理者おすすめ：プロが教える土地形状別の最適な間取り",
+                  "channelName": "設計事務所〇〇",
+                  "thumbnailUrl": "https://img.youtube.com/vi/proPlan0002/hqdefault.jpg",
+                  "publishedAt": "2025-04-18",
+                  "duration": "PT14M07S",
+                  "tags": [
+                    "manual"
+                  ],
+                  "source": "manual",
+                  "status": "active",
+                  "order": 2
+                }
+              ]
+            },
+            {
+              "id": "GNR-08",
+              "name": "リビング",
+              "videos": [
+                {
+                  "videoId": "proLive0001",
+                  "title": "プロが間取り図で解説する開放感あるLDKの設計手法",
+                  "channelName": "建築設計のプロ",
+                  "thumbnailUrl": "https://img.youtube.com/vi/proLive0001/hqdefault.jpg",
+                  "publishedAt": "2025-02-09",
+                  "duration": "PT16M12S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                }
+              ]
+            },
+            {
+              "id": "GNR-09",
+              "name": "ダイニング",
+              "videos": []
+            }
+          ]
+        },
+        {
+          "id": "GRP-B",
+          "name": "水回り",
+          "genres": [
+            {
+              "id": "GNR-04",
+              "name": "風呂",
+              "videos": []
+            },
+            {
+              "id": "GNR-05",
+              "name": "トイレ",
+              "videos": []
+            },
+            {
+              "id": "GNR-06",
+              "name": "キッチン",
+              "videos": []
+            },
+            {
+              "id": "GNR-12",
+              "name": "ランドリールーム",
+              "videos": []
+            }
+          ]
+        },
+        {
+          "id": "GRP-C",
+          "name": "外装",
+          "genres": [
+            {
+              "id": "GNR-02",
+              "name": "外壁",
+              "videos": []
+            },
+            {
+              "id": "GNR-03",
+              "name": "屋根",
+              "videos": []
+            },
+            {
+              "id": "GNR-11",
+              "name": "庭",
+              "videos": []
+            }
+          ]
+        },
+        {
+          "id": "GRP-D",
+          "name": "内装・設備",
+          "genres": [
+            {
+              "id": "GNR-07",
+              "name": "床",
+              "videos": []
+            },
+            {
+              "id": "GNR-10",
+              "name": "照明計画",
+              "videos": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CAT-01",
+      "name": "施主目線",
+      "groups": [
+        {
+          "id": "GRP-A",
+          "name": "計画・間取り",
+          "genres": [
+            {
+              "id": "GNR-01",
+              "name": "間取り",
+              "videos": [
+                {
+                  "videoId": "abcDEF12345",
+                  "title": "【施主体験談】後悔しない間取りの考え方〜実際に住んでわかった注意点〜",
+                  "channelName": "マイホームちゃんねる",
+                  "thumbnailUrl": "https://img.youtube.com/vi/abcDEF12345/hqdefault.jpg",
+                  "publishedAt": "2025-09-12",
+                  "duration": "PT12M34S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "xyz67890abc",
+                  "title": "管理者おすすめ：間取りで失敗しないための3つのポイント",
+                  "channelName": "注文住宅ガイド",
+                  "thumbnailUrl": "https://img.youtube.com/vi/xyz67890abc/hqdefault.jpg",
+                  "publishedAt": "2025-06-01",
+                  "duration": "PT8M15S",
+                  "tags": [
+                    "manual"
+                  ],
+                  "source": "manual",
+                  "status": "active",
+                  "order": 2
+                },
+                {
+                  "videoId": "qweRTY12345",
+                  "title": "リビング・ダイニング・キッチンの動線設計",
+                  "channelName": "建築士の住まい相談室",
+                  "thumbnailUrl": "https://img.youtube.com/vi/qweRTY12345/hqdefault.jpg",
+                  "publishedAt": "2024-11-20",
+                  "duration": "PT18M42S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 3
+                }
+              ]
+            },
+            {
+              "id": "GNR-08",
+              "name": "リビング",
+              "videos": [
+                {
+                  "videoId": "livingABCDE",
+                  "title": "20畳リビングを快適にする工夫",
+                  "channelName": "施主のリアル",
+                  "thumbnailUrl": "https://img.youtube.com/vi/livingABCDE/hqdefault.jpg",
+                  "publishedAt": "2025-07-04",
+                  "duration": "PT11M22S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                }
+              ]
+            },
+            {
+              "id": "GNR-09",
+              "name": "ダイニング",
+              "videos": []
+            }
+          ]
+        },
+        {
+          "id": "GRP-B",
+          "name": "水回り",
+          "genres": [
+            {
+              "id": "GNR-04",
+              "name": "風呂",
+              "videos": []
+            },
+            {
+              "id": "GNR-05",
+              "name": "トイレ",
+              "videos": []
+            },
+            {
+              "id": "GNR-06",
+              "name": "キッチン",
+              "videos": [
+                {
+                  "videoId": "kitchen1234",
+                  "title": "オーダーキッチンとシステムキッチンの違い・選び方を徹底比較してみた結果わかった意外な落とし穴と知っておくべき重要ポイント",
+                  "channelName": "キッチンプランナー田中",
+                  "thumbnailUrl": "https://img.youtube.com/vi/kitchen1234/hqdefault.jpg",
+                  "publishedAt": "2025-08-10",
+                  "duration": "PT1H5M30S",
+                  "tags": [],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                },
+                {
+                  "videoId": "kitchen5678",
+                  "title": "失敗しないキッチンレイアウト5選",
+                  "channelName": "施主のつぶやき",
+                  "thumbnailUrl": "https://img.youtube.com/vi/kitchen5678/hqdefault.jpg",
+                  "publishedAt": "2025-01-22",
+                  "duration": "PT9M48S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 2
+                }
+              ]
+            },
+            {
+              "id": "GNR-12",
+              "name": "ランドリールーム",
+              "videos": []
+            }
+          ]
+        },
+        {
+          "id": "GRP-C",
+          "name": "外装",
+          "genres": [
+            {
+              "id": "GNR-02",
+              "name": "外壁",
+              "videos": [
+                {
+                  "videoId": "wallSample1",
+                  "title": "外壁材の選び方〜サイディング・タイル・塗り壁の比較〜",
+                  "channelName": "外壁の専門家",
+                  "thumbnailUrl": "https://img.youtube.com/vi/wallSample1/hqdefault.jpg",
+                  "publishedAt": "2025-03-15",
+                  "duration": "PT15M00S",
+                  "tags": [
+                    "trending"
+                  ],
+                  "source": "auto",
+                  "status": "active",
+                  "order": 1
+                }
+              ]
+            },
+            {
+              "id": "GNR-03",
+              "name": "屋根",
+              "videos": []
+            },
+            {
+              "id": "GNR-11",
+              "name": "庭",
+              "videos": []
+            }
+          ]
+        },
+        {
+          "id": "GRP-D",
+          "name": "内装・設備",
+          "genres": [
+            {
+              "id": "GNR-07",
+              "name": "床",
+              "videos": []
+            },
+            {
+              "id": "GNR-10",
+              "name": "照明計画",
+              "videos": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

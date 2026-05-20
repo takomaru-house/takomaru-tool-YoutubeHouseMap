@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spec.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="注文住宅youtube動画マップ---完全設計仕様書-v20">注文住宅YouTube動画マップ - 完全設計仕様書 v2.0</h1>
+<hr>
+<h2 id="目次">目次</h2>
+<ol>
+<li><a href="#1-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%A6%82%E8%A6%81">プロジェクト概要</a></li>
+<li><a href="#2-%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3">システムアーキテクチャ</a></li>
+<li><a href="#3-%E6%A9%9F%E8%83%BD%E8%A6%81%E4%BB%B6">機能要件</a></li>
+<li><a href="#4-%E9%9D%9E%E6%A9%9F%E8%83%BD%E8%A6%81%E4%BB%B6">非機能要件</a></li>
+<li><a href="#5-%E3%83%87%E3%83%BC%E3%82%BF%E8%A8%AD%E8%A8%88">データ設計</a></li>
+<li><a href="#6-uiux%E8%A8%AD%E8%A8%88">UI/UX設計</a></li>
+<li><a href="#7-youtube-api%E6%B3%95%E7%9A%84%E8%A6%81%E4%BB%B6">YouTube API・法的要件</a></li>
+<li><a href="#8-%E3%82%A8%E3%83%83%E3%82%B8%E3%82%B1%E3%83%BC%E3%82%B9%E5%AF%BE%E5%BF%9C">エッジケース対応</a></li>
+<li><a href="#9-%E5%AE%9F%E8%A3%85%E8%A8%88%E7%94%BB%E3%82%B9%E3%83%97%E3%83%AA%E3%83%B3%E3%83%88%E8%A8%88%E7%94%BB">実装計画（スプリント計画）</a></li>
+<li><a href="#10-claudemd">CLAUDE.md</a></li>
+</ol>
+<hr>
+<h2 id="1-プロジェクト概要">1. プロジェクト概要</h2>
+<h3 id="11-目的背景">1.1 目的・背景</h3>
+<p>注文住宅を検討し始めた初心者ユーザーが、YouTube上に散在する関連動画の全体像を把握し、自分の関心に合った動画へスムーズにたどり着けるナビゲーションサイトを構築する。</p>
+<h3 id="12-ターゲットユーザー">1.2 ターゲットユーザー</h3>
+<ul>
+<li>注文住宅を初めて検討し始めた一般消費者</li>
+<li>スマートフォン・PCいずれでも利用する想定</li>
+</ul>
+<h3 id="13-サービス形態">1.3 サービス形態</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公開形態</td>
+<td>公開Webサイト（誰でも無料閲覧可能）</td>
+</tr>
+<tr>
+<td>運営形態</td>
+<td>個人運営・非商用</td>
+</tr>
+<tr>
+<td>ホスティング</td>
+<td>GitHub Pages（無料）</td>
+</tr>
+<tr>
+<td>ユーザー認証</td>
+<td>不要</td>
+</tr>
+<tr>
+<td>管理画面</td>
+<td>ローカル環境のみ（Web UI）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-システムアーキテクチャ">2. システムアーキテクチャ</h2>
+<h3 id="21-全体構成">2.1 全体構成</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TB
+    subgraph LOCAL["ローカル環境（管理者専用）"]
+        A[管理Web UI\nlocalhost:3000]
+        B[月次バッチスクリプト\nNode.js]
+        C_DRAFT[videos.draft.json\n下書きデータ]
+        C[videos.json\n本番データ]
+        D[静的サイトビルダー\nNode.js]
+        E[死活チェックスクリプト\n月次]
+        CATS[categories.json\nカテゴリ定義]
+    end
+
+    subgraph EXTERNAL["外部サービス"]
+        F[YouTube Data API v3\n無料枠 10,000unit/日]
+    end
+
+    subgraph HOSTING["GitHub Pages（無料ホスティング）"]
+        G[静的HTML/CSS/JS]
+        H[docs/data/videos.json\n公開用データ]
+    end
+
+    B -->|検索・取得 月次| F
+    E -->|死活確認 月次| F
+    F -->|動画メタデータ| B
+    B --> C_DRAFT
+    E --> C
+    A -->|レビュー・承認| C_DRAFT
+    C_DRAFT -->|承認後マージ| C
+    A -->|手動編集・補完| C
+    CATS --> B
+    C --> D
+    D -->|ビルド\ndead除外・日付埋め込み| H
+    G -->|git push| HOSTING
+    H -->|git push| HOSTING
+</div></code></pre>
+<h3 id="22-技術スタック">2.2 技術スタック</h3>
+<table>
+<thead>
+<tr>
+<th>レイヤー</th>
+<th>技術選定</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>フロントエンド</td>
+<td>HTML / CSS / Vanilla JS</td>
+<td>依存最小化・静的配信に最適</td>
+</tr>
+<tr>
+<td>PCビジュアル</td>
+<td>D3.js（カスタムツリーレイアウト）</td>
+<td>動画カードをサイドパネルに表示する設計で実装難易度を管理</td>
+</tr>
+<tr>
+<td>モバイルUI</td>
+<td>CSS アニメーション付きアコーディオン</td>
+<td>操作性◎・実装難易度中</td>
+</tr>
+<tr>
+<td>バッチ/ビルド</td>
+<td>Node.js スクリプト</td>
+<td>フロントとの言語統一・テスト容易</td>
+</tr>
+<tr>
+<td>データストア</td>
+<td>JSON ファイル群</td>
+<td>静的サイトとの親和性が高い</td>
+</tr>
+<tr>
+<td>ローカル管理UI</td>
+<td>Node.js + Express（localhost）</td>
+<td>ブラウザで操作可・GUIに近い体験</td>
+</tr>
+<tr>
+<td>ホスティング</td>
+<td>GitHub Pages</td>
+<td>無料・シンプル</td>
+</tr>
+<tr>
+<td>単体・結合テスト</td>
+<td>Jest</td>
+<td>Node.jsとの相性が良い</td>
+</tr>
+<tr>
+<td>管理APIテスト</td>
+<td>supertest</td>
+<td>Expressサーバーへの直接HTTPテスト</td>
+</tr>
+<tr>
+<td>YouTube APIモック</td>
+<td>nock</td>
+<td>HTTPリクエストを決定論的にインターセプト</td>
+</tr>
+<tr>
+<td>E2Eテスト（多用）</td>
+<td>Playwright</td>
+<td>レスポンシブ・タイムアウト・ネットワーク制御を自動化</td>
+</tr>
+<tr>
+<td>アクセシビリティ自動チェック</td>
+<td>axe-playwright</td>
+<td>WCAG AA違反を自動検出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-d3jsツリーレイアウト設計方針">2.3 D3.jsツリーレイアウト設計方針</h3>
+<p><strong>採用設計：動画カードをサイドパネルに表示する方式</strong></p>
+<pre class="hljs"><code><div>[マインドマップ領域]          [サイドパネル]
+                              ┌─────────────────┐
+ ルート                        │ 間取り の動画     │
+   ├── 施主目線                │                 │
+   │    ├── 間取り ◀クリック  │ ┌─────────────┐ │
+   │    ├── 外壁               │ │[サムネイル]  │ │
+   │    └── ...                │ │ タイトル    │ │
+   └── 専門家目線              │ │ チャンネル名│ │
+        ├── 間取り             │ └─────────────┘ │
+        └── ...                │ ┌─────────────┐ │
+                              │ │[サムネイル]  │ │
+                              └─────────────────┘
+</div></code></pre>
+<p><strong>選定理由：</strong></p>
+<ul>
+<li>動画カード（サムネイル・タイトル・バッジ）をD3.jsノード内に埋め込む場合、SVG内のHTML要素管理が複雑化してメンテナンスが困難になる</li>
+<li>サイドパネル方式であれば、D3.jsはノードのクリックイベントのみを担当し、動画カードは通常のHTML/CSSで実装できる</li>
+<li>Sprint 1での実装工数を現実的な範囲に収められる</li>
+</ul>
+<hr>
+<h2 id="3-機能要件">3. 機能要件</h2>
+<h3 id="31-公開サイト機能">3.1 公開サイト機能</h3>
+<h4 id="fr-01-マインドマップ表示pc">FR-01 マインドマップ表示（PC）</h4>
+<ul>
+<li>カテゴリ → ジャンル の2階層ツリーをD3.jsで表示する</li>
+<li>ジャンルノードをクリックすると、右側のサイドパネルに動画カード一覧を表示する</li>
+<li>各ノードはクリック/タップで展開・折りたたみができる</li>
+<li>ノードホバー時にアニメーション（拡大・ハイライト）を付与する</li>
+<li>マインドマップはズーム・パン操作に対応する（ノードが画面外にはみ出した場合の対策）</li>
+</ul>
+<h4 id="fr-02-アコーディオン表示モバイル">FR-02 アコーディオン表示（モバイル）</h4>
+<ul>
+<li>画面幅768px未満でアコーディオンUIに自動切り替えする</li>
+<li>カテゴリ → ジャンル → 動画カード の順に階層展開する</li>
+<li>展開・折りたたみにCSSアニメーション（<code>max-height</code> + <code>opacity</code>、300ms ease-in-out）を付与する</li>
+<li>アイコン（<code>▶</code>→<code>▼</code>）を90°回転アニメーションで切り替える</li>
+<li>動画カードのフェードイン：展開時に上からスライドインするスタガーアニメーション</li>
+</ul>
+<h4 id="fr-03-動画カード表示">FR-03 動画カード表示</h4>
+<p>各カードに以下を表示する：</p>
+<table>
+<thead>
+<tr>
+<th>表示要素</th>
+<th>内容</th>
+<th>備考</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>サムネイル</td>
+<td><code>https://img.youtube.com/vi/{videoId}/hqdefault.jpg</code></td>
+<td>404時はフォールバック画像を表示</td>
+</tr>
+<tr>
+<td>タイトル</td>
+<td>動画タイトル（最大2行で省略、<code>-webkit-line-clamp: 2</code>）</td>
+<td>100文字超も対応</td>
+</tr>
+<tr>
+<td>チャンネル名</td>
+<td>投稿者名（絵文字・特殊文字はエスケープ処理）</td>
+<td>XSS対策必須</td>
+</tr>
+<tr>
+<td>投稿日</td>
+<td><code>YYYY年MM月DD日</code> 形式</td>
+<td>情報鮮度の判断に有用</td>
+</tr>
+<tr>
+<td>動画時間</td>
+<td><code>MM:SS</code> または <code>HH:MM:SS</code> 形式</td>
+<td>視聴判断に影響大</td>
+</tr>
+<tr>
+<td>急上昇バッジ</td>
+<td>🔥「急上昇」ラベル（対象動画のみ）</td>
+<td></td>
+</tr>
+<tr>
+<td>おすすめバッジ</td>
+<td>⭐「管理者おすすめ」ラベル（手動追加動画のみ）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="fr-04-youtube遷移">FR-04 YouTube遷移</h4>
+<ul>
+<li>動画カードをクリックすると <code>https://www.youtube.com/watch?v={videoId}</code> を別タブで開く</li>
+<li>サイト内での動画再生は行わない（法的リスク低減）</li>
+</ul>
+<h4 id="fr-05-サムネイルフォールバック">FR-05 サムネイルフォールバック</h4>
+<pre class="hljs"><code><div><span class="hljs-comment">&lt;!-- フロントエンド実装必須 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+  <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://img.youtube.com/vi/{videoId}/hqdefault.jpg&quot;</span>
+  <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;{title}のサムネイル&quot;</span>
+  <span class="hljs-attr">onerror</span>=<span class="hljs-string">&quot;this.onerror=null; this.src=&#x27;/images/no-thumbnail.png&#x27;&quot;</span>
+/&gt;</span>
+</div></code></pre>
+<h4 id="fr-06-カテゴリジャンル構成">FR-06 カテゴリ・ジャンル構成</h4>
+<p><strong>カテゴリ（2種）</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>カテゴリ名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAT-01</td>
+<td>施主目線</td>
+</tr>
+<tr>
+<td>CAT-02</td>
+<td>専門家目線（工務店・ハウスメーカー・設計士）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ジャンル（12種）</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>ジャンル名</th>
+<th>施主目線クエリ</th>
+<th>専門家目線クエリ</th>
+<th>代替クエリ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GNR-01</td>
+<td>間取り</td>
+<td><code>注文住宅 間取り 施主 体験談</code></td>
+<td><code>注文住宅 間取り 設計士 プロ</code></td>
+<td><code>注文住宅 間取り 失敗 後悔</code></td>
+</tr>
+<tr>
+<td>GNR-02</td>
+<td>外壁</td>
+<td><code>注文住宅 外壁 施主 選び方</code></td>
+<td><code>注文住宅 外壁 工務店 おすすめ</code></td>
+<td><code>注文住宅 外壁 種類 比較</code></td>
+</tr>
+<tr>
+<td>GNR-03</td>
+<td>屋根</td>
+<td><code>注文住宅 屋根 施主 選び方</code></td>
+<td><code>注文住宅 屋根 工務店 おすすめ</code></td>
+<td><code>注文住宅 屋根 種類 比較</code></td>
+</tr>
+<tr>
+<td>GNR-04</td>
+<td>風呂</td>
+<td><code>注文住宅 お風呂 施主 体験談</code></td>
+<td><code>注文住宅 お風呂 設計士 おすすめ</code></td>
+<td><code>注文住宅 浴室 選び方</code></td>
+</tr>
+<tr>
+<td>GNR-05</td>
+<td>トイレ</td>
+<td><code>注文住宅 トイレ 施主 体験談</code></td>
+<td><code>注文住宅 トイレ 設計士 おすすめ</code></td>
+<td><code>注文住宅 トイレ 選び方</code></td>
+</tr>
+<tr>
+<td>GNR-06</td>
+<td>キッチン</td>
+<td><code>注文住宅 キッチン 施主 体験談</code></td>
+<td><code>注文住宅 キッチン 設計士 おすすめ</code></td>
+<td><code>注文住宅 キッチン 選び方</code></td>
+</tr>
+<tr>
+<td>GNR-07</td>
+<td>床</td>
+<td><code>注文住宅 床材 施主 体験談</code></td>
+<td><code>注文住宅 床材 工務店 おすすめ</code></td>
+<td><code>注文住宅 フローリング 選び方</code></td>
+</tr>
+<tr>
+<td>GNR-08</td>
+<td>リビング</td>
+<td><code>注文住宅 リビング 施主 体験談</code></td>
+<td><code>注文住宅 リビング 設計士 間取り</code></td>
+<td><code>注文住宅 リビング 後悔</code></td>
+</tr>
+<tr>
+<td>GNR-09</td>
+<td>ダイニング</td>
+<td><code>注文住宅 ダイニング 施主 体験談</code></td>
+<td><code>注文住宅 ダイニング 設計士 おすすめ</code></td>
+<td><code>注文住宅 ダイニング 選び方</code></td>
+</tr>
+<tr>
+<td>GNR-10</td>
+<td>照明計画</td>
+<td><code>注文住宅 照明 施主 体験談</code></td>
+<td><code>注文住宅 照明計画 設計士 解説</code></td>
+<td><code>注文住宅 照明 後悔</code></td>
+</tr>
+<tr>
+<td>GNR-11</td>
+<td>庭</td>
+<td><code>注文住宅 外構 庭 施主 体験談</code></td>
+<td><code>注文住宅 外構 工務店 おすすめ</code></td>
+<td><code>注文住宅 庭 ガーデニング</code></td>
+</tr>
+<tr>
+<td>GNR-12</td>
+<td>ランドリールーム</td>
+<td><code>注文住宅 ランドリールーム 施主 体験談</code></td>
+<td><code>注文住宅 ランドリールーム 設計士 解説</code></td>
+<td><code>注文住宅 洗濯 動線</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>⚠️ 重要：Sprint 0またはSprint 2開始前に、上記クエリを実際にYouTubeで検索し、意図通りの動画が返ってくるかを人手で検証すること。</strong></p>
+</blockquote>
+<h4 id="fr-07-動画表示件数ルール">FR-07 動画表示件数ルール</h4>
+<table>
+<thead>
+<tr>
+<th>種別</th>
+<th>件数</th>
+<th>選定基準</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人気動画</td>
+<td>上位5件</td>
+<td>再生数の多い順</td>
+</tr>
+<tr>
+<td>急上昇動画</td>
+<td>上位3件</td>
+<td>下記「急上昇」定義を満たす動画</td>
+</tr>
+<tr>
+<td>合計（目標）</td>
+<td>最大8件 / カテゴリ×ジャンル</td>
+<td>重複排除後</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「急上昇」コンテンツ定義：</strong></p>
+<ul>
+<li>チャンネル登録者数：2万人以下（登録者数が非公開の場合はtrendingタグ対象外、ただし通常動画として保持）</li>
+<li>エンゲージメント率：<code>再生数 ÷ 登録者数 ≥ 0.3</code>（30%以上）</li>
+<li>投稿日：直近1年以内</li>
+<li>登録者数が0の場合：ゼロ除算ガード処理を必須実装し、trending判定スキップ</li>
+</ul>
+<h4 id="fr-08-検索品質フィルタリング">FR-08 検索品質フィルタリング</h4>
+<p>バッチ実行時、以下のフィルタをYouTube API検索パラメータに設定する：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> searchParams = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;video&#x27;</span>,
+  <span class="hljs-attr">regionCode</span>: <span class="hljs-string">&#x27;JP&#x27;</span>,
+  <span class="hljs-attr">relevanceLanguage</span>: <span class="hljs-string">&#x27;ja&#x27;</span>,
+  <span class="hljs-attr">videoEmbeddable</span>: <span class="hljs-string">&#x27;true&#x27;</span>,   <span class="hljs-comment">// 埋め込み可能動画のみ</span>
+  <span class="hljs-attr">videoDuration</span>: <span class="hljs-string">&#x27;medium&#x27;</span>,   <span class="hljs-comment">// 4〜20分（品質向上）</span>
+  <span class="hljs-attr">safeSearch</span>: <span class="hljs-string">&#x27;strict&#x27;</span>
+}
+</div></code></pre>
+<p>また、グローバルブロックリストによる除外処理を実施する：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// data/categories.json globalSettings</span>
+<span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;globalSettings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;blockedChannelIds&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;blockedVideoIds&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<h4 id="fr-09-データ更新日時表示">FR-09 データ更新日時表示</h4>
+<ul>
+<li>サイトフッターまたはヘッダーに「最終更新日：YYYY年MM月DD日」を表示する</li>
+</ul>
+<h4 id="fr-10-フッター法的表示">FR-10 フッター法的表示</h4>
+<pre class="hljs"><code><div>本サイトはGoogleおよびYouTubeとは無関係の独立したサービスです。
+動画の権利は各動画制作者に帰属します。
+Powered by YouTube Data API | YouTube利用規約
+</div></code></pre>
+<h4 id="fr-11-エラー表示ui">FR-11 エラー表示UI</h4>
+<table>
+<thead>
+<tr>
+<th>シナリオ</th>
+<th>表示内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JSONファイルの読み込み失敗</td>
+<td>「データの読み込みに失敗しました。ページを再読み込みしてください。」+ リロードボタン</td>
+</tr>
+<tr>
+<td>ジャンルの動画が0件</td>
+<td>「このジャンルは現在収集中です。しばらくお待ちください。」</td>
+</tr>
+<tr>
+<td>JSONロードが5秒超過</td>
+<td>ローディングスピナーを表示し、タイムアウト後にエラーメッセージ</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="32-ローカル管理機能">3.2 ローカル管理機能</h3>
+<h4 id="fr-12-月次バッチ実行更新フロー">FR-12 月次バッチ実行（更新フロー）</h4>
+<p>コマンド1つで以下を自動実行する：</p>
+<ol>
+<li>YouTube Data API で全カテゴリ×ジャンルを検索（最大10件取得/組み合わせ）</li>
+<li>品質フィルタリング（<code>videoDuration: 'medium'</code> 等）</li>
+<li>グローバルブロックリストによる除外</li>
+<li>重複排除（同一videoIdが複数カテゴリにヒットした場合、カテゴリ順序の前を優先。manual動画も対象）</li>
+<li>「急上昇」スコアリング・フラグ付与</li>
+<li>件数不足チェック（8件未満のカテゴリ×ジャンルをコンソールとログに出力）</li>
+<li><strong><code>data/videos.draft.json</code> に出力</strong>（本番データには即時反映しない）</li>
+<li>管理UIでレビュー・承認後に <code>data/videos.json</code> にマージ</li>
+</ol>
+<p><strong>マージ戦略（重要）：</strong></p>
+<ul>
+<li><code>source: &quot;manual&quot;</code> の動画は、バッチ更新時に<strong>上書きせず固定で保持</strong>する</li>
+<li>件数不足分（8件未満）は前回の <code>videos.json</code> から自動補完する</li>
+<li>承認前は <code>videos.draft.json</code> を参照し、<code>videos.json</code> は変更しない</li>
+</ul>
+<h4 id="fr-13-死活チェック月次">FR-13 死活チェック（月次）</h4>
+<ul>
+<li>保存済み動画IDに対してAPI経由で存在確認を行う</li>
+<li>削除・非公開になった動画を検出し、ターミナルおよびログファイルに通知する</li>
+<li>対象動画を <code>status: &quot;dead&quot;</code> としてフラグ立てし、サイト表示から除外する</li>
+<li>ログ出力先：<code>logs/health-YYYY-MM-DD.log</code></li>
+</ul>
+<h4 id="fr-14-ローカル管理web-uilocalhost">FR-14 ローカル管理Web UI（localhost）</h4>
+<p><code>npm run admin</code> で localhost:3000 が起動する。以下の操作をブラウザから実施できる：</p>
+<table>
+<thead>
+<tr>
+<th>機能</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>動画一覧表示</td>
+<td>カテゴリ×ジャンル別に現在の動画を確認</td>
+</tr>
+<tr>
+<td>件数不足一覧</td>
+<td>8件未満のジャンルを色付き（赤/黄）でハイライト表示</td>
+</tr>
+<tr>
+<td>バッチ結果プレビュー</td>
+<td><code>videos.draft.json</code> の内容をレビュー・承認または差し戻し</td>
+</tr>
+<tr>
+<td>動画手動追加</td>
+<td>videoIDまたはURLを入力して動画を追加（「管理者おすすめ」タグ付与）</td>
+</tr>
+<tr>
+<td>動画手動削除</td>
+<td>一覧から任意の動画を削除</td>
+</tr>
+<tr>
+<td>動画順序変更</td>
+<td>上下ボタンで並び替え</td>
+</tr>
+<tr>
+<td>カテゴリ・ジャンル管理</td>
+<td>カテゴリ・ジャンルの追加・編集・削除</td>
+</tr>
+<tr>
+<td>ブロックリスト管理</td>
+<td>チャンネルIDおよび動画IDのブロックリスト編集</td>
+</tr>
+<tr>
+<td>バッチ実行ボタン</td>
+<td>UIからワンクリックでバッチを実行（結果は draft に保存）</td>
+</tr>
+<tr>
+<td>ビルド実行ボタン</td>
+<td>UIからワンクリックで静的サイトをビルド</td>
+</tr>
+</tbody>
+</table>
+<h4 id="fr-15-静的サイトビルド">FR-15 静的サイトビルド</h4>
+<ul>
+<li><code>npm run build</code> で <code>docs/</code> ディレクトリに静的ファイルを生成する</li>
+<li><code>status: &quot;dead&quot;</code> の動画を公開データから除外する</li>
+<li><code>meta.last_updated</code> を現在日付に更新する</li>
+<li>GitHub Pages の配信元は <code>docs/</code> ディレクトリに設定する</li>
+</ul>
+<hr>
+<h2 id="4-非機能要件">4. 非機能要件</h2>
+<h3 id="41-パフォーマンス">4.1 パフォーマンス</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>要件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初回表示速度</td>
+<td>静的HTML配信のため3秒以内を目標（Lighthouse Performance 80点以上）</td>
+</tr>
+<tr>
+<td>データ形式</td>
+<td>事前ビルド済みの静的JSON（ランタイムAPI呼び出しなし）</td>
+</tr>
+<tr>
+<td>サムネイル</td>
+<td>YouTube CDN から直接取得（自サーバー保存なし）</td>
+</tr>
+<tr>
+<td>JSONロード</td>
+<td>5秒超過でタイムアウト・エラー表示</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-youtube-api-コスト管理">4.2 YouTube API コスト管理</h3>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A[月次バッチ実行] --> B[検索クエリ実行]
+    B --> C[2カテゴリ × 12ジャンル = 24回]
+    C --> D[24回 × 100unit = 2,400unit]
+    D --> E[動画詳細取得\n最大240本 × 1unit = 240unit]
+    E --> F[死活チェック\n既存動画数 × 1unit ≈ 100unit]
+    F --> G[合計 約2,740unit/月次実行]
+    G --> H{無料枠チェック\n10,000unit/日}
+    H -->|2,740 < 10,000| I[✅ 無料枠内]
+    I --> J[年間合計 約32,880unit\n無料枠の0.9%/日換算]
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>月次バッチ消費量</td>
+<td>約2,740ユニット</td>
+</tr>
+<tr>
+<td>無料枠</td>
+<td>10,000ユニット/日</td>
+</tr>
+<tr>
+<td>年間合計</td>
+<td>約32,880ユニット（問題なし）</td>
+</tr>
+<tr>
+<td>ランタイム呼び出し</td>
+<td><strong>なし</strong>（静的配信のみ）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-セキュリティ">4.3 セキュリティ</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>対応</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APIキー管理</td>
+<td><code>.env</code> ファイルで管理、<code>.gitignore</code> で除外</td>
+</tr>
+<tr>
+<td>フロントエンドへのキー混入</td>
+<td><code>docs/</code> 以下のJSファイルへのAPIキー記述を禁止</td>
+</tr>
+<tr>
+<td>管理画面</td>
+<td>localhost限定（外部公開なし）</td>
+</tr>
+<tr>
+<td>公開サイト</td>
+<td>静的ファイルのみ（サーバーサイド処理なし）</td>
+</tr>
+<tr>
+<td>XSS対策</td>
+<td>チャンネル名・タイトル等の外部データは必ずエスケープ処理</td>
+</tr>
+<tr>
+<td>APIキー漏洩時</td>
+<td>Google Cloud ConsoleでAPIキーを即時無効化・再発行。手順を <code>OPERATION.md</code> に明記</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-可用性スケーラビリティ">4.4 可用性・スケーラビリティ</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SLA</td>
+<td>GitHub Pages依存（99.9%程度）、個人運用のため低SLAで可</td>
+</tr>
+<tr>
+<td>アクセス数</td>
+<td>静的HTML配信のためスケールアウト不要</td>
+</tr>
+<tr>
+<td>CDN</td>
+<td>GitHub Pages に付属のCDNを利用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-アクセシビリティ">4.5 アクセシビリティ</h3>
+<ul>
+<li>画像（サムネイル）に <code>alt</code> 属性を設定する（<code>&quot;{title}のサムネイル&quot;</code> 形式）</li>
+<li>キーボードナビゲーション対応（Tabキーで動画カードを移動可能）</li>
+<li>カラーコントラスト比 WCAG AA 基準（4.5:1以上）を目標とする</li>
+<li>Lighthouse Accessibility スコア 80点以上を目標とする</li>
+</ul>
+<h3 id="46-seo">4.6 SEO</h3>
+<pre class="hljs"><code><div><span class="hljs-comment">&lt;!-- docs/index.html に必須実装 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>注文住宅YouTube動画マップ | 間取り・外壁・キッチンetc.<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;description&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;注文住宅を検討中の方向けに、間取り・外壁・キッチンなど12ジャンルのYouTube動画をまとめたナビゲーションサイトです。&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;og:title&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;注文住宅YouTube動画マップ&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;og:description&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;注文住宅を検討中の方向けに、YouTube動画をカテゴリ別にまとめたナビゲーションサイトです。&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;og:image&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;https://{username}.github.io/{repo}/ogp-image.png&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;og:type&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;website&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;twitter:card&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;summary_large_image&quot;</span>&gt;</span>
+</div></code></pre>
+<h3 id="47-ログ管理">4.7 ログ管理</h3>
+<pre class="hljs"><code><div>logs/
+├── batch-YYYY-MM-DD.log    # バッチ実行ログ（実行結果・件数不足通知）
+├── health-YYYY-MM-DD.log   # 死活チェックログ（dead動画一覧）
+└── error.log               # エラーログ（API障害・スクリプトエラー）
+</div></code></pre>
+<hr>
+<h2 id="5-データ設計">5. データ設計</h2>
+<h3 id="51-データ構造json">5.1 データ構造（JSON）</h3>
+<h4 id="datavideosjsonメインデータ本番"><code>data/videos.json</code>（メインデータ・本番）</h4>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;meta&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;last_updated&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2025-01-01&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;schema_version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.1&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;categories&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CAT-01&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;施主目線&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;genres&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;GNR-01&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;間取り&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;videos&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-punctuation">{</span>
+              <span class="hljs-attr">&quot;videoId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;xxxxxxxxxxx&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;動画タイトル&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;channelName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;チャンネル名&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;thumbnailUrl&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://img.youtube.com/vi/xxxxxxxxxxx/hqdefault.jpg&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;publishedAt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2024-06-01&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;duration&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;PT15M30S&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;trending&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;source&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;auto&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;active&quot;</span><span class="hljs-punctuation">,</span>
+              <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>
+            <span class="hljs-punctuation">}</span>
+          <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<h4 id="フィールド定義">フィールド定義</h4>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>型</th>
+<th>値の例</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>videoId</code></td>
+<td>string</td>
+<td><code>&quot;abc123&quot;</code></td>
+<td>YouTube動画ID（11文字）</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>string</td>
+<td><code>&quot;間取りの考え方&quot;</code></td>
+<td>動画タイトル</td>
+</tr>
+<tr>
+<td><code>channelName</code></td>
+<td>string</td>
+<td><code>&quot;〇〇チャンネル&quot;</code></td>
+<td>チャンネル名</td>
+</tr>
+<tr>
+<td><code>thumbnailUrl</code></td>
+<td>string</td>
+<td>URL</td>
+<td>サムネイルURL</td>
+</tr>
+<tr>
+<td><code>publishedAt</code></td>
+<td>string</td>
+<td><code>&quot;2024-06-01&quot;</code></td>
+<td>投稿日（YYYY-MM-DD）</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>string</td>
+<td><code>&quot;PT15M30S&quot;</code></td>
+<td>動画時間（ISO 8601形式）</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>array</td>
+<td><code>[&quot;trending&quot;]</code>, <code>[&quot;manual&quot;]</code></td>
+<td>急上昇=trending、手動=manual</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>string</td>
+<td><code>&quot;auto&quot;</code> / <code>&quot;manual&quot;</code></td>
+<td>収集方法</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string</td>
+<td><code>&quot;active&quot;</code> / <code>&quot;dead&quot;</code></td>
+<td>死活状態</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>number</td>
+<td>1〜10</td>
+<td>表示順序</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：再生数・登録者数などのAPIデータはこのJSONに保存しない（YouTube利用規約遵守）</strong></p>
+</blockquote>
+<h4 id="datavideosdraftjsonバッチ実行後の下書き"><code>data/videos.draft.json</code>（バッチ実行後の下書き）</h4>
+<ul>
+<li><code>data/videos.json</code> と同一スキーマ</li>
+<li>バッチ実行のたびに上書きされる</li>
+<li>管理UIでレビュー・承認後、<code>videos.json</code> にマージされる</li>
+</ul>
+<h4 id="datacategoriesjsonカテゴリジャンル管理"><code>data/categories.json</code>（カテゴリ・ジャンル管理）</h4>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;globalSettings&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;blockedChannelIds&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;blockedVideoIds&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;categories&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;CAT-01&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;施主目線&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;genres&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;GNR-01&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;間取り&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;searchQuery&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;注文住宅 間取り 施主 体験談&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;searchQueryAlt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;注文住宅 間取り 失敗 後悔&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<h4 id="フォルダファイル構成">フォルダ・ファイル構成</h4>
+<pre class="hljs"><code><div>/
+├── docs/                       # GitHub Pages 配信ディレクトリ
+│   ├── index.html
+│   ├── style.css
+│   ├── app.js
+│   ├── images/
+│   │   └── no-thumbnail.png    # サムネイルフォールバック画像
+│   └── data/
+│       └── videos.json         # ビルド生成物（src/builder/build.js が生成）
+├── src/
+│   ├── batch/
+│   │   ├── index.js            # バッチエントリーポイント
+│   │   ├── fetch.js            # YouTube API 検索・取得
+│   │   ├── score.js            # 急上昇スコアリング
+│   │   ├── dedup.js            # 重複排除
+│   │   └── health.js           # 死活チェック
+│   ├── builder/
+│   │   └── build.js            # 静的サイトビルド
+│   └── admin/
+│       ├── server.js           # Express 管理サーバー
+│       └── public/             # 管理UI フロント
+├── data/
+│   ├── categories.json         # カテゴリ・ジャンル定義（手動編集可）
+│   ├── videos.json             # メインデータ・本番（バッチ + 手動管理）
+│   └── videos.draft.json       # バッチ実行後の下書き（承認前）
+├── logs/
+│   ├── batch-YYYY-MM-DD.log
+│   ├── health-YYYY-MM-DD.log
+│   └── error.log
+├── tests/
+│   ├── score.test.js
+│   ├── dedup.test.js
+│   ├── health.test.js
+│   └── build.test.js
+├── .env                        # 🔴 gitignore 対象
+├── .env.example
+├── .gitignore
+├── package.json
+├── CLAUDE.md
+├── OPERATION.md                # Sprint5で作成
+└── README.md
+</div></code></pre>
+<h3 id="52-バリデーションルール">5.2 バリデーションルール</h3>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>バリデーション</th>
+<th>実装箇所</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>videoId</code></td>
+<td>11文字の英数字・ハイフン・アンダーバーのみ</td>
+<td>管理UI入力時 + batch/fetch.js</td>
+</tr>
+<tr>
+<td><code>publishedAt</code></td>
+<td>YYYY-MM-DD 形式</td>
+<td>batch/fetch.js</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>ISO 8601 形式（PT...)</td>
+<td>batch/fetch.js</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>1以上の整数</td>
+<td>batch/dedup.js</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>&quot;active&quot;</code> または <code>&quot;dead&quot;</code> のみ</td>
+<td>スキーマ定義</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-アトミックファイル書き込み">5.3 アトミックファイル書き込み</h3>
+<p>データ破損防止のため、全JSONファイルの書き込みは一時ファイル経由で行う：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 推奨実装パターン（batch/index.js, admin/server.js で共通使用）</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">writeJsonAtomic</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">filePath, data</span>) =&gt; {
+  <span class="hljs-keyword">const</span> tmpPath = filePath + <span class="hljs-string">&#x27;.tmp&#x27;</span>;
+  <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">writeFile</span>(tmpPath, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>), <span class="hljs-string">&#x27;utf-8&#x27;</span>);
+  <span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">rename</span>(tmpPath, filePath); <span class="hljs-comment">// アトミックリネーム</span>
+};
+</div></code></pre>
+<h3 id="54-データフロー">5.4 データフロー</h3>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant Admin as 管理者
+    participant LocalUI as 管理Web UI
+    participant Batch as バッチスクリプト
+    participant API as YouTube Data API
+    participant DRAFT as videos.draft.json
+    participant JSON as videos.json
+    participant Builder as 静的ビルダー
+    participant GH as GitHub Pages
+
+    Note over Admin,GH: 月次更新フロー
+    Admin->>LocalUI: バッチ実行ボタンをクリック
+    LocalUI->>Batch: バッチ起動
+    Batch->>API: 検索 × 24クエリ（2,400unit）
+    API-->>Batch: 動画メタデータ
+    Batch->>Batch: フィルタリング・重複排除・スコアリング
+    Batch->>Batch: 件数不足チェック・前回データ補完
+    Batch->>DRAFT: videos.draft.json 生成
+    Batch-->>LocalUI: ⚠️ 不足ジャンル通知 + 完了通知
+    Admin->>LocalUI: バッチ結果プレビューで確認
+    Admin->>LocalUI: 手動補完（必要に応じて）
+    Admin->>LocalUI: 承認ボタンをクリック
+    LocalUI->>JSON: draft → videos.json にマージ\n（manualソース動画は保護）
+    Admin->>LocalUI: ビルド実行ボタンをクリック
+    LocalUI->>Builder: ビルド起動
+    Builder->>JSON: データ読み込み（dead除外・日付更新）
+    Builder-->>GH: docs/ に静的ファイル生成
+    Admin->>GH: git push でデプロイ
+</div></code></pre>
+<hr>
+<h2 id="6-uiux設計">6. UI/UX設計</h2>
+<h3 id="61-pc版マインドマップ表示">6.1 PC版：マインドマップ表示</h3>
+<pre class="hljs"><code><div>┌──────────────────────────────────────────────────────────┐
+│  🏠 注文住宅 YouTube ガイドマップ          最終更新: 2025/01/01 │
+├─────────────────────────────────┬────────────────────────┤
+│                                  │  📁 施主目線 &gt; 間取り    │
+│     [D3.js ツリーレイアウト]      │  ─────────────────────  │
+│                                  │  ┌──────────────────┐  │
+│  ルート                           │  │[サムネイル]       │  │
+│   ├── 施主目線                    │  │ タイトルタイトル   │  │
+│   │    ├── 間取り ◀選択中         │  │ チャンネル名      │  │
+│   │    ├── 外壁                   │  │ 2024/06/01 15:30  │  │
+│   │    └── ...                   │  │ 🔥急上昇          │  │
+│   └── 専門家目線                  │  └──────────────────┘  │
+│        ├── 間取り                 │  ┌──────────────────┐  │
+│        └── ...                   │  │[サムネイル]       │  │
+│                                  │  │ タイトル          │  │
+│   [ズーム: + - リセット]          │  └──────────────────┘  │
+│                                  │  ... (最大8件)          │
+└──────────────────────────────────┴────────────────────────┘
+│ 本サイトはGoogleおよびYouTubeとは無関係... | YouTube利用規約 │
+└──────────────────────────────────────────────────────────┘
+</div></code></pre>
+<h3 id="62-モバイル版アコーディオン表示">6.2 モバイル版：アコーディオン表示</h3>
+<pre class="hljs"><code><div>┌────────────────────────┐
+│ 🏠 注文住宅 YouTube ガイド │
+├────────────────────────┤
+│ ▼ 施主目線              │ ← タップで展開（300ms ease）
+│   ▼ 間取り              │ ← タップで展開（300ms ease）
+│   │ ┌──────────────┐   │
+│   │ │[サムネイル]   │   │ ← スライドイン
+│   │ │ タイトル2行   │   │
+│   │ │ チャンネル名  │   │
+│   │ │ 2024/06/01   │   │
+│   │ │ 15:30        │   │
+│   │ └──────────────┘   │
+│   │ ┌──────────────┐   │
+│   │ │[サムネイル]   │   │
+│   │ │ 🔥急上昇      │   │
+│   │ └──────────────┘   │
+│   ▶ 外壁               │ ← 折りたたみ状態
+│ ▶ 専門家目線            │ ← 折りたたみ状態
+├────────────────────────┤
+│ 最終更新日：2025年01月01日 │
+│ 本サイトはGoogleおよび... │
+└────────────────────────┘
+</div></code></pre>
+<h3 id="63-ブレークポイント">6.3 ブレークポイント</h3>
+<table>
+<thead>
+<tr>
+<th>デバイス</th>
+<th>画面幅</th>
+<th>表示形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PC・タブレット横</td>
+<td>768px以上</td>
+<td>マインドマップ（D3.js）+ サイドパネル</td>
+</tr>
+<tr>
+<td>スマートフォン・タブレット縦</td>
+<td>767px以下</td>
+<td>アコーディオン</td>
+</tr>
+</tbody>
+</table>
+<h3 id="64-cssアニメーション仕様モバイル">6.4 CSSアニメーション仕様（モバイル）</h3>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>アニメーション</th>
+<th>値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アコーディオン展開</td>
+<td><code>max-height</code> + <code>opacity</code></td>
+<td>300ms ease-in-out</td>
+</tr>
+<tr>
+<td>アイコン回転</td>
+<td><code>transform: rotate(90deg)</code></td>
+<td>300ms ease-in-out</td>
+</tr>
+<tr>
+<td>動画カードフェードイン</td>
+<td><code>opacity</code> + <code>translateY(-10px)</code></td>
+<td>200ms ease、各カード50msずつ遅延（stagger）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-youtube-api法的要件">7. YouTube API・法的要件</h2>
+<h3 id="71-youtube利用規約-適合方針">7.1 YouTube利用規約 適合方針</h3>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>対応内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API利用</td>
+<td>YouTube Data API v3 の利用規約に同意の上で使用</td>
+</tr>
+<tr>
+<td>サムネイル</td>
+<td><code>img.youtube.com/vi/{videoId}/hqdefault.jpg</code> をURLのみ参照（自サーバーに保存しない）</td>
+</tr>
+<tr>
+<td>再生数・登録者数</td>
+<td>ユーザー向けサイトには表示しない。バッチ処理にのみ利用し <code>videos.json</code> にも保存しない</td>
+</tr>
+<tr>
+<td>動画再生</td>
+<td>サイト内埋め込み再生は行わず、YouTubeへの外部リンク遷移のみ</td>
+</tr>
+<tr>
+<td>商用利用</td>
+<td>非商用・広告なし</td>
+</tr>
+<tr>
+<td>データ再配布</td>
+<td>APIから取得した数値データ（再生数等）は公開サイトに表示しない</td>
+</tr>
+<tr>
+<td>免責事項</td>
+<td>フッターに明記</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-フッター免責事項確定文言">7.2 フッター免責事項（確定文言）</h3>
+<pre class="hljs"><code><div>本サイトはGoogleおよびYouTubeとは無関係の独立したサービスです。
+動画の権利は各動画制作者に帰属します。
+Powered by YouTube Data API | YouTube利用規約へ
+</div></code></pre>
+<hr>
+<h2 id="8-エッジケース対応">8. エッジケース対応</h2>
+<h3 id="81-データ整合性エッジケース">8.1 データ整合性エッジケース</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>エッジケース</th>
+<th>対応方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-01</td>
+<td>videoId が11文字の正規表現 <code>^[a-zA-Z0-9_-]{11}$</code> に不一致</td>
+<td>管理UIと batch/fetch.js で入力バリデーション実施・エラーメッセージ表示</td>
+</tr>
+<tr>
+<td>E-02</td>
+<td>同一動画をCAT-01とCAT-02に手動追加</td>
+<td>manual動画も重複排除ルール適用（カテゴリ順序前を残す）</td>
+</tr>
+<tr>
+<td>E-03</td>
+<td>categories.json のジャンルIDが videos.json に存在しない</td>
+<td>ビルド時の整合性チェックを実施・警告ログ出力</td>
+</tr>
+<tr>
+<td>E-04</td>
+<td>バッチ実行中にCtrl+Cで強制終了</td>
+<td>アトミック書き込み（tmp→rename）により中途半端なJSON生成を防止</td>
+</tr>
+<tr>
+<td>E-05</td>
+<td>videos.json が存在しない状態でビルドを実行</td>
+<td>空のJSON構造を仮定して正常ビルド（空状態の表示UIで対応）</td>
+</tr>
+<tr>
+<td>E-06</td>
+<td>全ジャンルで急上昇動画が0件</td>
+<td>バッジ非表示でサイレント対応。ログに「急上昇動画なし」を記録</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-api関連エッジケース">8.2 API関連エッジケース</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>エッジケース</th>
+<th>対応方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-07</td>
+<td>登録者数が0（ゼロ除算）</td>
+<td>ゼロ除算ガード必須実装、trending判定スキップ</td>
+</tr>
+<tr>
+<td>E-08</td>
+<td>登録者数が非公開</td>
+<td>trending対象外として扱い、通常動画として保持</td>
+</tr>
+<tr>
+<td>E-09</td>
+<td>YouTube APIが503を返す</td>
+<td>指数バックオフでリトライ（最大3回、待機: 1s → 2s → 4s）</td>
+</tr>
+<tr>
+<td>E-10</td>
+<td>APIクォータを誤って使い切った場合</td>
+<td>バッチ実行前にクォータ残量をログ出力（Google Cloud Console APIで確認可能な範囲で）</td>
+</tr>
+<tr>
+<td>E-11</td>
+<td>APIキーが漏洩した場合</td>
+<td>Google Cloud Consoleで即時無効化・再発行。手順を <code>OPERATION.md</code> に明記</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83-ui関連エッジケース">8.3 UI関連エッジケース</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>エッジケース</th>
+<th>対応方針</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-12</td>
+<td>サムネイルが404を返す</td>
+<td><code>onerror</code> フォールバック画像（<code>/images/no-thumbnail.png</code>）</td>
+</tr>
+<tr>
+<td>E-13</td>
+<td>動画タイトルが100文字超</td>
+<td>CSSで2行省略（<code>-webkit-line-clamp: 2; overflow: hidden</code>）</td>
+</tr>
+<tr>
+<td>E-14</td>
+<td>チャンネル名に絵文字・特殊文字</td>
+<td>DOM生成時にテキストノードまたは <code>textContent</code> を使用（XSS対策）</td>
+</tr>
+<tr>
+<td>E-15</td>
+<td>JSONロードに5秒以上かかる</td>
+<td>ローディングスピナー表示、タイムアウト後にエラーメッセージ＋リロードボタン</td>
+</tr>
+<tr>
+<td>E-16</td>
+<td>マインドマップノードが画面外にはみ出す</td>
+<td>D3.jsのズーム・パン機能で対応（<code>zoom.scaleExtent([0.3, 3])</code>）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-実装計画スプリント計画">9. 実装計画（スプリント計画）</h2>
+<h3 id="フェーズ概要">フェーズ概要</h3>
+<pre><code class="language-mermaid"><div class="mermaid">gantt
+    title 実装スプリント計画
+    dateFormat  YYYY-MM-DD
+    section Phase 1 基盤
+    Sprint 0: プロジェクト基盤・データ設計    :s0, 2025-01-01, 7d
+    Sprint 1: UIプロトタイプ・アニメーション確認 :s1, after s0, 7d
+    section Phase 2 データ
+    Sprint 2: バッチ・データ収集    :s2, after s1, 10d
+    Sprint 3: 管理Web UI            :s3, after s2, 10d
+    section Phase 3 統合
+    Sprint 4: 静的ビルド・公開サイト統合 :s4, after s3, 7d
+    Sprint 5: 品質・仕上げ          :s5, after s4, 7d
+</div></code></pre>
+<hr>
+<h3 id="sprint-0プロジェクト基盤テスト環境構築1週間">Sprint 0：プロジェクト基盤・テスト環境構築（1週間）</h3>
+<p><strong>目標：</strong> 開発環境・<strong>テスト環境</strong>・データスキーマを確立し、Sprint 1以降をTDDで進められる状態にする。</p>
+<p><strong>実装タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox0"><label for="checkbox0">GitHubリポジトリ作成・初期構成</label></li>
+<li><input type="checkbox" id="checkbox1"><label for="checkbox1"><code>package.json</code> 初期化（Node.js）</label></li>
+<li><input type="checkbox" id="checkbox2"><label for="checkbox2">フォルダ構成全体を作成（<code>docs/</code>, <code>src/</code>, <code>data/</code>, <code>logs/</code>, <code>tests/{unit,integration,e2e,security,schema,mocks}</code>）</label></li>
+<li><input type="checkbox" id="checkbox3"><label for="checkbox3"><code>.env.example</code> 作成（<code>YOUTUBE_API_KEY</code>, <code>ADMIN_PORT=3000</code>）</label></li>
+<li><input type="checkbox" id="checkbox4"><label for="checkbox4"><code>.gitignore</code> 設定（<code>.env</code>, <code>node_modules</code>, <code>data/raw/</code>, <code>logs/</code>, <code>coverage/</code>, <code>test-results/</code>, <code>playwright-report/</code>）</label></li>
+<li><input type="checkbox" id="checkbox5"><label for="checkbox5">GitHub Pages 設定（<code>docs/</code> ディレクトリ）・Hello World 配置</label></li>
+<li><input type="checkbox" id="checkbox6"><label for="checkbox6"><code>data/categories.json</code> 初期データ作成（2カテゴリ×12ジャンル・全検索クエリ・<code>globalSettings</code>）</label></li>
+<li><input type="checkbox" id="checkbox7"><label for="checkbox7"><code>data/videos.json</code> スキーマ確定・空の初期ファイル作成</label></li>
+<li><input type="checkbox" id="checkbox8"><label for="checkbox8"><code>docs/images/no-thumbnail.png</code> フォールバック画像作成</label></li>
+<li><input type="checkbox" id="checkbox9"><label for="checkbox9">アトミック書き込みユーティリティ実装（<code>src/utils/fileUtils.js</code>）</label></li>
+<li><input type="checkbox" id="checkbox10"><label for="checkbox10">バリデーション関数実装（<code>src/utils/validation.js</code>：<code>validateVideoId</code>, <code>validatePublishedAt</code>, <code>validateDuration</code>）</label></li>
+<li><input type="checkbox" id="checkbox11"><label for="checkbox11"><strong>検索クエリ24本の人手検証</strong>（YouTubeで実際に検索して品質確認）</label></li>
+</ul>
+<p><strong>テスト環境構築タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox12"><label for="checkbox12"><code>npm i -D jest supertest nock @playwright/test axe-playwright jest-junit</code> インストール</label></li>
+<li><input type="checkbox" id="checkbox13"><label for="checkbox13"><code>npx playwright install</code> でブラウザ取得</label></li>
+<li><input type="checkbox" id="checkbox14"><label for="checkbox14"><code>jest.config.js</code> 作成（<code>testMatch</code>, <code>coverageThreshold</code> statements/lines 85%, branches 80%）</label></li>
+<li><input type="checkbox" id="checkbox15"><label for="checkbox15"><code>playwright.config.js</code> 作成（<code>webServer: serve docs -p 8080</code>、<code>chromium-desktop</code>/<code>chromium-mobile(iPhone 14)</code>/<code>boundary-768</code> の3プロジェクト）</label></li>
+<li><input type="checkbox" id="checkbox16"><label for="checkbox16"><code>tests/setup.js</code> 共通セットアップ</label></li>
+<li><input type="checkbox" id="checkbox17"><label for="checkbox17"><code>tests/mocks/youtube-api.js</code> 雛形作成</label></li>
+<li><input type="checkbox" id="checkbox18"><label for="checkbox18"><strong>UT-03</strong> <code>tests/unit/fileUtils.test.js</code>（5ケース）</label></li>
+<li><input type="checkbox" id="checkbox19"><label for="checkbox19"><strong>UT-04</strong> <code>tests/unit/validation.test.js</code>（14ケース）</label></li>
+<li><input type="checkbox" id="checkbox20"><label for="checkbox20"><strong>SEC</strong> <code>tests/security/secrets.test.js</code>（SEC-01〜03）</label></li>
+</ul>
+<p><strong>完了条件：</strong></p>
+<ul>
+<li><code>npm test</code> で全テスト GREEN（UT-03: 5 + UT-04: 14 + SEC: 3 ＝ 22ケース）</li>
+<li><code>npx playwright test --list</code> で3プロジェクトが認識される</li>
+<li>GitHub Pages に <code>Hello World</code> が表示される</li>
+<li><code>data/categories.json</code> の全クエリが人手検証済みである</li>
+<li><code>git log -p</code> 上にAPIキー混入なし</li>
+</ul>
+<hr>
+<h3 id="sprint-1uiプロトタイプアニメーション確認1週間">Sprint 1：UIプロトタイプ・アニメーション確認（1週間）</h3>
+<p><strong>目標：</strong> 早期にデザイン・アニメーションを管理者が確認・承認できる状態にする</p>
+<p><strong>タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox21"><label for="checkbox21">モバイル用アコーディオンUIのプロトタイプ作成（サンプルデータ使用）</label>
+<ul>
+<li>CSS アニメーション実装（展開/折りたたみ 300ms ease-in-out）</li>
+<li>アイコン回転アニメーション実装</li>
+<li>動画カードのスタガーアニメーション実装（各カード50msずつ遅延）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox22"><label for="checkbox22">PC用D3.jsマインドマップのプロトタイプ作成</label>
+<ul>
+<li>カスタムツリーレイアウト実装</li>
+<li>ジャンルノードクリックでサイドパネルに動画カード一覧表示</li>
+<li>ノードホバーアニメーション実装</li>
+<li>ズーム・パン機能実装（<code>zoom.scaleExtent([0.3, 3])</code>）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox23"><label for="checkbox23">ブレークポイント切り替え実装（768px）</label></li>
+<li><input type="checkbox" id="checkbox24"><label for="checkbox24">動画カードデザイン実装</label>
+<ul>
+<li>サムネイル表示（フォールバック付き）</li>
+<li>タイトル2行省略（<code>-webkit-line-clamp: 2</code>）</li>
+<li>投稿日・動画時間表示</li>
+<li>🔥「急上昇」バッジ表示</li>
+<li>⭐「管理者おすすめ」バッジ表示</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox25"><label for="checkbox25">フッター実装（免責事項・YouTube利用規約リンク・最終更新日）</label></li>
+<li><input type="checkbox" id="checkbox26"><label for="checkbox26">SEO基本実装（title, meta description, OGP）</label></li>
+<li><input type="checkbox" id="checkbox27"><label for="checkbox27">エラー表示UIプロトタイプ（ローディングスピナー・エラーメッセージ）</label></li>
+</ul>
+<p><strong>テストタスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox28"><label for="checkbox28"><strong>UT-05</strong> <code>tests/unit/formatDuration.test.js</code>（6ケース：<code>PT15M30S</code>/<code>PT1H5M30S</code>/<code>PT5M0S</code>/<code>PT30S</code>/<code>PT0S</code>/不正フォーマット）</label></li>
+<li><input type="checkbox" id="checkbox29"><label for="checkbox29"><strong>E2E-03</strong> <code>tests/e2e/responsive.spec.js</code>（3ケース：1280px=D3 / 767px=アコーディオン / 768px境界）</label></li>
+<li><input type="checkbox" id="checkbox30"><label for="checkbox30">🖐 UIアニメーション目視確認チェックリスト作成</label></li>
+</ul>
+<p><strong>完了条件：</strong></p>
+<ul>
+<li><code>docs/index.html</code> をブラウザで開いてアニメーションが確認できる</li>
+<li>PC/モバイル両方でレイアウトが崩れない</li>
+<li><code>npm test</code> 全GREEN（UT-05: 6）・<code>npx playwright test responsive</code> 全PASS</li>
+<li><strong>管理者（ユーザー）がアニメーションを確認・承認する</strong>（次スプリント進行の前提条件）</li>
+</ul>
+<hr>
+<h3 id="sprint-2バッチデータ収集機能10日間">Sprint 2：バッチ・データ収集機能（10日間）</h3>
+<p><strong>目標：</strong> YouTube APIからデータを自動収集・下書き生成できる状態にする</p>
+<p><strong>タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox31"><label for="checkbox31">YouTube Data API 接続実装（<code>src/batch/fetch.js</code>）</label>
+<ul>
+<li>APIキー認証設定</li>
+<li>検索パラメータ：<code>regionCode=JP</code>, <code>relevanceLanguage=ja</code>, <code>type=video</code>, <code>videoEmbeddable=true</code>, <code>videoDuration=medium</code>, <code>safeSearch=strict</code></li>
+<li>最大10件取得（<code>searchQueryAlt</code> を使った代替クエリ対応）</li>
+<li><strong>指数バックオフリトライ実装</strong>（最大3回: 1s → 2s → 4s）</li>
+<li>動画詳細取得：<code>contentDetails.duration</code>, <code>snippet.channelTitle</code> 等</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox32"><label for="checkbox32">グローバルブロックリストフィルタリング実装</label></li>
+<li><input type="checkbox" id="checkbox33"><label for="checkbox33">スコアリング実装（<code>src/batch/score.js</code>）</label>
+<ul>
+<li>ゼロ除算ガード（<code>subscriberCount === 0</code> の場合はtrendingスキップ）</li>
+<li>登録者数非公開の場合はtrendingスキップ（通常動画として保持）</li>
+<li>急上昇判定：登録者数2万以下 + 再生数/登録者数 &gt;= 0.3 + 投稿日直近1年</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox34"><label for="checkbox34">重複排除実装（<code>src/batch/dedup.js</code>）</label>
+<ul>
+<li>同一videoIdはカテゴリ順序前を残す（auto・manual共通）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox35"><label for="checkbox35">件数不足チェック・前回データ補完実装</label>
+<ul>
+<li>8件未満のカテゴリ×ジャンルをログ出力</li>
+<li><code>source: &quot;manual&quot;</code> の動画は前回 <code>videos.json</code> から保護・引き継ぎ</li>
+<li>件数不足分は前回 <code>videos.json</code> の自動動画で補完</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox36"><label for="checkbox36"><strong><code>data/videos.draft.json</code> への出力</strong>（本番データには反映しない）</label></li>
+<li><input type="checkbox" id="checkbox37"><label for="checkbox37">死活チェック実装（<code>src/batch/health.js</code>）</label>
+<ul>
+<li>保存済み動画IDのステータス確認</li>
+<li><code>status: &quot;dead&quot;</code> フラグ更新</li>
+<li><code>logs/health-YYYY-MM-DD.log</code> 出力</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox38"><label for="checkbox38">ログ実装（<code>logs/batch-YYYY-MM-DD.log</code>, <code>logs/error.log</code>）</label></li>
+<li><input type="checkbox" id="checkbox39"><label for="checkbox39"><code>npm run batch</code> コマンド設定</label></li>
+</ul>
+<p><strong>テストタスク（TDD推奨）：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox40"><label for="checkbox40"><strong>UT-01</strong> <code>tests/unit/score.test.js</code>（11ケース：ゼロ除算 / 非公開 / undefined / 境界値20000・20001・0.29・0.30・364日・366日 / <code>_tempApiData</code> 欠落）</label></li>
+<li><input type="checkbox" id="checkbox41"><label for="checkbox41"><strong>UT-02</strong> <code>tests/unit/dedup.test.js</code>（7ケース：重複なし / CAT間 / manual重複 / ジャンルorder / 空配列 / 全重複 / auto-manual混在）</label></li>
+<li><input type="checkbox" id="checkbox42"><label for="checkbox42"><strong>IT-01</strong> <code>tests/integration/batch.test.js</code>（8ケース：draft生成 / スキーマ一致 / manualがdraft混入しない / ブロックリスト除外 / 件数不足ログ / 前回manual補完 / 503で3回リトライ / 指数バックオフ）</label></li>
+<li><input type="checkbox" id="checkbox43"><label for="checkbox43"><strong>IT-03</strong> <code>tests/integration/health.test.js</code>（5ケース：dead付与 / active保持 / ログ生成 / dead一覧記録 / 全dead時もJSON破損なし）</label></li>
+<li><input type="checkbox" id="checkbox44"><label for="checkbox44"><code>tests/mocks/youtube-api.js</code> モックデータ整備（正常10件 / 不足3件 / 503 / 空 / 登録者数0 / 非公開）</label></li>
+</ul>
+<p><strong>完了条件：</strong></p>
+<ul>
+<li><code>npm run batch</code> で <code>data/videos.draft.json</code> が生成される</li>
+<li>ゼロ除算ガード（UT-01-05〜07）GREEN</li>
+<li>リトライロジック（IT-01-07〜08）GREEN・指数バックオフ 1s/2s/4s 確認</li>
+<li><code>source: &quot;manual&quot;</code> の動画が前回データから保護されている</li>
+<li><code>npm test -- --coverage</code> で <code>src/batch/</code> ブランチカバレッジ ≥ 80%</li>
+</ul>
+<hr>
+<h3 id="sprint-3ローカル管理web-ui10日間">Sprint 3：ローカル管理Web UI（10日間）</h3>
+<p><strong>目標：</strong> ブラウザからデータを管理・承認できる状態にする</p>
+<p><strong>タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox45"><label for="checkbox45">Express サーバー構築（<code>src/admin/server.js</code>）</label></li>
+<li><input type="checkbox" id="checkbox46"><label for="checkbox46">動画一覧表示画面</label>
+<ul>
+<li>カテゴリ×ジャンル別に動画を一覧表示</li>
+<li>件数不足ジャンルのハイライト表示（赤: 5件未満、黄: 8件未満）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox47"><label for="checkbox47"><strong>バッチ結果プレビュー画面</strong>（<code>videos.draft.json</code> の確認）</label>
+<ul>
+<li>前回との差分表示（新規追加・削除・変更）</li>
+<li>承認ボタン（draft → 本番マージ）</li>
+<li>差し戻しボタン（draftを破棄）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox48"><label for="checkbox48">動画手動追加機能</label>
+<ul>
+<li>YouTube URL または videoID 入力</li>
+<li>videoID バリデーション（<code>^[a-zA-Z0-9_-]{11}$</code>）</li>
+<li>APIで動画情報取得・プレビュー表示</li>
+<li>カテゴリ・ジャンル選択</li>
+<li>「管理者おすすめ」タグ自動付与（<code>source: &quot;manual&quot;</code>, <code>tags: [&quot;manual&quot;]</code>）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox49"><label for="checkbox49">動画手動削除機能</label></li>
+<li><input type="checkbox" id="checkbox50"><label for="checkbox50">動画順序変更機能（上下ボタン）</label></li>
+<li><input type="checkbox" id="checkbox51"><label for="checkbox51">カテゴリ・ジャンル管理機能（追加・編集・削除・検索クエリ編集）</label></li>
+<li><input type="checkbox" id="checkbox52"><label for="checkbox52"><strong>ブロックリスト管理UI</strong>（チャンネルID・動画IDの追加・削除）</label></li>
+<li><input type="checkbox" id="checkbox53"><label for="checkbox53">バッチ実行ボタン（UIからバッチ起動・結果をdraftに保存）</label></li>
+<li><input type="checkbox" id="checkbox54"><label for="checkbox54">ビルド実行ボタン（UIからビルド起動）</label></li>
+<li><input type="checkbox" id="checkbox55"><label for="checkbox55"><code>npm run admin</code> コマンド設定</label></li>
+</ul>
+<p><strong>テストタスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox56"><label for="checkbox56"><strong>IT-02</strong> <code>tests/integration/merge.test.js</code>（5ケース：承認後draft反映 / <strong>manual保持</strong> / auto更新 / dead保持 / アトミック書込）</label></li>
+<li><input type="checkbox" id="checkbox57"><label for="checkbox57"><strong>IT-04</strong> <code>tests/integration/admin-api.test.js</code>（11ケース・supertest：<code>/api/videos</code>・<code>/api/batch</code>・<code>/api/blocklist</code> 全エンドポイント）</label></li>
+<li><input type="checkbox" id="checkbox58"><label for="checkbox58"><strong>NS-010</strong> localhost以外（非ループバック）からのアクセス拒否テスト</label></li>
+<li><input type="checkbox" id="checkbox59"><label for="checkbox59">🖐 管理UI操作性チェックリスト（FN-029, FN-035, NU-014）</label></li>
+</ul>
+<p><strong>完了条件：</strong></p>
+<ul>
+<li><code>npm run admin</code> で localhost:3000 が起動する</li>
+<li>動画の追加・削除・並び替えが正しく <code>data/videos.json</code> に反映される</li>
+<li>バッチ実行後に draft プレビューが表示され、承認後に本番マージされる</li>
+<li><code>source: &quot;manual&quot;</code> の動画が承認・マージ後も保護されている（IT-02-02 必ずGREEN）</li>
+</ul>
+<hr>
+<h3 id="sprint-4静的ビルド公開サイト統合--e2e強化1週間">Sprint 4：静的ビルド・公開サイト統合 + E2E強化（1週間）</h3>
+<p><strong>目標：</strong> 公開サイトを生成・デプロイし、<strong>Playwrightによる自動E2Eテストを多用して品質を担保</strong>する。</p>
+<p><strong>実装タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox60"><label for="checkbox60">静的サイトビルダー実装（<code>src/builder/build.js</code>）</label>
+<ul>
+<li><code>data/videos.json</code> を読み込み</li>
+<li><code>status: &quot;dead&quot;</code> の動画を除外</li>
+<li><code>meta.last_updated</code> を現在日付に更新</li>
+<li><code>docs/data/videos.json</code> をアトミック書き込みで生成</li>
+<li><code>categories.json</code> との整合性チェック（孤立IDがあれば警告ログ）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox61"><label for="checkbox61">公開サイト側で <code>docs/data/videos.json</code> を読み込む処理実装</label>
+<ul>
+<li><code>fetch()</code> で JSON 取得（ローディングスピナー・エラーUI対応）</li>
+<li>マインドマップ・アコーディオンにデータをバインド</li>
+<li><code>AbortController</code> で5秒タイムアウト実装</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox62"><label for="checkbox62"><strong>XSS対策最終確認</strong>（全 <code>innerHTML</code> を <code>textContent</code> に置換）</label></li>
+<li><input type="checkbox" id="checkbox63"><label for="checkbox63"><code>npm run build</code> コマンド設定</label></li>
+<li><input type="checkbox" id="checkbox64"><label for="checkbox64">GitHub Pages デプロイ確認</label></li>
+<li><input type="checkbox" id="checkbox65"><label for="checkbox65">本番環境での動作確認（PC・スマートフォン）</label></li>
+</ul>
+<p><strong>テストタスク（Playwright重点）：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox66"><label for="checkbox66"><strong>UT-06</strong> <code>tests/unit/build.test.js</code>（6ケース：dead除外 / active保持 / 全dead / <code>last_updated</code> 更新 / 孤立ID警告 / 整合性OK）</label></li>
+<li><input type="checkbox" id="checkbox67"><label for="checkbox67"><strong>IT-05</strong> <code>tests/integration/build.test.js</code>（6ケース：<code>docs/data/videos.json</code> 生成 / dead除外 / <code>last_updated</code> / 空 <code>videos.json</code> でも動作 / 孤立ID警告 / アトミック書込）</label></li>
+<li><input type="checkbox" id="checkbox68"><label for="checkbox68"><strong>E2E-01</strong> <code>tests/e2e/public-site.spec.js</code>（7ケース：3秒以内表示 / ロード成功 / ロード失敗UI / 5秒タイムアウトUI / リロードボタン / 免責 / 最終更新日）</label></li>
+<li><input type="checkbox" id="checkbox69"><label for="checkbox69"><strong>E2E-02</strong> <code>tests/e2e/video-card.spec.js</code>（6ケース：別タブ遷移 / URL形式 / fallback画像 / 🔥バッジ / ⭐バッジ / 2行省略）</label></li>
+<li><input type="checkbox" id="checkbox70"><label for="checkbox70"><strong>E2E-04</strong> <code>tests/e2e/accessibility.spec.js</code>（3ケース：alt属性 / Tabキー移動 / axe-playwright 違反 0件）</label></li>
+<li><input type="checkbox" id="checkbox71"><label for="checkbox71"><strong>SCHEMA</strong> <code>tests/schema/videos-schema.test.js</code>（7ケース：スキーマ準拠 / videoId形式 / publishedAt / duration / status / source / schema_version=&quot;1.1&quot;）</label></li>
+</ul>
+<p><strong>完了条件：</strong></p>
+<ul>
+<li><code>npm run build &amp;&amp; git push</code> でサイトが更新される</li>
+<li>実際のYouTubeデータがサイトに表示される</li>
+<li>モバイルでアコーディオンが正しく動作する</li>
+<li>サムネイルフォールバックが正しく動作する</li>
+<li><code>npm run test:all</code>（Jest + Playwright）全PASS</li>
+<li>axe-playwright によるアクセシビリティ違反 0件</li>
+<li>全体カバレッジ Statements ≥ 85%・自動化率 ≥ 70%</li>
+</ul>
+<hr>
+<h3 id="sprint-5品質仕上げ運用ドキュメント1週間">Sprint 5：品質・仕上げ・運用ドキュメント（1週間）</h3>
+<p><strong>目標：</strong> 公開リリース判定基準を全て満たし、運用ドキュメントを整備する。</p>
+<p><strong>実装・確認タスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox72"><label for="checkbox72">エッジケース 16件（E-01〜E-16）の全件動作確認と修正</label></li>
+<li><input type="checkbox" id="checkbox73"><label for="checkbox73">スキーマバリデーションチェック実装（ビルド時）</label></li>
+<li><input type="checkbox" id="checkbox74"><label for="checkbox74">Lighthouse スコア確認・改善（Performance・Accessibility 80点以上目標）</label></li>
+<li><input type="checkbox" id="checkbox75"><label for="checkbox75">アクセシビリティ対応</label>
+<ul>
+<li><code>alt</code> 属性設定（<code>&quot;{title}のサムネイル&quot;</code> 形式）</li>
+<li>キーボードナビゲーション確認</li>
+<li>カラーコントラスト比確認（WCAG AA: 4.5:1以上）</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox76"><label for="checkbox76">🖐 クロスブラウザ確認（Chrome, Safari, Firefox, iPhone Safari, Android Chrome）</label></li>
+<li><input type="checkbox" id="checkbox77"><label for="checkbox77">セキュリティ最終チェック：<code>git log --all -S &quot;AIza&quot;</code> および <code>git grep -E &quot;AIza[0-9A-Za-z_-]{35}&quot;</code> でAPIキー漏洩なし</label></li>
+<li><input type="checkbox" id="checkbox78"><label for="checkbox78">運用マニュアル作成（<code>OPERATION.md</code>）</label>
+<ul>
+<li>月次バッチ実行手順</li>
+<li>バッチ結果レビュー・承認手順</li>
+<li>手動動画追加手順</li>
+<li>デプロイ手順</li>
+<li><strong>APIキー漏洩時の即時無効化・再発行手順</strong></li>
+<li>ブロックリスト管理手順</li>
+<li>障害対応手順</li>
+</ul>
+</li>
+<li><input type="checkbox" id="checkbox79"><label for="checkbox79"><code>README.md</code> 作成</label></li>
+</ul>
+<p><strong>テストタスク：</strong></p>
+<ul>
+<li><input type="checkbox" id="checkbox80"><label for="checkbox80"><code>npm run test:all</code> 最終実行・全テスト 0 FAIL</label></li>
+<li><input type="checkbox" id="checkbox81"><label for="checkbox81"><code>npm run test:coverage</code> でカバレッジレポート確認・不足ブランチがあればテスト追加</label></li>
+<li><input type="checkbox" id="checkbox82"><label for="checkbox82">エッジケース 16件 ↔ テストケースのマッピング検証（テスト計画書 §5.2 参照）</label></li>
+<li><input type="checkbox" id="checkbox83"><label for="checkbox83"><code>scripts/run-tests.sh</code> 作成（unit → integration → security → schema → e2e → coverageサマリ → 自動化率レポートの順）</label></li>
+</ul>
+<p><strong>完了条件（最終リリース判定 — 必須🔴 / 目標🟡）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>基準</th>
+<th>判定方法</th>
+<th>合格条件</th>
+<th>優先度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全自動テスト GREEN</td>
+<td><code>npm run test:all</code></td>
+<td>0 FAIL</td>
+<td>🔴必須</td>
+</tr>
+<tr>
+<td>コードカバレッジ</td>
+<td><code>npm run test:coverage</code></td>
+<td>Statements ≥ 85%</td>
+<td>🔴必須</td>
+</tr>
+<tr>
+<td>エッジケース16件対応</td>
+<td>テスト結果 + 手動確認</td>
+<td>全件対応済み</td>
+<td>🔴必須</td>
+</tr>
+<tr>
+<td>セキュリティ（APIキー）</td>
+<td><code>git log --all -S</code></td>
+<td>検出ゼロ</td>
+<td>🔴必須</td>
+</tr>
+<tr>
+<td>自動化率</td>
+<td>テストケース集計</td>
+<td>≥ 70%</td>
+<td>🔴必須</td>
+</tr>
+<tr>
+<td>Lighthouse Performance</td>
+<td>Lighthouseレポート</td>
+<td>≥ 80点</td>
+<td>🟡目標</td>
+</tr>
+<tr>
+<td>Lighthouse Accessibility</td>
+<td>Lighthouseレポート</td>
+<td>≥ 80点</td>
+<td>🟡目標</td>
+</tr>
+<tr>
+<td>クロスブラウザ表示</td>
+<td>手動（5環境）</td>
+<td>表示崩れなし</td>
+<td>🟡目標</td>
+</tr>
+<tr>
+<td><code>OPERATION.md</code> / <code>README.md</code></td>
+<td>目視</td>
+<td>整備済み</td>
+<td>🔴必須</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="将来対応2nd-step以降">将来対応（2nd Step以降）</h3>
+<table>
+<thead>
+<tr>
+<th>機能</th>
+<th>概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>急上昇アルゴリズム精緻化</td>
+<td>初回バッチ後の実データでエンゲージメント率閾値を検証・調整</td>
+</tr>
+<tr>
+<td>カテゴリ拡張</td>
+<td>新ジャンル追加（資金計画・土地探し 等）</td>
+</tr>
+<tr>
+<td>オンボーディング</td>
+<td>初回訪問ユーザーへの使い方ガイド</td>
+</tr>
+<tr>
+<td>アクセス解析</td>
+<td>Google Analytics 等の導入</td>
+</tr>
+<tr>
+<td>動画時間フィルタ</td>
+<td>短尺（Shorts）除外の精緻化</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>以上が完全な設計仕様書 v2.0 と CLAUDE.md です。</p>
+<p><strong>v1.0からの主な変更点：</strong></p>
+<table>
+<thead>
+<tr>
+<th>変更点</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>バッチフロー</td>
+<td>即時反映 → <code>videos.draft.json</code> 経由の承認フロー</td>
+</tr>
+<tr>
+<td>D3.js方針</td>
+<td>ノード内埋め込み → サイドパネル方式に変更（実装難易度低減）</td>
+</tr>
+<tr>
+<td>manual動画保護</td>
+<td>マージ時の保護ロジックを明確化</td>
+</tr>
+<tr>
+<td>検索クエリ</td>
+<td>全カテゴリ×ジャンルの具体的なクエリを定義・代替クエリ追加</td>
+</tr>
+<tr>
+<td>エッジケース</td>
+<td>16件の具体的な対応方針を追加</td>
+</tr>
+<tr>
+<td>データ項目</td>
+<td><code>duration</code>（動画時間）を追加</td>
+</tr>
+<tr>
+<td>セキュリティ</td>
+<td>XSS対策・アトミック書き込みを実装必須として明記</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>OGP・meta設定をSprint 1に前倒し</td>
+</tr>
+<tr>
+<td>ログ管理</td>
+<td>ログファイル体系を明確化</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>

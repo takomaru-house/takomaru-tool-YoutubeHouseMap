@@ -22,12 +22,13 @@ describe('セキュリティチェック', () => {
       /\.(js|html|css)$/i.test(name)
     );
     const API_KEY_PATTERN = /AIza[0-9A-Za-z_-]{30,}/;
-    const GOOGLE_API_PATTERN = /googleapis\.com/;
+    // YouTube Data API への直接呼び出しのみ禁止（fonts.googleapis.com 等の CDN は許容）
+    const YOUTUBE_API_PATTERN = /googleapis\.com\/youtube/;
 
     for (const file of files) {
       const content = fs.readFileSync(file, 'utf-8');
       expect(content).not.toMatch(API_KEY_PATTERN);
-      expect(content).not.toMatch(GOOGLE_API_PATTERN);
+      expect(content).not.toMatch(YOUTUBE_API_PATTERN);
     }
   });
 
