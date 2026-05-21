@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mind Map — Warm Tree</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --bg:       #1a1208;
+  --bg2:      #231a0a;
+  --surface:  #2e2010;
+  --surface2: #3d2c14;
+  --border:   rgba(255,200,100,0.10);
+  --border-hi:rgba(255,200,100,0.30);
+
+  /* warm palette */
+  --root-fill:  #f5c842;
+  --root-text:  #1a1208;
+  --b1-fill:    #e07a2f;   /* テラコッタ */
+  --b1-text:    #fff5e8;
+  --b1-glow:    rgba(224,122,47,0.35);
+  --b2-fill:    #c45e1a;   /* バーントオレンジ */
+  --b2-text:    #ffecd6;
+  --b2-glow:    rgba(196,94,26,0.25);
+
+  --stem-root:  rgba(245,200,66,0.5);
+  --stem-b1:    rgba(224,122,47,0.4);
+  --stem-b2:    rgba(196,94,26,0.3);
+
+  --font: 'Zen Kaku Gothic New', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+html,body { width:100%; height:100%; overflow:hidden; background:var(--bg); font-family:var(--font); }
+#app { width:100vw; height:100vh; position:relative; }
+
+/* ── canvas ── */
+#canvas {
+  position:absolute; inset:0;
+  width:0; height:0; overflow:visible;
+  cursor:grab;
+  will-change:transform;
+}
+#canvas.grabbing { cursor:grabbing; }
+
+/* ── SVG edges ── */
+#svg-layer {
+  position:absolute; inset:0;
+  width:100vw; height:100vh;
+  pointer-events:none; overflow:visible;
+}
+
+/* 流れる点線アニメーション */
+@keyframes flow-root {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0;  }
+}
+@keyframes flow-b1 {
+  from { stroke-dashoffset: 18; }
+  to   { stroke-dashoffset: 0;  }
+}
+.edge-dot-root {
+  fill:none; stroke-linecap:round;
+  stroke-dasharray: 3 9;
+  animation: flow-root 0.9s linear infinite;
+}
+.edge-dot-b1 {
+  fill:none; stroke-linecap:round;
+  stroke-dasharray: 2 8;
+  animation: flow-b1 1.2s linear infinite;
+}
+.edge-glow-root {
+  fill:none; stroke-linecap:round;
+  stroke-dasharray: 3 9;
+  animation: flow-root 0.9s linear infinite;
+}
+.edge-glow-b1 {
+  fill:none; stroke-linecap:round;
+  stroke-dasharray: 2 8;
+  animation: flow-b1 1.2s linear infinite;
+}
+
+/* ── nodes ── */
+.node { position:absolute; transform-origin:center center; }
+
+/* root */
+.node-root .inner {
+  background: radial-gradient(circle at 40% 35%, #fde97a, #f5c842 55%, #d4a020);
+  color: var(--root-text);
+  border-radius: 50%;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-weight:900; line-height:1.3; padding:12px;
+  box-shadow:
+    0 0 0 6px rgba(245,200,66,0.15),
+    0 0 30px rgba(245,200,66,0.45),
+    0 0 70px rgba(245,200,66,0.15),
+    inset 0 2px 4px rgba(255,255,255,0.3);
+  cursor:default;
+}
+
+/* branch-1 */
+.node-b1 .inner {
+  background: radial-gradient(circle at 40% 35%, #f2a05a, var(--b1-fill) 55%, #b85f1a);
+  color: var(--b1-text);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-weight:700; line-height:1.3; padding:10px;
+  box-shadow:
+    0 0 0 4px rgba(224,122,47,0.15),
+    0 0 20px var(--b1-glow),
+    inset 0 2px 3px rgba(255,255,255,0.2);
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+  cursor:default;
+}
+.node-b1:hover .inner {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 0 6px rgba(224,122,47,0.2),
+    0 0 30px var(--b1-glow),
+    inset 0 2px 3px rgba(255,255,255,0.2);
+}
+
+/* branch-2 */
+.node-b2 .inner {
+  background: radial-gradient(circle at 40% 35%, #da7f3a, var(--b2-fill) 55%, #8b3e0a);
+  color: var(--b2-text);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-weight:700; line-height:1.3; padding:9px;
+  box-shadow:
+    0 0 0 3px rgba(196,94,26,0.15),
+    0 0 14px var(--b2-glow),
+    inset 0 1px 3px rgba(255,255,255,0.15);
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+  cursor:default;
+}
+.node-b2:hover .inner {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 0 5px rgba(196,94,26,0.2),
+    0 0 22px var(--b2-glow),
+    inset 0 1px 3px rgba(255,255,255,0.15);
+}
+
+/* ── UI ── */
+#ui {
+  position:absolute; top:20px; left:20px; right:20px;
+  display:flex; align-items:flex-start; justify-content:space-between;
+  pointer-events:none; z-index:200;
+}
+.title-block h1 { font-size:19px; font-weight:900; color:#f5c842; letter-spacing:-.01em; }
+.title-block p  { font-size:10px; color:rgba(245,200,66,0.45); margin-top:3px; font-family:var(--mono); }
+.controls { display:flex; gap:8px; pointer-events:all; }
+.btn {
+  background:var(--surface2); border:1px solid var(--border);
+  color:#f5c842; padding:6px 14px; border-radius:8px;
+  font-size:11px; font-family:var(--font); font-weight:700; cursor:pointer;
+  transition:background .15s, border-color .15s;
+}
+.btn:hover { background:var(--surface); border-color:var(--border-hi); }
+
+/* minimap */
+#minimap {
+  position:absolute; bottom:20px; right:20px;
+  width:145px; height:90px;
+  background:rgba(20,14,4,0.88); border:1px solid var(--border);
+  border-radius:10px; overflow:hidden; backdrop-filter:blur(8px); z-index:200;
+}
+#minimap canvas { width:100%; height:100%; }
+
+/* stats */
+#stats {
+  position:absolute; bottom:20px; left:20px;
+  display:flex; gap:16px; z-index:200;
+}
+.stat { font-family:var(--mono); font-size:10px; color:rgba(245,200,66,0.4); }
+.stat strong { color:#f5c842; font-weight:500; }
+
+/* label tooltip on hover */
+.node-b1 .label-popup,
+.node-b2 .label-popup {
+  position:absolute; bottom:calc(100% + 8px); left:50%;
+  transform:translateX(-50%);
+  background:var(--surface2); border:1px solid var(--border-hi);
+  border-radius:6px; padding:4px 10px;
+  font-size:10px; color:#ffecd6; white-space:nowrap;
+  pointer-events:none; opacity:0;
+  transition:opacity .15s; z-index:500;
+}
+.node-b1:hover .label-popup,
+.node-b2:hover .label-popup { opacity:1; }
+</style>
+</head>
+<body>
+<div id="app">
+  <svg id="svg-layer"></svg>
+  <div id="canvas">
+  </div>
+  <div id="ui">
+    <div class="title-block">
+      <h1>🌿 Mind Map</h1>
+      <p>drag · scroll to zoom · hover for label</p>
+    </div>
+    <div class="controls">
+      <button class="btn" onclick="fitView()">Fit view</button>
+      <button class="btn" id="btn-e" onclick="toggleEdges()">枝を非表示</button>
+    </div>
+  </div>
+  <div id="minimap"><canvas id="mm"></canvas></div>
+  <div id="stats">
+    <div class="stat">大枝 <strong id="s-b1">0</strong></div>
+    <div class="stat">小枝 <strong id="s-b2">0</strong></div>
+    <div class="stat">zoom <strong id="s-z">1.0×</strong></div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+// ルート 1 → 大枝 4 → 小枝 3〜4 ずつ
+const TREE = {
+  id:'root', label:'プログラミング\n学習',
+  children:[
+    {
+      id:'b1', label:'フロントエンド',
+      children:[
+        { id:'b1-1', label:'HTML / CSS' },
+        { id:'b1-2', label:'JavaScript' },
+        { id:'b1-3', label:'React' },
+        { id:'b1-4', label:'TypeScript' },
+      ]
+    },
+    {
+      id:'b2', label:'バックエンド',
+      children:[
+        { id:'b2-1', label:'Node.js' },
+        { id:'b2-2', label:'Python' },
+        { id:'b2-3', label:'REST / GraphQL' },
+        { id:'b2-4', label:'DB 設計' },
+      ]
+    },
+    {
+      id:'b3', label:'インフラ',
+      children:[
+        { id:'b3-1', label:'Docker' },
+        { id:'b3-2', label:'Kubernetes' },
+        { id:'b3-3', label:'AWS / GCP' },
+      ]
+    },
+    {
+      id:'b4', label:'品質 / 設計',
+      children:[
+        { id:'b4-1', label:'テスト戦略' },
+        { id:'b4-2', label:'アルゴリズム' },
+        { id:'b4-3', label:'システム設計' },
+        { id:'b4-4', label:'セキュリティ' },
+      ]
+    },
+  ]
+};
+
+// ─── LAYOUT ──────────────────────────────────────────────────────────────────
+function computeLayout(tree) {
+  const nodes = [], edges = [];
+
+  // サイズ
+  const ROOT_D = 120;          // root 直径
+  const B1_D   = 88;           // 大枝 直径
+  const B2_D   = 66;           // 小枝 直径
+  const GAP    = 18;           // ノード間の最低隙間
+
+  // 半径 (中心間距離)
+  const R1 = ROOT_D/2 + B1_D/2 + GAP + 20;   // root→大枝
+  const R2 = B1_D/2   + B2_D/2 + GAP + 55;   // 大枝→小枝
+
+  // ── root ──
+  nodes.push({ id:tree.id, type:'root', label:tree.label,
+               x:0, y:0, d:ROOT_D });
+
+  const branches = tree.children;
+  const nB1 = branches.length; // 4
+
+  branches.forEach((b1, i) => {
+    // 大枝を等角度で配置（少し上から始めて見やすく）
+    const a1 = (i / nB1) * Math.PI * 2 - Math.PI / 2;
+    const b1x = Math.cos(a1) * R1;
+    const b1y = Math.sin(a1) * R1;
+
+    nodes.push({ id:b1.id, type:'b1', label:b1.label,
+                 x:b1x, y:b1y, d:B1_D });
+    edges.push({ source:tree.id, target:b1.id, tier:'root' });
+
+    const children = b1.children || [];
+    const nB2 = children.length;
+
+    // 小枝の配置：大枝の方向を中心に±広げる
+    // 広がり角を小枝の数で決める（詰まりすぎず、広がりすぎず）
+    const spreadTotal = nB2 <= 3
+      ? Math.PI * 0.55          // 3個: 99°
+      : Math.PI * 0.65;         // 4個: 117°
+
+    children.forEach((b2, j) => {
+      // -spread/2 〜 +spread/2 を均等割り
+      const offset = nB2 > 1
+        ? (j / (nB2 - 1) - 0.5) * spreadTotal
+        : 0;
+      const a2 = a1 + offset;
+      const b2x = b1x + Math.cos(a2) * R2;
+      const b2y = b1y + Math.sin(a2) * R2;
+
+      nodes.push({ id:b2.id, type:'b2', label:b2.label,
+                   x:b2x, y:b2y, d:B2_D });
+      edges.push({ source:b1.id, target:b2.id, tier:'b1' });
+    });
+  });
+
+  return { nodes, edges };
+}
+
+// ─── VIEWPORT ────────────────────────────────────────────────────────────────
+let vp = { x:0, y:0, scale:1 };
+let drag = null;
+let showEdges = true;
+let layoutData = null;
+let nodeMap = {};
+
+function applyVP() {
+  document.getElementById('canvas').style.transform =
+    `translate(${vp.x}px,${vp.y}px) scale(${vp.scale})`;
+  document.getElementById('canvas').style.transformOrigin = '0 0';
+  renderEdges();
+  renderMinimap();
+  document.getElementById('s-z').textContent = vp.scale.toFixed(2)+'×';
+}
+
+function fitView() {
+  if (!layoutData) return;
+  const { nodes } = layoutData;
+  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+  nodes.forEach(n => {
+    x0=Math.min(x0, n.x-n.d/2); y0=Math.min(y0, n.y-n.d/2);
+    x1=Math.max(x1, n.x+n.d/2); y1=Math.max(y1, n.y+n.d/2);
+  });
+  const pad=80, W=window.innerWidth, H=window.innerHeight;
+  vp.scale = Math.min((W-pad*2)/(x1-x0),(H-pad*2)/(y1-y0), 1.4);
+  vp.x = W/2 - (x0+(x1-x0)/2)*vp.scale;
+  vp.y = H/2 - (y0+(y1-y0)/2)*vp.scale;
+  applyVP();
+}
+
+function toggleEdges() {
+  showEdges = !showEdges;
+  document.getElementById('svg-layer').style.opacity = showEdges?'1':'0';
+  document.getElementById('btn-e').textContent = showEdges?'枝を非表示':'枝を表示';
+}
+
+// pan
+document.addEventListener('mousedown', e => {
+  if (e.target.closest('.btn')) return;
+  drag = { sx:e.clientX-vp.x, sy:e.clientY-vp.y };
+  document.getElementById('canvas').classList.add('grabbing');
+});
+document.addEventListener('mousemove', e => {
+  if (!drag) return;
+  vp.x=e.clientX-drag.sx; vp.y=e.clientY-drag.sy;
+  applyVP();
+});
+document.addEventListener('mouseup', () => {
+  drag=null;
+  document.getElementById('canvas').classList.remove('grabbing');
+});
+
+// zoom
+document.addEventListener('wheel', e => {
+  e.preventDefault();
+  const d = e.deltaY>0 ? 0.9 : 1.11;
+  vp.x = e.clientX-(e.clientX-vp.x)*d;
+  vp.y = e.clientY-(e.clientY-vp.y)*d;
+  vp.scale = Math.min(Math.max(vp.scale*d, 0.1), 5);
+  applyVP();
+}, { passive:false });
+
+// ─── EDGE RENDER ─────────────────────────────────────────────────────────────
+// svg-layer は #canvas の外（#app 直下）に置く。
+// #canvas には CSS transform がかかるが svg-layer には一切かからない。
+// よってエッジはパン/ズームのたびにスクリーン座標へ変換して d 属性を更新する。
+// <path> 要素は初回だけ生成して使い回すのでアニメーションは途切れない。
+
+let edgePathPairs = []; // [{glow, dot, source, target}]
+
+function buildEdges() {
+  if (!layoutData || edgePathPairs.length > 0) return;
+  const svg = document.getElementById('svg-layer');
+  svg.innerHTML = '';
+  const glowLayer = document.createElementNS('http://www.w3.org/2000/svg','g');
+  const lineLayer = document.createElementNS('http://www.w3.org/2000/svg','g');
+  svg.appendChild(glowLayer);
+  svg.appendChild(lineLayer);
+
+  layoutData.edges.forEach((edge, idx) => {
+    const s=nodeMap[edge.source], t=nodeMap[edge.target];
+    if(!s||!t) return;
+
+    const isRoot = edge.tier==='root';
+    const glowColor = isRoot ? 'rgba(245,200,66,0.18)' : 'rgba(224,122,47,0.14)';
+    const dotColor  = isRoot ? 'rgba(245,200,66,0.80)' : 'rgba(220,130,60,0.70)';
+    const lw   = isRoot ? 2.5 : 1.8;
+    const glowW= isRoot ? 8   : 6;
+    const cls  = isRoot ? 'root' : 'b1';
+    const delay= (idx * 0.13) % 1.5;
+
+    const pg = document.createElementNS('http://www.w3.org/2000/svg','path');
+    pg.setAttribute('class', `edge-glow-${cls}`);
+    pg.setAttribute('stroke', glowColor);
+    pg.setAttribute('stroke-width', glowW);
+    pg.style.animationDelay = `-${delay}s`;
+    glowLayer.appendChild(pg);
+
+    const pl = document.createElementNS('http://www.w3.org/2000/svg','path');
+    pl.setAttribute('class', `edge-dot-${cls}`);
+    pl.setAttribute('stroke', dotColor);
+    pl.setAttribute('stroke-width', lw);
+    pl.style.animationDelay = `-${delay}s`;
+    lineLayer.appendChild(pl);
+
+    edgePathPairs.push({ glow:pg, dot:pl, s, t });
+  });
+}
+
+function renderEdges() {
+  buildEdges();
+  // スクリーン座標へ変換して d 属性だけ更新（要素は使い回し）
+  edgePathPairs.forEach(({ glow, dot, s, t }) => {
+    const sx = s.x * vp.scale + vp.x;
+    const sy = s.y * vp.scale + vp.y;
+    const tx = t.x * vp.scale + vp.x;
+    const ty = t.y * vp.scale + vp.y;
+    const dx = tx - sx, dy = ty - sy;
+    const cx1 = sx + dx*0.4, cy1 = sy + dy*0.15;
+    const cx2 = sx + dx*0.6, cy2 = sy + dy*0.85;
+    const d = `M${sx} ${sy} C${cx1} ${cy1} ${cx2} ${cy2} ${tx} ${ty}`;
+    glow.setAttribute('d', d);
+    dot.setAttribute('d', d);
+  });
+}
+
+// ─── MINIMAP ─────────────────────────────────────────────────────────────────
+function renderMinimap() {
+  if (!layoutData) return;
+  const canvas=document.getElementById('mm');
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth, H=canvas.offsetHeight;
+  canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+  ctx.scale(devicePixelRatio,devicePixelRatio);
+  ctx.clearRect(0,0,W,H);
+
+  const ns=layoutData.nodes;
+  let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;
+  ns.forEach(n=>{
+    x0=Math.min(x0,n.x-n.d/2); y0=Math.min(y0,n.y-n.d/2);
+    x1=Math.max(x1,n.x+n.d/2); y1=Math.max(y1,n.y+n.d/2);
+  });
+  const pad=6, s=Math.min((W-pad*2)/(x1-x0||1),(H-pad*2)/(y1-y0||1));
+
+  ns.forEach(n=>{
+    const nx=(n.x-x0)*s+pad, ny=(n.y-y0)*s+pad, r=n.d/2*s;
+    ctx.beginPath(); ctx.arc(nx,ny,r,0,Math.PI*2);
+    ctx.fillStyle = n.type==='root'?'#f5c842':n.type==='b1'?'#e07a2f':'#c45e1a';
+    ctx.fill();
+  });
+
+  const vpX=(-vp.x/vp.scale-x0)*s+pad;
+  const vpY=(-vp.y/vp.scale-y0)*s+pad;
+  const vpW=(window.innerWidth/vp.scale)*s;
+  const vpH=(window.innerHeight/vp.scale)*s;
+  ctx.strokeStyle='rgba(245,200,66,0.7)'; ctx.lineWidth=1;
+  ctx.strokeRect(vpX,vpY,vpW,vpH);
+}
+
+// ─── NODE DOM ────────────────────────────────────────────────────────────────
+function makeNode(n) {
+  const el=document.createElement('div');
+  el.className=`node node-${n.type}`;
+  el.id='el-'+n.id;
+  el.style.left=n.x+'px'; el.style.top=n.y+'px';
+  el.style.width=n.d+'px'; el.style.height=n.d+'px';
+  el.style.marginLeft=-n.d/2+'px'; el.style.marginTop=-n.d/2+'px';
+
+  const fs = n.type==='root' ? 14 : n.type==='b1' ? 12 : 10.5;
+
+  const inner=document.createElement('div');
+  inner.className='inner';
+  inner.style.width='100%'; inner.style.height='100%';
+  inner.style.fontSize=fs+'px';
+  inner.innerHTML=n.label.replace(/\n/g,'<br>');
+
+  el.appendChild(inner);
+
+  // hover tooltip for b2 (ラベルが小さすぎる場合の補助)
+  if (n.type==='b2') {
+    const tip=document.createElement('div');
+    tip.className='label-popup';
+    tip.textContent=n.label.replace(/\n/g,' ');
+    el.appendChild(tip);
+  }
+
+  return el;
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+function init() {
+  layoutData=computeLayout(TREE);
+  const canvas=document.getElementById('canvas');
+  layoutData.nodes.forEach(n=>{ nodeMap[n.id]=n; });
+  layoutData.nodes.forEach(n=>canvas.appendChild(makeNode(n)));
+
+  document.getElementById('s-b1').textContent=
+    layoutData.nodes.filter(n=>n.type==='b1').length;
+  document.getElementById('s-b2').textContent=
+    layoutData.nodes.filter(n=>n.type==='b2').length;
+
+  fitView();
+}
+window.addEventListener('load', init);
+</script>
+</body>
+</html>
