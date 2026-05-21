@@ -1,0 +1,98 @@
+name: Monthly Batch (YouTube Data API)
+
+# 毎月 1 日 9:00 JST（= 前日 24:00 UTC = 当日 0:00 UTC）に自動実行
+# workflow_dispatch で手動実行も可能
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monthly-batch
+  cancel-in-progress: false
+
+jobs:
+  batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run batch (YouTube Data API)
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: npm run batch
+
+      - name: Sanity check (動画数 50 件以上を要求)
+        run: |
+          if [ ! -f data/videos.draft.json ]; then
+            echo "::error::data/videos.draft.json が生成されていません"
+            exit 1
+          fi
+          count=$(node -e "const d=require('./data/videos.draft.json'); let n=0; for(const c of d.categories) for(const g of c.groups) for(const gn of g.genres) n+=gn.videos.length; console.log(n);")
+          echo "draft 動画数: $count"
+          if [ "$count" -lt 50 ]; then
+            echo "::error::draft の動画数が 50 件未満（$count件）。API クォータ・検索クエリ・閾値設定の異常の可能性。マージは中止。"
+            exit 1
+          fi
+
+      - name: Approve & merge draft
+        run: |
+          node -e "
+          const fs = require('fs');
+          const { writeJsonAtomic } = require('./src/utils/fileUtils');
+          const { mergeDraft } = require('./src/admin/merge');
+          (async () => {
+            const prev = JSON.parse(fs.readFileSync('./data/videos.json', 'utf-8'));
+            const draft = JSON.parse(fs.readFileSync('./data/videos.draft.json', 'utf-8'));
+            const merged = mergeDraft(prev, draft);
+            await writeJsonAtomic('./data/videos.json', merged);
+            fs.unlinkSync('./data/videos.draft.json');
+            let total = 0, manual = 0;
+            for (const c of merged.categories) for (const g of c.groups) for (const gn of g.genres) {
+              for (const v of gn.videos) { total++; if (v.source === 'manual') manual++; }
+            }
+            console.log('merged videos.json: total=' + total + ' / manual保持=' + manual);
+          })();
+          "
+
+      - name: Build public site
+        run: npm run build
+
+      - name: Commit & push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/videos.json docs/data/videos.json
+          if git diff --cached --quiet; then
+            echo "変更なし、コミットをスキップ"
+            exit 0
+          fi
+          ymd=$(date -u +'%Y-%m-%d')
+          git commit -m "Monthly batch ($ymd): YouTube data refresh [skip ci]"
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 月次バッチ実行結果" >> $GITHUB_STEP_SUMMARY
+          echo "- 日時: $(date -u +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "- 実行ステータス: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          if [ -f data/videos.json ]; then
+            total=$(node -e "const d=require('./data/videos.json'); let n=0; for(const c of d.categories) for(const g of c.groups) for(const gn of g.genres) n+=gn.videos.length; console.log(n);" 2>/dev/null || echo "?")
+            echo "- 公開動画数: $total" >> $GITHUB_STEP_SUMMARY
+          fi

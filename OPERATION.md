@@ -55,31 +55,76 @@ ADMIN_PORT=3000
 
 ---
 
-## 2. 月次更新フロー（標準運用）
+## 2. 月次更新フロー（GitHub Actions で自動化済み）
 
-### 2.1 標準フロー
+### 2.1 自動化フロー
+
+毎月 1 日 9:00 JST に **GitHub Actions が自動実行**：
 
 ```
-管理者 ─[npm run admin]→ 管理UI ─[バッチ実行ボタン]→ runBatch
-                            ↓
-                       data/videos.draft.json
-                            ↓
-                       管理UI で差分確認
-                            ↓
-                  「承認」or「差し戻し」
-                            ↓
-              data/videos.json（manual 保護）
-                            ↓
-                      [ビルド実行]
-                            ↓
-                  docs/data/videos.json
-                            ↓
-                     git push origin main
-                            ↓
-                       GitHub Pages
+GitHub Actions cron (毎月1日 09:00 JST)
+        ↓
+  npm run batch（YouTube Data API 呼び出し）
+        ↓
+  data/videos.draft.json 生成
+        ↓
+  Sanity check（動画数 ≥ 50 件）
+        ↓
+  mergeDraft（manual 動画保護）→ data/videos.json
+        ↓
+  npm run build → docs/data/videos.json
+        ↓
+  git commit & push origin main
+        ↓
+  GitHub Pages 自動デプロイ
 ```
 
-### 2.2 詳細手順
+ワークフロー定義：`.github/workflows/monthly-batch.yml`
+
+### 2.2 事前準備（1回のみ）
+
+**GitHub Secrets に APIキー登録**：
+
+1. https://github.com/inumaru-kazuya/takomaru-tool-YoutubeHouseMap/settings/secrets/actions を開く
+2. **「New repository secret」**
+3. Name: `YOUTUBE_API_KEY`
+4. Secret: `.env` ファイルの値と同じ APIキー
+5. **Save**
+
+> ⚠️ Secrets はリポジトリ管理者だけが見られる。GitHub Actions 実行時のみ環境変数として渡される（ログ・コードベースには表示されない）
+
+### 2.3 手動実行（任意のタイミングで）
+
+定期 cron を待たずに即実行したい場合：
+
+1. https://github.com/inumaru-kazuya/takomaru-tool-YoutubeHouseMap/actions/workflows/monthly-batch.yml を開く
+2. 右上の **「Run workflow」** ボタン
+3. **「Run workflow」** 確定
+
+数分後にコミット・デプロイ完了。
+
+### 2.4 異常検知
+
+Sanity check で **動画数が 50 件未満** の場合、job は fail し **マージは行われません**（公開データは前回のまま）：
+- API クォータ枯渇
+- 検索クエリの誤設定
+- 閾値（再生数 ≥ 3000 等）が厳しすぎる
+
+の可能性。`Actions` タブでログ確認 → 原因特定。
+
+### 2.5 ローカル手動実行（緊急時のみ）
+
+GitHub Actions が使えない・部分修正したい場合は、従来通りローカルから：
+
+```bash
+npm run admin   # 管理 UI 起動（任意：差分プレビュー用）
+npm run batch   # バッチ実行 → draft 生成
+# 管理UIで承認 → 自動マージ → ビルド → デプロイ
+```
+
+### 2.99 詳細手順（ローカル手動実行）
+
+> 通常は GitHub Actions 自動実行で完結。以下はローカルから運用する場合の参考手順。
 
 #### Step 1: 管理 UI 起動
 
