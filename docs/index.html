@@ -71,6 +71,24 @@
     </div>
   </main>
 
+  <!-- オンボーディングオーバーレイ（初回訪問時に自動表示、フッタ「使い方ガイド」で再表示可能） -->
+  <div id="onboarding" class="onboarding" hidden role="dialog" aria-label="サイトの使い方ガイド" aria-modal="true">
+    <div class="onboarding-overlay" id="onboarding-overlay"></div>
+    <div class="onboarding-highlight" id="onboarding-highlight" hidden></div>
+    <div class="onboarding-card" id="onboarding-card">
+      <div class="onboarding-step-indicator">
+        <span class="onboarding-eyebrow">§ GUIDE</span>
+        <span class="onboarding-step" id="onboarding-step-counter">1 / 4</span>
+      </div>
+      <h3 class="onboarding-title" id="onboarding-title"></h3>
+      <p class="onboarding-text" id="onboarding-text"></p>
+      <div class="onboarding-actions">
+        <button type="button" class="onboarding-skip" id="onboarding-skip">スキップ</button>
+        <button type="button" class="onboarding-next" id="onboarding-next">次へ →</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-col">
@@ -83,6 +101,7 @@
       <div class="footer-col footer-col-right">
         <p class="footer-mono">本サイトはGoogleおよびYouTubeとは無関係の独立したサービスです。</p>
         <p class="footer-mono">POWERED BY YOUTUBE DATA API · <a href="https://www.youtube.com/static?template=terms" target="_blank" rel="noopener">YouTube利用規約 ↗</a></p>
+        <p class="footer-mono"><button type="button" id="onboarding-restart" class="footer-link-btn">使い方ガイドを見る ↗</button></p>
       </div>
     </div>
     <div class="footer-bottom">

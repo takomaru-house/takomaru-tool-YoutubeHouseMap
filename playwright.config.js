@@ -1,5 +1,8 @@
 const { defineConfig, devices } = require('@playwright/test');
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:8080';
+const BASE_ORIGIN = new URL(BASE_URL).origin;
+
 module.exports = defineConfig({
   testDir: './tests/e2e',
   timeout: 30000,
@@ -13,10 +16,21 @@ module.exports = defineConfig({
     ['line'],
   ],
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:8080',
+    baseURL: BASE_URL,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
+    // オンボーディングのオーバーレイが他のテストの操作を妨げないよう、
+    // 全テストで「表示済み」状態を初期セット。onboarding.spec.js では明示的にクリアして検証する。
+    storageState: {
+      cookies: [],
+      origins: [
+        {
+          origin: BASE_ORIGIN,
+          localStorage: [{ name: 'takomaru-onboarding-seen', value: '1' }],
+        },
+      ],
+    },
   },
   projects: [
     {

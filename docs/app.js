@@ -496,6 +496,126 @@ function displayLastUpdated(data) {
   el.textContent = `最終更新日：${formatPublishedAt(data.meta.last_updated)}`;
 }
 
+/* ---------- オンボーディング（初回訪問ガイド） ---------- */
+
+const ONBOARDING_KEY = 'takomaru-onboarding-seen';
+
+// PC view 向け 4 ステップ（モバイル view でも同じテキストで動作）
+const ONBOARDING_STEPS = [
+  {
+    title: 'タコまる書庫へようこそ',
+    text:
+      '注文住宅の YouTube 動画を、視点別・ジャンル別に索引したサイトです。\n4 ステップで使い方をご案内します。',
+    target: null,
+  },
+  {
+    title: '視点を切り替える',
+    text:
+      '「専門家目線（工務店・設計士）」と「施主目線（実際に建てた人）」をタブで切替できます。',
+    target: '#category-tabs',
+  },
+  {
+    title: '索引からジャンルを選ぶ',
+    text:
+      '中央の索引図（マインドマップ）にあるオレンジ色の円をクリックすると、そのジャンルの動画一覧が右側に表示されます。',
+    target: '#mindmap-container',
+  },
+  {
+    title: 'YouTube で視聴する',
+    text:
+      '動画カードをクリックすると、YouTube が新しいタブで開きます。\n気になる動画から自由にご覧ください。',
+    target: '#side-panel',
+  },
+];
+
+let onboardingStepIndex = 0;
+let onboardingResizeHandler = null;
+
+function startOnboarding(force) {
+  if (!force) {
+    try {
+      if (localStorage.getItem(ONBOARDING_KEY) === '1') return;
+    } catch (_e) {
+      // localStorage 不可（プライベートブラウジング等）でもオンボードは表示
+    }
+  }
+  const root = document.getElementById('onboarding');
+  if (!root) return;
+  onboardingStepIndex = 0;
+  root.hidden = false;
+  showOnboardingStep(onboardingStepIndex);
+
+  onboardingResizeHandler = () => showOnboardingStep(onboardingStepIndex);
+  window.addEventListener('resize', onboardingResizeHandler);
+}
+
+function showOnboardingStep(i) {
+  const step = ONBOARDING_STEPS[i];
+  if (!step) return;
+  document.getElementById('onboarding-step-counter').textContent =
+    `${i + 1} / ${ONBOARDING_STEPS.length}`;
+  document.getElementById('onboarding-title').textContent = step.title;
+  document.getElementById('onboarding-text').textContent = step.text;
+
+  const nextBtn = document.getElementById('onboarding-next');
+  if (nextBtn) {
+    nextBtn.textContent = i === ONBOARDING_STEPS.length - 1 ? '閉じる' : '次へ →';
+  }
+
+  const highlight = document.getElementById('onboarding-highlight');
+  if (step.target) {
+    const el = document.querySelector(step.target);
+    if (el && !el.hidden && el.offsetParent !== null) {
+      const rect = el.getBoundingClientRect();
+      const pad = 6;
+      highlight.style.top = `${rect.top - pad}px`;
+      highlight.style.left = `${rect.left - pad}px`;
+      highlight.style.width = `${rect.width + pad * 2}px`;
+      highlight.style.height = `${rect.height + pad * 2}px`;
+      highlight.hidden = false;
+    } else {
+      highlight.hidden = true;
+    }
+  } else {
+    highlight.hidden = true;
+  }
+}
+
+function finishOnboarding() {
+  const root = document.getElementById('onboarding');
+  if (root) root.hidden = true;
+  try {
+    localStorage.setItem(ONBOARDING_KEY, '1');
+  } catch (_e) {
+    // 失敗してもサイトは動く
+  }
+  if (onboardingResizeHandler) {
+    window.removeEventListener('resize', onboardingResizeHandler);
+    onboardingResizeHandler = null;
+  }
+}
+
+function bindOnboardingEvents() {
+  const next = document.getElementById('onboarding-next');
+  const skip = document.getElementById('onboarding-skip');
+  const overlay = document.getElementById('onboarding-overlay');
+  const restart = document.getElementById('onboarding-restart');
+
+  if (next) {
+    next.addEventListener('click', () => {
+      if (onboardingStepIndex >= ONBOARDING_STEPS.length - 1) {
+        finishOnboarding();
+        return;
+      }
+      onboardingStepIndex += 1;
+      showOnboardingStep(onboardingStepIndex);
+    });
+  }
+  if (skip) skip.addEventListener('click', finishOnboarding);
+  if (overlay) overlay.addEventListener('click', finishOnboarding);
+  if (restart) restart.addEventListener('click', () => startOnboarding(true));
+}
+
 /* ---------- ブートストラップ ---------- */
 
 async function bootstrap() {
@@ -519,6 +639,8 @@ async function bootstrap() {
     });
   }
 
+  bindOnboardingEvents();
+
   try {
     const data = await loadVideos();
     currentData = data;
@@ -532,6 +654,8 @@ async function bootstrap() {
     if (main) main.hidden = false;
     renderTabs(data);
     renderForView(data);
+    // メインコンテンツ描画後、初回訪問者にオンボーディング表示
+    startOnboarding(false);
   } catch (err) {
     if (loading) loading.hidden = true;
     if (errorEl) errorEl.hidden = false;
