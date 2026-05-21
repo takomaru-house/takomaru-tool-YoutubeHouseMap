@@ -459,18 +459,31 @@ function renderForView(data) {
     (data.categories || [])[0];
   if (!cat) return;
 
-  // サイドパネルを初期化（カテゴリ切替時）
-  const panel = document.getElementById('side-panel');
-  if (panel) {
-    panel.textContent = '';
-    const ph = document.createElement('p');
-    ph.className = 'side-panel-placeholder';
-    ph.textContent = '左のジャンルを選択してください';
-    panel.appendChild(ph);
-  }
-
   if (view === 'pc') {
     currentMindmap = renderMindmap(cat, document.getElementById('mindmap'));
+    // 初期表示でカテゴリの最初のジャンル（GRP-A GNR-01 = 間取り）のサイドパネルを開く
+    const firstGroup = (cat.groups || [])[0];
+    const firstGenre = firstGroup && (firstGroup.genres || [])[0];
+    if (firstGenre) {
+      // genre オブジェクトに categoryId/groupId/genreId/name/videos を補完して showSidePanel に渡す
+      showSidePanel({
+        name: firstGenre.name,
+        videos: firstGenre.videos || [],
+        categoryId: cat.id,
+        groupId: firstGroup.id,
+        genreId: firstGenre.id,
+      });
+    } else {
+      // フォールバック: グループ/ジャンル未定義時の placeholder
+      const panel = document.getElementById('side-panel');
+      if (panel) {
+        panel.textContent = '';
+        const ph = document.createElement('p');
+        ph.className = 'side-panel-placeholder';
+        ph.textContent = '左のジャンルを選択してください';
+        panel.appendChild(ph);
+      }
+    }
   } else {
     renderAccordion(cat, document.getElementById('accordion'));
   }
