@@ -213,96 +213,15 @@ function renderAccordion(cat, container) {
   });
 }
 
-/* ---------- D3.js マインドマップ（PC、選択中カテゴリのみ 3階層 tree） ---------- */
-
-function buildHierarchyForCategory(cat) {
-  return {
-    name: cat.name,
-    type: 'category',
-    id: cat.id,
-    children: (cat.groups || []).map((grp) => ({
-      name: grp.name,
-      type: 'group',
-      id: grp.id,
-      children: (grp.genres || []).map((gnr) => ({
-        name: gnr.name,
-        type: 'genre',
-        id: gnr.id,
-        categoryId: cat.id,
-        groupId: grp.id,
-        videos: gnr.videos || [],
-      })),
-    })),
-  };
-}
+/* ---------- D3.js マインドマップ（PC、選択中カテゴリ 3階層・放射状） ---------- */
 
 function renderMindmap(cat, container) {
   if (typeof d3 === 'undefined') {
     container.textContent = 'D3.js の読み込みに失敗しました。';
     return null;
   }
-  // 施主目線（CAT-01）は放射状レイアウト（大きめノードでクリックしやすく）
-  if (cat.id === 'CAT-01') {
-    return renderMindmapRadial(cat, container);
-  }
-  // 専門家目線（CAT-02）等は従来のツリーレイアウト
-  return renderMindmapTree(cat, container);
-}
-
-function renderMindmapTree(cat, container) {
-  container.textContent = '';
-
-  const width = container.clientWidth || 1000;
-  const height = Math.max(container.clientHeight, 700);
-
-  const root = d3.hierarchy(buildHierarchyForCategory(cat));
-  d3.tree().size([height - 80, width - 240])(root);
-
-  const svg = d3
-    .select(container)
-    .append('svg')
-    .attr('viewBox', `0 0 ${width} ${height}`)
-    .attr('preserveAspectRatio', 'xMidYMid meet');
-
-  const g = svg.append('g').attr('transform', `translate(80, 40)`);
-
-  const zoom = d3
-    .zoom()
-    .scaleExtent([0.3, 3])
-    .on('zoom', (event) => {
-      g.attr('transform', event.transform);
-    });
-  svg.call(zoom);
-
-  g.selectAll('path.link')
-    .data(root.links())
-    .enter()
-    .append('path')
-    .attr('class', 'link')
-    .attr('d', d3.linkHorizontal().x((d) => d.y).y((d) => d.x));
-
-  const node = g
-    .selectAll('g.node')
-    .data(root.descendants())
-    .enter()
-    .append('g')
-    .attr('class', (d) => `node node-${d.data.type || 'root'}`)
-    .attr('transform', (d) => `translate(${d.y}, ${d.x})`);
-
-  node.append('circle').attr('r', 6);
-  node
-    .append('text')
-    .attr('dx', 12)
-    .attr('dy', '0.32em')
-    .text((d) => d.data.name);
-
-  node
-    .filter((d) => d.data.type === 'genre')
-    .on('click', (_event, d) => {
-      showSidePanel(d.data);
-    });
-
-  return { svg, zoom };
+  // 全カテゴリ共通の放射状レイアウト
+  return renderMindmapRadial(cat, container);
 }
 
 // 放射状マインドマップ（CAT-01 施主目線専用）
