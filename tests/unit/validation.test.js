@@ -2,6 +2,7 @@ const {
   validateVideoId,
   validatePublishedAt,
   validateDuration,
+  parseDurationSeconds,
 } = require('../../src/utils/validation');
 
 describe('validateVideoId()', () => {
@@ -63,5 +64,35 @@ describe('validateDuration()', () => {
 
   test('UT-04-14: 不正な文字列はfalse', () => {
     expect(validateDuration('15分30秒')).toBe(false);
+  });
+});
+
+describe('parseDurationSeconds()', () => {
+  test('UT-04-15: PT15M30S → 930 秒', () => {
+    expect(parseDurationSeconds('PT15M30S')).toBe(930);
+  });
+
+  test('UT-04-16: PT1H5M30S → 3930 秒（時間含む）', () => {
+    expect(parseDurationSeconds('PT1H5M30S')).toBe(3930);
+  });
+
+  test('UT-04-17: PT45S → 45 秒（Shorts相当）', () => {
+    expect(parseDurationSeconds('PT45S')).toBe(45);
+  });
+
+  test('UT-04-18: PT4M0S → 240 秒（最低基準ちょうど）', () => {
+    expect(parseDurationSeconds('PT4M0S')).toBe(240);
+  });
+
+  test('UT-04-19: PT40M0S → 2400 秒（最大基準ちょうど）', () => {
+    expect(parseDurationSeconds('PT40M0S')).toBe(2400);
+  });
+
+  test('UT-04-20: 不正フォーマットは 0 を返す', () => {
+    expect(parseDurationSeconds('15分30秒')).toBe(0);
+    expect(parseDurationSeconds('PT')).toBe(0);
+    expect(parseDurationSeconds('')).toBe(0);
+    expect(parseDurationSeconds(null)).toBe(0);
+    expect(parseDurationSeconds(undefined)).toBe(0);
   });
 });

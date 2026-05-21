@@ -25,4 +25,15 @@ const validateDuration = (duration) => {
   return DURATION_REGEX.test(duration);
 };
 
-module.exports = { validateVideoId, validatePublishedAt, validateDuration };
+// ISO 8601 duration (PT15M30S 等) を秒数に変換。不正な文字列は 0 を返す。
+const parseDurationSeconds = (duration) => {
+  if (typeof duration !== 'string') return 0;
+  const match = duration.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/);
+  if (!match || (!match[1] && !match[2] && !match[3])) return 0;
+  const h = parseInt(match[1] || '0', 10);
+  const m = parseInt(match[2] || '0', 10);
+  const s = parseInt(match[3] || '0', 10);
+  return h * 3600 + m * 60 + s;
+};
+
+module.exports = { validateVideoId, validatePublishedAt, validateDuration, parseDurationSeconds };

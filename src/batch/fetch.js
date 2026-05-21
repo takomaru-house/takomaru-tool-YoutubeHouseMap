@@ -4,6 +4,7 @@
 // - グローバルブロックリスト除外 + videoId バリデーション
 
 const { MIN_VIEW_COUNT } = require('./score');
+const { parseDurationSeconds } = require('../utils/validation');
 
 const SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 const VIDEOS_URL = 'https://www.googleapis.com/youtube/v3/videos';
@@ -11,6 +12,9 @@ const CHANNELS_URL = 'https://www.googleapis.com/youtube/v3/channels';
 
 const VIDEO_ID_RE = /^[a-zA-Z0-9_-]{11}$/;
 const MAX_SEARCH_RESULTS = 10;
+// 動画時間フィルタ: Shorts と超長尺を除外、4分〜40分のみ採用
+const MIN_DURATION_SECONDS = 240;  // 4分
+const MAX_DURATION_SECONDS = 2400; // 40分
 
 const defaultSleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -53,7 +57,7 @@ const searchVideos = async (query, options) => {
         regionCode: 'JP',
         relevanceLanguage: 'ja',
         videoEmbeddable: 'true',
-        videoDuration: 'medium',
+        // videoDuration は指定せず、取得後に ISO 8601 で厳密フィルタ（MIN/MAX_DURATION_SECONDS）
         safeSearch: 'strict',
         maxResults,
         key: apiKey,
@@ -178,8 +182,16 @@ const fetchForGenre = async (category, genre, options) => {
   const channelIds = [...new Set(details.map((d) => d.channelId).filter(Boolean))];
   const channelStats = await fetchChannelStats(channelIds, { apiKey, sleep });
 
-  // 統合 + 最低再生数フィルタ（再生数が少なすぎる動画は初心者向け参考になりにくいため除外）
-  return details.filter((d) => (d.viewCount || 0) >= MIN_VIEW_COUNT).map((d) => {
+  // 統合 + フィルタ:
+  //  - 最低再生数（MIN_VIEW_COUNT）
+  //  - 動画時間レンジ（MIN_DURATION_SECONDS 〜 MAX_DURATION_SECONDS）で Shorts と超長尺を除外
+  return details
+    .filter((d) => (d.viewCount || 0) >= MIN_VIEW_COUNT)
+    .filter((d) => {
+      const sec = parseDurationSeconds(d.duration);
+      return sec >= MIN_DURATION_SECONDS && sec <= MAX_DURATION_SECONDS;
+    })
+    .map((d) => {
     const publishedAtIso = d.publishedAt || '';
     const stats = channelStats[d.channelId];
     const subscriberCount = stats ? stats.subscriberCount : null;
