@@ -208,11 +208,25 @@ body { min-height: 100vh; }
   background: rgba(26,24,22,0.03);
 }
 .tab-nav .tab-btn[aria-selected="true"] {
-  color: var(--ink);
-  border-bottom-color: var(--ink);
-  background: var(--bg);
+  font-weight: 700;
+  border-bottom-width: 3px;
 }
-.tab-nav .tab-btn[aria-selected="true"]::before {
+/* カテゴリ別のアクティブ色（施主目線=rust / 専門家目線=sage-deep）
+   本文は ink（コントラスト確保）、下線・§番号でカテゴリ色を表現 */
+.tab-nav .tab-btn[aria-selected="true"] {
+  color: var(--ink);
+}
+.tab-nav .tab-btn[data-cat-id="CAT-01"][aria-selected="true"] {
+  border-bottom-color: var(--rust);
+}
+.tab-nav .tab-btn[data-cat-id="CAT-01"][aria-selected="true"]::before {
+  color: var(--rust);
+  opacity: 1;
+}
+.tab-nav .tab-btn[data-cat-id="CAT-02"][aria-selected="true"] {
+  border-bottom-color: var(--sage-deep);
+}
+.tab-nav .tab-btn[data-cat-id="CAT-02"][aria-selected="true"]::before {
   color: var(--sage-deep);
   opacity: 1;
 }
@@ -763,6 +777,16 @@ body { min-height: 100vh; }
   font-size: 15px;
   fill: var(--bg);
   letter-spacing: 0.04em;
+}
+/* 施主目線（CAT-01）の ROOT は rust（暖色） */
+.mindmap-radial--cat-01 .node-radial-root circle {
+  fill: var(--rust);
+  filter: drop-shadow(0 0 14px rgba(179, 90, 58, 0.5));
+}
+/* 専門家目線（CAT-02）の ROOT は sage-deep（深緑、デフォルト） */
+.mindmap-radial--cat-02 .node-radial-root circle {
+  fill: var(--sage-deep);
+  filter: drop-shadow(0 0 14px rgba(61, 74, 50, 0.5));
 }
 
 .mindmap-radial .node-radial-group circle {

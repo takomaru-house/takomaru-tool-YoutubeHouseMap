@@ -293,7 +293,7 @@ function renderMindmapRadial(cat, container) {
   const svg = d3
     .select(container)
     .append('svg')
-    .attr('class', 'mindmap-radial')
+    .attr('class', `mindmap-radial mindmap-radial--${String(cat.id).toLowerCase()}`)
     .attr('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`)
     .attr('preserveAspectRatio', 'xMidYMid meet');
 
