@@ -3,6 +3,8 @@
 // - 指数バックオフリトライ（最大3回：1s → 2s → 4s）
 // - グローバルブロックリスト除外 + videoId バリデーション
 
+const { MIN_VIEW_COUNT } = require('./score');
+
 const SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 const VIDEOS_URL = 'https://www.googleapis.com/youtube/v3/videos';
 const CHANNELS_URL = 'https://www.googleapis.com/youtube/v3/channels';
@@ -176,8 +178,8 @@ const fetchForGenre = async (category, genre, options) => {
   const channelIds = [...new Set(details.map((d) => d.channelId).filter(Boolean))];
   const channelStats = await fetchChannelStats(channelIds, { apiKey, sleep });
 
-  // 統合
-  return details.map((d) => {
+  // 統合 + 最低再生数フィルタ（再生数が少なすぎる動画は初心者向け参考になりにくいため除外）
+  return details.filter((d) => (d.viewCount || 0) >= MIN_VIEW_COUNT).map((d) => {
     const publishedAtIso = d.publishedAt || '';
     const stats = channelStats[d.channelId];
     const subscriberCount = stats ? stats.subscriberCount : null;

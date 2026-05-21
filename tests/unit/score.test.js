@@ -126,4 +126,37 @@ describe('isTrending()', () => {
     expect(() => isTrending(v)).not.toThrow();
     expect(isTrending(v)).toBe(false);
   });
+
+  test('UT-01-12: 再生数3000はtrue（境界値ちょうど）', () => {
+    const v = makeVideo({
+      _tempApiData: {
+        subscriberCount: 10000,
+        viewCount: 3000,
+        publishedAt: daysAgo(30),
+      },
+    });
+    expect(isTrending(v)).toBe(true);
+  });
+
+  test('UT-01-13: 再生数2999はfalse（最低再生数を満たさない）', () => {
+    const v = makeVideo({
+      _tempApiData: {
+        subscriberCount: 5000,
+        viewCount: 2999,
+        publishedAt: daysAgo(30),
+      },
+    });
+    expect(isTrending(v)).toBe(false);
+  });
+
+  test('UT-01-14: エンゲージメント率は高いが再生数200は false（マイクロチャンネルだが絶対数不足）', () => {
+    const v = makeVideo({
+      _tempApiData: {
+        subscriberCount: 500,
+        viewCount: 200,
+        publishedAt: daysAgo(30),
+      },
+    });
+    expect(isTrending(v)).toBe(false);
+  });
 });
