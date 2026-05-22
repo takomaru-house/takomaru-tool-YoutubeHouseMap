@@ -59,6 +59,7 @@ const searchVideos = async (query, options) => {
         videoEmbeddable: 'true',
         // videoDuration は指定せず、取得後に ISO 8601 で厳密フィルタ（MIN/MAX_DURATION_SECONDS）
         safeSearch: 'strict',
+        order: 'viewCount', // クエリ関連の動画を再生数多い順で取得（注文住宅初心者向け人気動画を優先）
         maxResults,
         key: apiKey,
       }),
