@@ -230,6 +230,14 @@ body { min-height: 100vh; }
   color: var(--sage-deep);
   opacity: 1;
 }
+/* CAT-03 準備・資金（専門家・施主混在）— accent 青系 */
+.tab-nav .tab-btn[data-cat-id="CAT-03"][aria-selected="true"] {
+  border-bottom-color: var(--color-accent);
+}
+.tab-nav .tab-btn[data-cat-id="CAT-03"][aria-selected="true"]::before {
+  color: var(--color-accent);
+  opacity: 1;
+}
 .tab-nav .tab-btn:focus-visible {
   outline: 1px solid var(--ink);
   outline-offset: -3px;
@@ -787,6 +795,11 @@ body { min-height: 100vh; }
 .mindmap-radial--cat-02 .node-radial-root circle {
   fill: var(--sage-deep);
   filter: drop-shadow(0 0 14px rgba(61, 74, 50, 0.5));
+}
+/* 準備・資金（CAT-03、専門家・施主混在）の ROOT は青系 */
+.mindmap-radial--cat-03 .node-radial-root circle {
+  fill: var(--color-accent);
+  filter: drop-shadow(0 0 14px rgba(37, 99, 235, 0.45));
 }
 
 .mindmap-radial .node-radial-group circle {

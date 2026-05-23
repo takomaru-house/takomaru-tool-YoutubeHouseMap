@@ -247,6 +247,56 @@
           ]
         }
       ]
+    },
+    {
+      "id": "CAT-03",
+      "name": "準備・資金",
+      "order": 3,
+      "side": "mixed",
+      "groups": [
+        {
+          "id": "GRP-E",
+          "name": "資金計画",
+          "order": 1,
+          "genres": [
+            {
+              "id": "GNR-13",
+              "name": "住宅ローン",
+              "order": 1,
+              "searchQuery": "注文住宅 住宅ローン 比較 解説",
+              "searchQueryAlt": "注文住宅 ローン 選び方"
+            },
+            {
+              "id": "GNR-14",
+              "name": "補助金・税金",
+              "order": 2,
+              "searchQuery": "注文住宅 補助金 税金 控除",
+              "searchQueryAlt": "注文住宅 住宅ローン控除"
+            }
+          ]
+        },
+        {
+          "id": "GRP-F",
+          "name": "土地探し",
+          "order": 2,
+          "genres": [
+            {
+              "id": "GNR-15",
+              "name": "土地選び",
+              "order": 1,
+              "searchQuery": "注文住宅 土地探し コツ",
+              "searchQueryAlt": "注文住宅 土地 選び方"
+            },
+            {
+              "id": "GNR-16",
+              "name": "地盤・立地",
+              "order": 2,
+              "searchQuery": "注文住宅 地盤調査 解説",
+              "searchQueryAlt": "注文住宅 立地 選び方"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

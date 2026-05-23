@@ -70,6 +70,7 @@ const stripTempApiData = (video, order) => {
 };
 
 // チャンネル属性で各動画を CAT-01（individual / 施主目線）または CAT-02（company / 専門家目線）へ振り分け直す
+// side="mixed" のカテゴリ（例：CAT-03 準備・資金）は専門家・施主混在で扱うため skip
 const reclassifyByChannel = (data, overrides) => {
   const genreMap = {};
   for (const c of data.categories) {
@@ -82,6 +83,8 @@ const reclassifyByChannel = (data, overrides) => {
   }
   let moves = 0;
   for (const c of data.categories) {
+    // mixed カテゴリは再分類対象外（専門家・施主が混在したまま）
+    if (c.side === 'mixed') continue;
     for (const g of c.groups) {
       for (const gn of g.genres) {
         const keep = [];
