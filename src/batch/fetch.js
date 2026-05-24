@@ -15,6 +15,8 @@ const MAX_SEARCH_RESULTS = 10;
 // 動画時間フィルタ: Shorts と超長尺を除外、4分〜40分のみ採用
 const MIN_DURATION_SECONDS = 240;  // 4分
 const MAX_DURATION_SECONDS = 2400; // 40分
+// 連続APIリクエスト間の最小間隔（レート制限 HTTP 429 回避）
+const REQUEST_INTERVAL_MS = 300;
 
 const defaultSleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -47,7 +49,8 @@ const fetchJSON = async (baseUrl, params) => {
 };
 
 const searchVideos = async (query, options) => {
-  const { apiKey, sleep, maxResults = MAX_SEARCH_RESULTS } = options;
+  const { apiKey, sleep = defaultSleep, maxResults = MAX_SEARCH_RESULTS } = options;
+  await sleep(REQUEST_INTERVAL_MS);
   const data = await withRetry(
     () =>
       fetchJSON(SEARCH_URL, {
@@ -76,9 +79,10 @@ const searchVideos = async (query, options) => {
 
 const fetchVideoDetails = async (videoIds, options) => {
   if (!videoIds.length) return [];
-  const { apiKey, sleep } = options;
+  const { apiKey, sleep = defaultSleep } = options;
   const results = [];
   for (let i = 0; i < videoIds.length; i += 50) {
+    await sleep(REQUEST_INTERVAL_MS);
     const batch = videoIds.slice(i, i + 50);
     const data = await withRetry(
       () =>
@@ -106,9 +110,10 @@ const fetchVideoDetails = async (videoIds, options) => {
 
 const fetchChannelStats = async (channelIds, options) => {
   if (!channelIds.length) return {};
-  const { apiKey, sleep } = options;
+  const { apiKey, sleep = defaultSleep } = options;
   const map = {};
   for (let i = 0; i < channelIds.length; i += 50) {
+    await sleep(REQUEST_INTERVAL_MS);
     const batch = channelIds.slice(i, i + 50);
     const data = await withRetry(
       () =>

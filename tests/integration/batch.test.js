@@ -572,7 +572,9 @@ describe('IT-01: バッチフロー統合テスト', () => {
       sleep: sleepFn,
     });
 
-    // 最初の3回が指数バックオフ
-    expect(sleepCalls.slice(0, 3)).toEqual([1000, 2000, 4000]);
+    // 指数バックオフ（1s → 2s → 4s）が正しい順序で発火している
+    // ※ リクエスト間隔 sleep（REQUEST_INTERVAL_MS=300）が混入するため、バックオフ値のみ抽出して検証
+    const backoffSleeps = sleepCalls.filter((ms) => [1000, 2000, 4000].includes(ms));
+    expect(backoffSleeps).toEqual([1000, 2000, 4000]);
   });
 });

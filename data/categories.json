@@ -250,7 +250,7 @@
     },
     {
       "id": "CAT-03",
-      "name": "準備・資金",
+      "name": "準備・知識・資金",
       "order": 3,
       "side": "mixed",
       "groups": [
@@ -293,6 +293,55 @@
               "order": 2,
               "searchQuery": "注文住宅 地盤調査 解説",
               "searchQueryAlt": "注文住宅 立地 選び方"
+            },
+            {
+              "id": "GNR-17",
+              "name": "道路",
+              "order": 3,
+              "searchQuery": "注文住宅 土地 道路 接道 解説",
+              "searchQueryAlt": "土地 道路付け 選び方"
+            },
+            {
+              "id": "GNR-18",
+              "name": "探し方",
+              "order": 4,
+              "searchQuery": "注文住宅 土地 探し方 コツ",
+              "searchQueryAlt": "土地探し 不動産屋 進め方"
+            }
+          ]
+        },
+        {
+          "id": "GRP-G",
+          "name": "性能",
+          "order": 3,
+          "genres": [
+            {
+              "id": "GNR-19",
+              "name": "耐震性",
+              "order": 1,
+              "searchQuery": "注文住宅 耐震性 解説",
+              "searchQueryAlt": "住宅 耐震等級 比較"
+            },
+            {
+              "id": "GNR-20",
+              "name": "省エネ性",
+              "order": 2,
+              "searchQuery": "注文住宅 省エネ 解説",
+              "searchQueryAlt": "住宅 ZEH 省エネ性能"
+            },
+            {
+              "id": "GNR-21",
+              "name": "断熱性・気密性",
+              "order": 3,
+              "searchQuery": "注文住宅 断熱 気密 解説",
+              "searchQueryAlt": "住宅 UA値 C値 比較"
+            },
+            {
+              "id": "GNR-22",
+              "name": "耐久性",
+              "order": 4,
+              "searchQuery": "注文住宅 耐久性 解説",
+              "searchQueryAlt": "住宅 長持ち 構造 メンテナンス"
             }
           ]
         }
