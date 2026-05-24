@@ -44,10 +44,10 @@ ADMIN_PORT=3000
 
 ### 1.2 GitHub Pages 有効化
 
-1. https://github.com/inumaru-kazuya/takomaru-tool-YoutubeHouseMap/settings/pages
+1. https://github.com/takomaru-house/takomaru-tool-YoutubeHouseMap/settings/pages
 2. **Source**: Deploy from a branch
 3. **Branch**: `main` / **Folder**: `/docs`
-4. **Save** → 1〜2分後に `https://inumaru-kazuya.github.io/takomaru-tool-YoutubeHouseMap/` で公開
+4. **Save** → 1〜2分後に `https://takomaru-house.github.io/takomaru-tool-YoutubeHouseMap/` で公開
 
 ### 1.3 検索クエリ品質の人手検証
 
@@ -85,7 +85,7 @@ GitHub Actions cron (毎月1日 09:00 JST)
 
 **GitHub Secrets に APIキー登録**：
 
-1. https://github.com/inumaru-kazuya/takomaru-tool-YoutubeHouseMap/settings/secrets/actions を開く
+1. https://github.com/takomaru-house/takomaru-tool-YoutubeHouseMap/settings/secrets/actions を開く
 2. **「New repository secret」**
 3. Name: `YOUTUBE_API_KEY`
 4. Secret: `.env` ファイルの値と同じ APIキー
@@ -97,7 +97,7 @@ GitHub Actions cron (毎月1日 09:00 JST)
 
 定期 cron を待たずに即実行したい場合：
 
-1. https://github.com/inumaru-kazuya/takomaru-tool-YoutubeHouseMap/actions/workflows/monthly-batch.yml を開く
+1. https://github.com/takomaru-house/takomaru-tool-YoutubeHouseMap/actions/workflows/monthly-batch.yml を開く
 2. 右上の **「Run workflow」** ボタン
 3. **「Run workflow」** 確定
 
@@ -172,14 +172,14 @@ git push origin main
 
 ### 2.3 公開後の確認
 
-- https://inumaru-kazuya.github.io/takomaru-tool-YoutubeHouseMap/ で表示確認
+- https://takomaru-house.github.io/takomaru-tool-YoutubeHouseMap/ で表示確認
 - タブ切替（専門家目線 / 施主目線）が動作する
 - マインドマップのジャンルをクリック→動画カードが表示される
 
 ### 2.4 自動チェック（任意）
 
 ```bash
-BASE_URL=https://inumaru-kazuya.github.io/takomaru-tool-YoutubeHouseMap/ \
+BASE_URL=https://takomaru-house.github.io/takomaru-tool-YoutubeHouseMap/ \
   npx playwright test public-site.spec.js responsive.spec.js tabs.spec.js
 ```
 

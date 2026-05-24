@@ -2,7 +2,7 @@
 
 注文住宅を検討し始めた初心者向けに、YouTube動画をカテゴリ × グループ × ジャンル別にマッピングしてナビゲーションする Web サイト。
 
-**公開URL**：https://inumaru-kazuya.github.io/takomaru-tool-YoutubeHouseMap/
+**公開URL**：https://takomaru-house.github.io/takomaru-tool-YoutubeHouseMap/
 
 ---
 
@@ -39,7 +39,7 @@ YouTube API ─[npm run batch]→ data/videos.draft.json
 ## セットアップ
 
 ```bash
-git clone https://github.com/inumaru-kazuya/takomaru-tool-YoutubeHouseMap.git
+git clone https://github.com/takomaru-house/takomaru-tool-YoutubeHouseMap.git
 cd takomaru-tool-YoutubeHouseMap
 npm install
 npx playwright install chromium
